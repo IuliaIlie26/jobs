@@ -5,13 +5,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:ui="http://java.sun.com/jsf/facelets">
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
  
 <f:loadBundle basename="ApplicationResources" var="msg" />
  
  
 <h:head>
     <title>Find my dream job</title>
+    <script name="jquery/jquery.js" library="primefaces"></script>
 </h:head>
 <h:body>
      <h:form style="text-align:right">
@@ -22,26 +24,19 @@
         <h:inputSecret id="password" value="#{login.password}" ></h:inputSecret>
         <h:commandButton action="#{login.validateUsernamePassword}" value="Login"></h:commandButton>
     </h:form>
-    <p:tabView id="tabsView" dynamic="true" cache="true"
-           value="#{TabViewController.tabView.openedTabs}" var="tabDefinition" activeIndex="#{TabViewController.tabView.activeIndex}">
-    <p:ajax event="tabClose" listener="#{TabViewController.onCloseTab}" update="tabsView"/>
-    <p:ajax event="tabChange" update="tabsView"/>
-    <p:tab id="tab#{tabDefinition.id}" title="#{tabDefinition.title}" closable="true" action="">
-        <f:facet name="title">
-            <h:outputText value="#{tabDefinition.title}"/>
-        </f:facet>
-        <p:outputPanel style="display:block" rendered="#{'dataTable'.equals(tabDefinition.type)}">
-            <ui:include src="dataTable.xhtml">
-                <ui:param name="dataTableName" value="#{tabDefinition.contentName}"/>
-            </ui:include>
-        </p:outputPanel>
-        <p:outputPanel style="display:block" rendered="#{'form'.equals(tabDefinition.type)}">
-            <ui:include src="form.xhtml">
-                <ui:param name="formId" value="#{tabDefinition.id}"/>
-                <ui:param name="formName" value="#{tabDefinition.contentName}"/>
-            </ui:include>
-        </p:outputPanel>
-    </p:tab>
-</p:tabView>
+    <h:form style="width:500px;">
+	<p:growl id="message"></p:growl>
+	<p:tabView activeIndex="#{tabViewManagedBean.index}">
+		<p:tab title="Tab#1">
+			<p:outputLabel value="Content goes here ! Message # 1"></p:outputLabel>
+		</p:tab>
+		<p:tab title="Tab#2">
+			<p:outputLabel value="Content goes here ! Message # 2"></p:outputLabel>
+		</p:tab>
+		<p:tab title="Tab#3">
+			<p:outputLabel value="Content goes here ! Message # 3"></p:outputLabel>
+		</p:tab>
+	</p:tabView>
+</h:form>
 </h:body>
 </html>
