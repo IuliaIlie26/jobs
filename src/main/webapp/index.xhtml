@@ -1,42 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
- 
+
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:p="http://primefaces.org/ui">
- 
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
 <f:loadBundle basename="ApplicationResources" var="msg" />
- 
- 
+
+
 <h:head>
-    <title>Find my dream job</title>
-    <script name="jquery/jquery.js" library="primefaces"></script>
+	<title>Find my dream job</title>
 </h:head>
 <h:body>
-     <h:form style="text-align:right">
-    	<h:outputText value="Username:  " />
-        <h:inputText id="username" value="#{login.username}" ></h:inputText>
-        <h:outputText value="	" />
-        <h:outputText value="Password: " />
-        <h:inputSecret id="password" value="#{login.password}" ></h:inputSecret>
-        <h:commandButton action="#{login.validateUsernamePassword}" value="Login"></h:commandButton>
-    </h:form>
-    <h:form style="width:500px;">
-	<p:growl id="message"></p:growl>
-	<p:tabView activeIndex="#{tabViewManagedBean.index}">
-		<p:tab title="Tab#1">
-			<p:outputLabel value="Content goes here ! Message # 1"></p:outputLabel>
-		</p:tab>
-		<p:tab title="Tab#2">
-			<p:outputLabel value="Content goes here ! Message # 2"></p:outputLabel>
-		</p:tab>
-		<p:tab title="Tab#3">
-			<p:outputLabel value="Content goes here ! Message # 3"></p:outputLabel>
-		</p:tab>
-	</p:tabView>
-</h:form>
+	<h:form style="text-align:right">
+		<h:outputText value="Username:  " />
+		<h:inputText id="username" value="#{login.username}"></h:inputText>
+		<h:outputText value="	" />
+		<h:outputText value="Password: " />
+		<h:inputSecret id="password" value="#{login.password}"></h:inputSecret>
+		<h:commandButton action="#{login.validateUsernamePassword}"
+			value="Login"></h:commandButton>
+	</h:form>
+
+	<h:form style="width:500px;">
+		<p:growl id="message"></p:growl>
+		<p:tabView activeIndex="#{tabViewManagedBean.index}">
+			<p:tab title="#{msg.search}">
+				<h:inputText value="#{searchBean.job}" placeholder="#{msg.job}"></h:inputText>
+				<h:inputText value="#{searchBean.company}" placeholder="#{msg.company}"></h:inputText>
+				<h:selectOneMenu>
+				<f:selectItem itemLabel="#{msg.domainsAll}" itemValue="" />
+				<f:selectItems value="#{searchBean.list}" itemValue="" />
+				</h:selectOneMenu>
+				<h:selectOneMenu>
+				<f:selectItem itemLabel="#{msg.citiesALl}" itemValue="" />
+				<f:selectItems value="#{searchBean.city}" itemValue="" />
+				</h:selectOneMenu>
+			</p:tab>
+			<p:tab title="#{msg.createCV}">
+				<p:outputLabel value="Content goes here ! Message # 2"></p:outputLabel>
+			</p:tab>
+		</p:tabView>
+	</h:form>
 </h:body>
 </html>
