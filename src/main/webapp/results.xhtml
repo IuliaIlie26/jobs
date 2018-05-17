@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+<f:loadBundle basename="ApplicationResources" var="msg" />
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Search results</title>
+</head>
+<body>
+	<h:form style="width:1300px;">
+		<h:outputLabel value="#{msg.result} #{searchBean.job} #{searchBean.company} #{searchBean.selectedDomain} #{searchBean.selectedCity}" /><br/>
+		<!--<h:panelGroup binding="#{resultsBean.resultsDataTable}" />-->
+	</h:form>
+</body>
+</html>

@@ -6,7 +6,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
 <f:loadBundle basename="ApplicationResources" var="msg" />
 
@@ -25,20 +26,25 @@
 			value="Login"></h:commandButton>
 	</h:form>
 
-	<h:form style="width:500px;">
+	<h:form style="width:1000px;">
 		<p:growl id="message"></p:growl>
-		<p:tabView activeIndex="#{tabViewManagedBean.index}">
+		<p:tabView>
 			<p:tab title="#{msg.search}">
-				<h:inputText value="#{searchBean.job}" placeholder="#{msg.job}"></h:inputText>
-				<h:inputText value="#{searchBean.company}" placeholder="#{msg.company}"></h:inputText>
-				<h:selectOneMenu>
-				<f:selectItem itemLabel="#{msg.domainsAll}" itemValue="" />
-				<f:selectItems value="#{searchBean.list}" itemValue="" />
+				<h:inputText value="#{searchBean.job}" pt:placeholder="#{msg.job}"
+					></h:inputText>
+				<h:inputText value="#{searchBean.company}"
+					pt:placeholder="#{msg.company}"></h:inputText>
+				<h:selectOneMenu value="#{searchBean.selectedDomain}">
+					<f:selectItem itemLabel="#{msg.domainsAll}" itemValue=""/>
+					<f:selectItems value="#{searchBean.list}" itemValue="" />
 				</h:selectOneMenu>
-				<h:selectOneMenu>
-				<f:selectItem itemLabel="#{msg.citiesALl}" itemValue="" />
-				<f:selectItems value="#{searchBean.city}" itemValue="" />
+				<h:selectOneMenu value="#{searchBean.selectedCity}">
+					<f:selectItem itemLabel="#{msg.citiesAll}" itemValue=""/>
+					<f:selectItems value="#{searchBean.city}" itemValue="" />
 				</h:selectOneMenu>
+				<h:commandButton value="#{msg.search}" type="submit"
+					action="#{searchBean.search}">
+				</h:commandButton>
 			</p:tab>
 			<p:tab title="#{msg.createCV}">
 				<p:outputLabel value="Content goes here ! Message # 2"></p:outputLabel>

@@ -7,26 +7,37 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.model.SelectItem;
+import javax.servlet.jsp.jstl.sql.Result;
+
 public class SearchDAO {
 
-	private Connection con=null;
-	PreparedStatement ps = null;
+	private static Connection con=null;
+	static PreparedStatement ps = null;
 	
-	public List<String> getCities(){
-		List<String> results= new ArrayList<>();
+	public static List<SelectItem> getCities(){
+		List<SelectItem> results= new ArrayList<>();
 		
 		try {
 			con=DataConnect.getConnection();
-			ps = con.prepareStatement("select city from jobs");
+			ps = con.prepareStatement("select city from jobs order by city");
 			ResultSet rs = ps.executeQuery();
 
-			if (rs.next()) {
-				
+			while (rs.next()) {
+				results.add(new SelectItem(rs.getString("city")));
 			}
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
 		}
+		finally {
+			DataConnect.close(con);
+		}
 		return results;
+	}
+
+	public static Result getResults() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -11,6 +11,10 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.model.SelectItem;
+import javax.servlet.http.HttpSession;
+
+import com.unitbv.mi.dao.SearchDAO;
 
 @ManagedBean(name = "searchBean")
 @SessionScoped
@@ -18,16 +22,36 @@ public class SearchBean implements Serializable {
 
 	private static final long serialVersionUID = -3984475135190155594L;
 	
-	private List<String> list, city;
+	private List<SelectItem> list, city;
 	private String line;
 	private String job;
 	private String company;
+	private String selectedDomain, selectedCity;
 	
-	public List<String> getCity() {
-		return citiesAll();
+	public String getSelectedDomain() {
+		return selectedDomain;
 	}
 
-	public void setCity(List<String> city) {
+	public void setSelectedDomain(String selectedDomain) {
+		this.selectedDomain = selectedDomain;
+	}
+
+	public String getSelectedCity() {
+		return selectedCity;
+	}
+
+	public void setSelectedCity(String selectedCity) {
+		this.selectedCity = selectedCity;
+	}
+
+	public List<SelectItem> getCity() {
+		city=new ArrayList<>();
+		city.add(new SelectItem("Test"));
+		return city;
+		//return citiesAll();
+	}
+
+	public void setCity(List<SelectItem> city) {
 		this.city = city;
 	}
 	
@@ -47,11 +71,11 @@ public class SearchBean implements Serializable {
 		this.company = company;
 	}
 
-	public List<String> getList() {
+	public List<SelectItem> getList() {
 		return domainsAll();
 	}
 
-	public void setList(ArrayList<String> list) {
+	public void setList(ArrayList<SelectItem> list) {
 		this.list = list;
 	}
 
@@ -63,16 +87,16 @@ public class SearchBean implements Serializable {
 		this.line = line;
 	}
 
-	public List<String> domainsAll() {
+	public List<SelectItem> domainsAll() {
 
 		try (FileReader fr = new FileReader(
-				new File("..//resources//domains_EN.txt"));
+				new File("D://USEFUL//licenta//project//jobs//src//main//resources//domains_EN.txt"));
 				BufferedReader bf = new BufferedReader(fr)) {
 			list = new ArrayList<>();
 
 			line = bf.readLine();
 			while (line != null) {
-				list.add(line);
+				list.add(new SelectItem(line));
 				line = bf.readLine();
 			}
 		} catch (FileNotFoundException e) {
@@ -90,7 +114,20 @@ public class SearchBean implements Serializable {
 		return list;
 	}
 	
-	public List<String> citiesAll(){
-		return city;
+	public List<SelectItem> citiesAll(){
+		
+		return SearchDAO.getCities();
+	}
+	
+	public String search() {
+		
+		
+			HttpSession session = SessionUtils.getSession();
+			session.setAttribute("job", job);
+			session.setAttribute("company", company);
+			session.setAttribute("domain", selectedDomain);
+			session.setAttribute("city", selectedCity);
+			return "results";
+				
 	}
 }

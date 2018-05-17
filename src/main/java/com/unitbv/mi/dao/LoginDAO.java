@@ -25,6 +25,7 @@ public class LoginDAO {
 			}
 		} catch (SQLException ex) {
 			System.out.println("Login error -->" + ex.getMessage());
+			ex.printStackTrace();
 			return false;
 		} finally {
 			DataConnect.close(con);
