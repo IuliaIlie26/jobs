@@ -9,18 +9,16 @@ import javax.servlet.http.HttpSession;
 
 import com.unitbv.mi.dao.LoginDAO;
 
-
-@ManagedBean
+@ManagedBean(name = "login")
 @SessionScoped
-public class Login implements Serializable {
+public class LoginBean implements Serializable {
 
 	private static final long serialVersionUID = 1094801825228386363L;
-	
+
 	private String password;
 	private String msg;
 	private String username;
 
-	
 	public void setPassword(String password) {
 		this.password = password;
 	}
@@ -49,7 +47,7 @@ public class Login implements Serializable {
 		return username;
 	}
 
-	//validate login
+	// validate login
 	public String validateUsernamePassword() {
 		boolean valid = LoginDAO.validate(username, password);
 		if (valid) {
@@ -57,16 +55,13 @@ public class Login implements Serializable {
 			session.setAttribute("username", username);
 			return "welcome";
 		} else {
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_WARN,
-							"Incorrect Username and Passowrd",
-							"Please enter correct username and Password"));
-			return "login";
+			// TODO internationalizare!
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
+					"Incorrect Username and Passowrd", "Please enter correct username and Password"));
+			return "index";
 		}
 	}
 
-	//logout event, invalidate session
 	public String logout() {
 		HttpSession session = SessionUtils.getSession();
 		session.invalidate();

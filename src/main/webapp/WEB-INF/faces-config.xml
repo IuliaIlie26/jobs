@@ -16,6 +16,14 @@
 			<from-outcome>results</from-outcome>
 			<to-view-id>/results.xhtml</to-view-id>
 		</navigation-case>
+		<navigation-case>
+			<from-outcome>createCV</from-outcome>
+			<to-view-id>/createCV.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>login</from-outcome>
+			<to-view-id>/login.xhtml</to-view-id>
+		</navigation-case>
 	</navigation-rule>
 
 

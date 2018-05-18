@@ -20,7 +20,7 @@ public class LoginDAO {
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.next()) {
-				//result found, means valid inputs
+				// result found, means valid inputs
 				return true;
 			}
 		} catch (SQLException ex) {
@@ -31,5 +31,30 @@ public class LoginDAO {
 			DataConnect.close(con);
 		}
 		return false;
+	}
+
+	public String getNameAndLastname(String username) {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		String nameAndLastname=null;
+		try {
+			con = DataConnect.getConnection();
+			ps = con.prepareStatement("Select name, lastname from User where username = ?");
+			ps.setString(1, username);
+
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				nameAndLastname = rs.getString("name") + " " + rs.getString("lastname");
+			}
+		} catch (SQLException ex) {
+			System.out.println("Login error -->" + ex.getMessage());
+			ex.printStackTrace();
+
+		} finally {
+			DataConnect.close(con);
+		}
+		return nameAndLastname;
 	}
 }

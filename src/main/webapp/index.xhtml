@@ -17,11 +17,8 @@
 </h:head>
 <h:body>
 	<h:form style="text-align:right">
-		<h:outputText value="Username:  " />
-		<h:inputText id="username" value="#{login.username}"></h:inputText>
-		<h:outputText value="	" />
-		<h:outputText value="Password: " />
-		<h:inputSecret id="password" value="#{login.password}"></h:inputSecret>
+		<h:inputText id="username" value="#{login.username}" pt:placeholder="#{msg.username}"></h:inputText>
+		<h:inputSecret id="password" value="#{login.password}" pt:placeholder="#{msg.password}"></h:inputSecret>
 		<h:commandButton action="#{login.validateUsernamePassword}"
 			value="Login"></h:commandButton>
 	</h:form>
@@ -34,11 +31,11 @@
 					></h:inputText>
 				<h:inputText value="#{searchBean.company}"
 					pt:placeholder="#{msg.company}"></h:inputText>
-				<h:selectOneMenu value="#{searchBean.selectedDomain}">
+				<h:selectOneMenu value="#{searchBean.selectedDomain}" required="true">
 					<f:selectItem itemLabel="#{msg.domainsAll}" itemValue=""/>
 					<f:selectItems value="#{searchBean.list}" itemValue="" />
 				</h:selectOneMenu>
-				<h:selectOneMenu value="#{searchBean.selectedCity}">
+				<h:selectOneMenu value="#{searchBean.selectedCity}"  required="true">
 					<f:selectItem itemLabel="#{msg.citiesAll}" itemValue=""/>
 					<f:selectItems value="#{searchBean.city}" itemValue="" />
 				</h:selectOneMenu>

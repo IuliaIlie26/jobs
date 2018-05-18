@@ -14,9 +14,44 @@
 <title>Search results</title>
 </head>
 <body>
+	<h:form style="text-align:right">
+		<h:inputText id="username" value="#{login.username}"
+			pt:placeholder="#{msg.username}"></h:inputText>
+		<h:inputSecret id="password" value="#{login.password}"
+			pt:placeholder="#{msg.password}"></h:inputSecret>
+		<h:commandButton action="#{login.validateUsernamePassword}"
+			value="Login"></h:commandButton>
+	</h:form>
 	<h:form style="width:1300px;">
-		<h:outputLabel value="#{msg.result} #{searchBean.job} #{searchBean.company} #{searchBean.selectedDomain} #{searchBean.selectedCity}" /><br/>
-		<!--<h:panelGroup binding="#{resultsBean.resultsDataTable}" />-->
+		<h:outputLabel
+			value="#{msg.result} #{searchBean.job} #{searchBean.company} #{searchBean.selectedDomain} #{searchBean.selectedCity}" />
+		<br />
+		<h:dataTable var="row" value="#{resultsBean.getResultsDataTable()}"
+			border="1">
+			<h:column>
+				<f:facet name="header">#{msg.job}</f:facet>
+            #{row.position}
+        </h:column>
+			<h:column>
+				<f:facet name="header">#{msg.resultCompany}</f:facet>
+            #{row.company}
+        </h:column>
+			<h:column>
+				<f:facet name="header">#{msg.city}</f:facet>
+            #{row.city}
+        </h:column>
+			<h:column>
+				<f:facet name="header">#{msg.description}</f:facet>
+            #{row.description}
+        </h:column>
+			<h:column>
+				<f:facet name="header"></f:facet>
+				<h:commandButton type="submit" name="apply"
+					value="#{msg.apply(#{row.position}, #{row.company}, #{row.city} )}"
+					action="#{cvBean.apply()}" />
+			</h:column>
+		</h:dataTable>
+		<p />
 	</h:form>
 </body>
 </html>
