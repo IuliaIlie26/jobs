@@ -15,6 +15,7 @@ import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpSession;
 
 import com.unitbv.mi.dao.SearchDAO;
+import com.unitbv.mi.utils.SessionUtils;
 
 @ManagedBean(name = "searchBean")
 @SessionScoped
@@ -45,10 +46,7 @@ public class SearchBean implements Serializable {
 	}
 
 	public List<SelectItem> getCity() {
-		city=new ArrayList<>();
-		city.add(new SelectItem("Test"));
-		return city;
-		//return citiesAll();
+			return citiesAll();
 	}
 
 	public void setCity(List<SelectItem> city) {
@@ -88,30 +86,7 @@ public class SearchBean implements Serializable {
 	}
 
 	public List<SelectItem> domainsAll() {
-
-		try (FileReader fr = new FileReader(
-				new File("D://USEFUL//licenta//project//jobs//src//main//resources//domains_EN.txt"));
-				BufferedReader bf = new BufferedReader(fr)) {
-			list = new ArrayList<>();
-
-			line = bf.readLine();
-			while (line != null) {
-				list.add(new SelectItem(line));
-				line = bf.readLine();
-			}
-		} catch (FileNotFoundException e) {
-
-			e.printStackTrace();
-		} catch (IOException e) {
-
-			e.printStackTrace();
-		} catch (Exception e) {
-
-			e.printStackTrace();
-		
-		}
-	
-		return list;
+		return SearchDAO.selectDomains();
 	}
 	
 	public List<SelectItem> citiesAll(){

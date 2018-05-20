@@ -7,7 +7,10 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
-import com.unitbv.mi.dao.LoginDAO;
+import org.primefaces.context.RequestContext;
+
+import com.unitbv.mi.dao.UsersDAO;
+import com.unitbv.mi.utils.SessionUtils;
 
 @ManagedBean(name = "login")
 @SessionScoped
@@ -49,15 +52,18 @@ public class LoginBean implements Serializable {
 
 	// validate login
 	public String validateUsernamePassword() {
-		boolean valid = LoginDAO.validate(username, password);
+		boolean valid = UsersDAO.validate(username, password);
 		if (valid) {
 			HttpSession session = SessionUtils.getSession();
 			session.setAttribute("username", username);
-			return "welcome";
+			RequestContext requestContext = RequestContext.getCurrentInstance();
+			RequestContext.getCurrentInstance().execute("alert('OK!');");
+			requestContext.execute("dialog.showHide(logged)");
+			requestContext.execute("dialog.showHide(log)");
+			return "index";
 		} else {
 			// TODO internationalizare!
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
-					"Incorrect Username and Passowrd", "Please enter correct username and Password"));
+			RequestContext.getCurrentInstance().execute("alert('Incorrect username or password!');");
 			return "index";
 		}
 	}
@@ -65,6 +71,9 @@ public class LoginBean implements Serializable {
 	public String logout() {
 		HttpSession session = SessionUtils.getSession();
 		session.invalidate();
+		 RequestContext requestContext = RequestContext.getCurrentInstance(); 
+		 requestContext.execute("dialog.showHide(logged)");
+		 requestContext.execute("dialog.showHide(log)");
 		return "index";
 	}
 }

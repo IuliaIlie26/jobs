@@ -11,6 +11,8 @@ import javax.faces.model.SelectItem;
 import javax.servlet.jsp.jstl.sql.Result;
 import javax.servlet.jsp.jstl.sql.ResultSupport;
 
+import com.unitbv.mi.utils.SearchResultsUtils;
+
 public class SearchDAO {
 
 	private static Connection con = null;
@@ -35,16 +37,16 @@ public class SearchDAO {
 		return results;
 	}
 
-	public static List<com.unitbv.mi.beans.ResultSet> getResults(String domain, String city, String company, String position) {
+	public static List<SearchResultsUtils> getResults(String domain, String city, String company, String position) {
 
-		List<com.unitbv.mi.beans.ResultSet> results = new ArrayList<>();
+		List<SearchResultsUtils> results = new ArrayList<>();
 		
 		try {
 			con = DataConnect.getConnection();
 
 			String sql = "select position, company, city, description from jobs where domain= ? and city= ? ";
-			if (company != null) {
-				if (position != null) {
+			if (company != null && (!company.equals(""))) {
+				if (position != null && (!position.equals(""))) {
 					sql += " and company = ?  and position = ?";
 					ps = con.prepareStatement(sql);
 					ps.setString(3, "%" + company + "%");
@@ -54,7 +56,7 @@ public class SearchDAO {
 					ps = con.prepareStatement(sql);
 					ps.setString(3, "%" + company + "%");
 				}
-			} else if (position != null) {
+			} else if (position != null && (!position.equals(""))) {
 				sql += " and position = ?";
 				ps = con.prepareStatement(sql);
 				ps.setString(3, "%" + position + "%");
@@ -68,15 +70,32 @@ public class SearchDAO {
 
 			while (rs.next()) {
 				
-				com.unitbv.mi.beans.ResultSet row = new com.unitbv.mi.beans.ResultSet(rs.getString("position"),rs.getString("company"),rs.getString("city"),rs.getString("description"));	
+				SearchResultsUtils row = new SearchResultsUtils(rs.getString("position"),rs.getString("company"),rs.getString("city"),rs.getString("description"));	
 				results.add(row);
 			}
 		} catch (SQLException e) {
+			System.out.println(e.getMessage());
 			e.printStackTrace();
 		} finally {
 			DataConnect.close(con);
 		}
 		return results;
+	}
+
+	public static List<SelectItem> selectDomains() {
+		List<SelectItem> list = new ArrayList<>();
+		String sql = "SELECT DOMAIN FROM JOBS ORDER BY DOMAIN	";
+		con = DataConnect.getConnection();
+		try {
+		ps= con.prepareStatement(sql);
+		ResultSet rs= ps.executeQuery();
+		while(rs.next()) {
+			list.add(new SelectItem(rs.getString("domain")));
+		}}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 }

@@ -1,10 +1,10 @@
-package com.unitbv.mi.beans;
+package com.unitbv.mi.utils;
 
-public class ResultSet {
+public class SearchResultsUtils {
 
 	private String position, company, description, city;
 
-	public ResultSet(String position, String company, String description, String city) {
+	public SearchResultsUtils(String position, String company, String description, String city) {
 		super();
 		this.position = position;
 		this.company = company;

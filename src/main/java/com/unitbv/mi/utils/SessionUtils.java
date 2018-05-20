@@ -1,4 +1,4 @@
-package com.unitbv.mi.beans;
+package com.unitbv.mi.utils;
 
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;

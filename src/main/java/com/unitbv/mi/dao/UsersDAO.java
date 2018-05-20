@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class LoginDAO {
+public class UsersDAO {
 
 	public static boolean validate(String user, String password) {
 		Connection con = null;
@@ -37,7 +37,7 @@ public class LoginDAO {
 
 		Connection con = null;
 		PreparedStatement ps = null;
-		String nameAndLastname=null;
+		String nameAndLastname = null;
 		try {
 			con = DataConnect.getConnection();
 			ps = con.prepareStatement("Select name, lastname from User where username = ?");
@@ -56,5 +56,28 @@ public class LoginDAO {
 			DataConnect.close(con);
 		}
 		return nameAndLastname;
+	}
+
+	public static String getIdByUsername(String username) {
+		String id= null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con = DataConnect.getConnection();
+			ps = con.prepareStatement("Select iduser from User where username = ?");
+			ps.setString(1, username);
+
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				id = rs.getString("iduser");
+			}
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+
+		} finally {
+			DataConnect.close(con);
+		}
+		return id;
 	}
 }

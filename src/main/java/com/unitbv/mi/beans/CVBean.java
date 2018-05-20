@@ -11,9 +11,16 @@ import com.unitbv.mi.dao.CVDAO;
 @SessionScoped
 public class CVBean {
 
-	public String apply(String position, String company, String city) {
+	public String apply() {
 
-		String username = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("username");
+		String position = (String) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap()
+				.get("position");
+		String company = (String) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap()
+				.get("company");
+		String city = (String) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap()
+				.get("city");
+		String username = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.get("username");
 		if (username == null) {
 			return "login";
 		} else if (hasCV(username)) {
@@ -23,18 +30,19 @@ public class CVBean {
 			return "index";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
-					"Incorrect Username and Passowrd", "Please enter correct username and Password"));
+					"No CV available", "You seem to have no CV uploaded. Please add your CV using CV Tool."));
 			return "createCV";
 		}
 	}
 
 	private void sendCV(String position, String company, String city) {
-		String username = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("username");
+		String username = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.get("username");
 		CVDAO.sendApplication(username, position, company, city);
 	}
 
 	private boolean hasCV(String username) {
-		if(CVDAO.hasCV(username))
+		if (CVDAO.hasCV(username))
 			return true;
 		return false;
 	}

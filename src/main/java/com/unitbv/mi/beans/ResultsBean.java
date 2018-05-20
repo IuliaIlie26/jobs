@@ -5,15 +5,20 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.model.SelectItem;
+import javax.faces.context.FacesContext;
+
 import com.unitbv.mi.dao.SearchDAO;
+import com.unitbv.mi.utils.SearchResultsUtils;
 
 @ManagedBean(name = "resultsBean")
 @SessionScoped
 public class ResultsBean {
 
-	private static List<ResultSet> resultsDataTable = new ArrayList<>();
-	private String job, selectedCity, company, selectedDomain;
+	private List<SearchResultsUtils> resultsDataTable = new ArrayList<>();
+	private String job;
+	private String selectedCity;
+	private String company;
+	private String selectedDomain;
 
 	public String getJob() {
 		return job;
@@ -47,19 +52,20 @@ public class ResultsBean {
 		this.selectedDomain = selectedDomain;
 	}
 
-	public void setResultsDataTable(List<ResultSet> resultsDataTable) {
+	public void setResultsDataTable(List<SearchResultsUtils> resultsDataTable) {
 		this.resultsDataTable = resultsDataTable;
 	}
 
-	public List<ResultSet> getResultsDataTable() {
-		// resultsDataTable = SearchDAO.getResults(selectedDomain, selectedCity,
-		// company, job);
-
-		resultsDataTable.add(new ResultSet("test", "test", "test", "test"));
-		resultsDataTable.add(new ResultSet("test2", "test2", "test2", "test2"));
-		resultsDataTable.add(new ResultSet("test3", "test3", "test3", "test3"));
-
-		return resultsDataTable;
+	public List<SearchResultsUtils> getResultsDataTable() {
+		selectedDomain =  (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.get("domain");
+		selectedCity =  (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.get("city");
+		job =  (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.get("job");
+		company =  (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.get("company");
+		return SearchDAO.getResults(selectedDomain, selectedCity, company, job);
 	}
 
 }

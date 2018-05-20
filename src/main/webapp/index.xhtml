@@ -11,33 +11,59 @@
 
 <f:loadBundle basename="ApplicationResources" var="msg" />
 
-
 <h:head>
 	<title>Find my dream job</title>
 </h:head>
 <h:body>
+	<script type="text/javascript">
+		function showHide(id) {
+			var element = document.getElementById(id);
+			if (element.style.display == 'block') {
+				element.style.display = 'none';
+			} else {
+				element.style.display = 'block'
+			}
+		}
+	</script>
 	<h:form style="text-align:right">
-		<h:inputText id="username" value="#{login.username}" pt:placeholder="#{msg.username}"></h:inputText>
-		<h:inputSecret id="password" value="#{login.password}" pt:placeholder="#{msg.password}"></h:inputSecret>
-		<h:commandButton action="#{login.validateUsernamePassword}"
-			value="Login"></h:commandButton>
+		<div id="log" style="display: block">
+			<h:inputText id="username" value="#{login.username}"
+				pt:placeholder="#{msg.username}" />
+			<h:inputSecret id="password" value="#{login.password}"
+				pt:placeholder="#{msg.password}" />
+			<h:commandButton action="#{login.validateUsernamePassword}"
+				value="#{msg.login}" />
+
+		</div>
+
+		<div id="logged" style="display: none">
+			<h:outputLabel id="welcome"
+				value="#{msg.welcomeUsername} #{login.username}" />
+			<h:commandButton action="#{login.logout}" value="#{msg.logout}" />
+		</div>
 	</h:form>
 
 	<h:form style="width:1000px;">
 		<p:growl id="message"></p:growl>
 		<p:tabView>
 			<p:tab title="#{msg.search}">
-				<h:inputText value="#{searchBean.job}" pt:placeholder="#{msg.job}"
-					></h:inputText>
+				<h:inputText value="#{searchBean.job}" pt:placeholder="#{msg.job}">
+
+				</h:inputText>
 				<h:inputText value="#{searchBean.company}"
-					pt:placeholder="#{msg.company}"></h:inputText>
-				<h:selectOneMenu value="#{searchBean.selectedDomain}" required="true">
-					<f:selectItem itemLabel="#{msg.domainsAll}" itemValue=""/>
+					pt:placeholder="#{msg.company}">
+
+				</h:inputText>
+				<h:selectOneMenu value="#{searchBean.selectedDomain}"
+					required="true">
+					<f:selectItem itemLabel="#{msg.domainsAll}" itemValue="" />
 					<f:selectItems value="#{searchBean.list}" itemValue="" />
+
 				</h:selectOneMenu>
-				<h:selectOneMenu value="#{searchBean.selectedCity}"  required="true">
-					<f:selectItem itemLabel="#{msg.citiesAll}" itemValue=""/>
+				<h:selectOneMenu value="#{searchBean.selectedCity}" required="true">
+					<f:selectItem itemLabel="#{msg.citiesAll}" itemValue="" />
 					<f:selectItems value="#{searchBean.city}" itemValue="" />
+
 				</h:selectOneMenu>
 				<h:commandButton value="#{msg.search}" type="submit"
 					action="#{searchBean.search}">
