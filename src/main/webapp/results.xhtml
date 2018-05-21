@@ -14,14 +14,11 @@
 <title>Search results</title>
 </head>
 <body>
-	<h:form style="text-align:right">
-		<h:inputText id="username" value="#{login.username}"
-			pt:placeholder="#{msg.username}"></h:inputText>
-		<h:inputSecret id="password" value="#{login.password}"
-			pt:placeholder="#{msg.password}"></h:inputSecret>
-		<h:commandButton action="#{login.validateUsernamePassword}"
-			value="Login"></h:commandButton>
-	</h:form>
+	<div id="header">
+		<ui:insert name="header">
+			<ui:include src="header.xhtml" />
+		</ui:insert>
+	</div>
 	<h:form style="width:1300px;">
 		<h:outputLabel
 			value="#{msg.result} #{searchBean.job} #{searchBean.company} #{searchBean.selectedDomain} #{searchBean.selectedCity}" />

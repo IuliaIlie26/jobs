@@ -1,5 +1,8 @@
 package com.unitbv.mi.beans;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -11,6 +14,67 @@ import com.unitbv.mi.dao.CVDAO;
 @SessionScoped
 public class CVBean {
 
+	private String name, lastname, email, phone, city, country;
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public List<String> getCountryList() {
+		countryList = new ArrayList<>();
+		countryList.add("Romania");
+		return countryList;
+	}
+
+	public void setCountryList(List<String> countryList) {
+		this.countryList = countryList;
+	}
+
+	private List<String> countryList;
+	
 	public String apply() {
 
 		String position = (String) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap()
@@ -47,4 +111,7 @@ public class CVBean {
 		return false;
 	}
 
+	public void next() {
+		
+	}
 }

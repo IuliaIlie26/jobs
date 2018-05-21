@@ -1,10 +1,6 @@
 package com.unitbv.mi.beans;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +9,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpSession;
-
 import com.unitbv.mi.dao.SearchDAO;
 import com.unitbv.mi.utils.SessionUtils;
 
@@ -23,7 +18,8 @@ public class SearchBean implements Serializable {
 
 	private static final long serialVersionUID = -3984475135190155594L;
 	
-	private List<SelectItem> list, city;
+	private List<SelectItem> list = new ArrayList<>();
+	private List<SelectItem> city = new ArrayList<>();
 	private String line;
 	private String job;
 	private String company;
@@ -86,17 +82,19 @@ public class SearchBean implements Serializable {
 	}
 
 	public List<SelectItem> domainsAll() {
-		return SearchDAO.selectDomains();
+		list.add(new SelectItem("test domain"));
+		return list;
+		//return SearchDAO.selectDomains();
 	}
 	
 	public List<SelectItem> citiesAll(){
-		
-		return SearchDAO.getCities();
+		city.add(new SelectItem("test city"));
+		return city;
+		//return SearchDAO.getCities();
 	}
 	
 	public String search() {
-		
-		
+
 			HttpSession session = SessionUtils.getSession();
 			session.setAttribute("job", job);
 			session.setAttribute("company", company);

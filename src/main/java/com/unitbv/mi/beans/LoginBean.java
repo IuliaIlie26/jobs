@@ -1,12 +1,9 @@
 package com.unitbv.mi.beans;
 
 import java.io.Serializable;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
-
 import org.primefaces.context.RequestContext;
 
 import com.unitbv.mi.dao.UsersDAO;
@@ -21,6 +18,25 @@ public class LoginBean implements Serializable {
 	private String password;
 	private String msg;
 	private String username;
+	private String isLoggedIn = " none";
+
+	public String getIsLoggedIn() {
+		return isLoggedIn;
+	}
+
+	public void setIsLoggedIn(String isLoggedIn) {
+		this.isLoggedIn = isLoggedIn;
+	}
+
+	public String getIsLoggedOut() {
+		return isLoggedOut;
+	}
+
+	public void setIsLoggedOut(String isLoggedOut) {
+		this.isLoggedOut = isLoggedOut;
+	}
+
+	private String isLoggedOut = " block";
 
 	public void setPassword(String password) {
 		this.password = password;
@@ -56,10 +72,8 @@ public class LoginBean implements Serializable {
 		if (valid) {
 			HttpSession session = SessionUtils.getSession();
 			session.setAttribute("username", username);
-			RequestContext requestContext = RequestContext.getCurrentInstance();
-			RequestContext.getCurrentInstance().execute("alert('OK!');");
-			requestContext.execute("dialog.showHide(logged)");
-			requestContext.execute("dialog.showHide(log)");
+			isLoggedIn = " block";
+			isLoggedOut = " none";
 			return "index";
 		} else {
 			// TODO internationalizare!
@@ -71,9 +85,8 @@ public class LoginBean implements Serializable {
 	public String logout() {
 		HttpSession session = SessionUtils.getSession();
 		session.invalidate();
-		 RequestContext requestContext = RequestContext.getCurrentInstance(); 
-		 requestContext.execute("dialog.showHide(logged)");
-		 requestContext.execute("dialog.showHide(log)");
+		isLoggedIn = " none";
+		isLoggedOut = " block";
 		return "index";
 	}
 }

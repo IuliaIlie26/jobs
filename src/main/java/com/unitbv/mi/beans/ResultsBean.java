@@ -7,6 +7,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import org.primefaces.context.RequestContext;
+
 import com.unitbv.mi.dao.SearchDAO;
 import com.unitbv.mi.utils.SearchResultsUtils;
 
@@ -57,6 +59,7 @@ public class ResultsBean {
 	}
 
 	public List<SearchResultsUtils> getResultsDataTable() {
+		RequestContext.getCurrentInstance().execute("toggle();");
 		selectedDomain =  (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
 				.get("domain");
 		selectedCity =  (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
@@ -65,7 +68,9 @@ public class ResultsBean {
 				.get("job");
 		company =  (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
 				.get("company");
-		return SearchDAO.getResults(selectedDomain, selectedCity, company, job);
+		resultsDataTable.add(new SearchResultsUtils("test", "test", "test", "test"));
+		return resultsDataTable;
+		//return SearchDAO.getResults(selectedDomain, selectedCity, company, job);
 	}
 
 }
