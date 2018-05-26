@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+<script type="text/javascript">
+	var i = 0;
+	document.getElementById('button').onclick = duplicate;
+	function duplicate(id) {
+		var original = document.getElementById(id);
+		var clone = original.cloneNode(true); 
+		clone.id = id + ++i; 
+		clone.onclick = duplicate;
+		original.parentNode.appendChild(clone);
+	}
+</script>
+</h:head>
+<h:body>
+<h:form>
+		<div id="prev">
+		<h:outputLabel id="experience" value="#{msg.experience}" />
+			<h:outputLabel id="work" value="#{msg.work}" />
+			<h:inputText id="inputWork" value="#{cvBean.position}" />
+			<br />
+			<h:outputLabel id="at" value="#{msg.CVcompany}" />
+			<h:inputText id="inputCompanyPrev" value="#{cvBean.prevCompany}" /><br/>
+			<h:outputLabel id="since" value="#{msg.since}" />
+			<h:inputText id="inputDate" value="#{cvBean.sinceDate}" />
+			<br />
+			<h:outputLabel id="to" value="#{msg.to}" />
+			<h:inputText id="inputTo" value="#{cvBean.toDate}" />
+			<br />
+			<h:outputLabel id="domain" value="#{msg.domain}" />
+			<h:selectOneMenu value="#{cvBean.selectedDomainPrev}">
+				<f:selectItem itemLabel="#{msg.domain}" itemValue="" />
+				<f:selectItems value="#{cvBean.domainList}" itemValue="" />
+			</h:selectOneMenu>
+			<br />
+			<h:commandButton id="button" onclick="duplicate('prev')" value="#{msg.duplicate}"/>
+		</div>
+</h:form>
+</h:body>
+</html>

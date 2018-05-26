@@ -16,7 +16,7 @@
 	<h:form style="text-align:right">
 		<div id="log" style="display: #{login.isLoggedOut}">
 			<h:inputText id="username" value="#{login.username}"
-				pt:placeholder="#{msg.username}" />
+				pt:placeholder="#{msg.username}" style="width:200px;"/>
 			<h:inputSecret id="password" value="#{login.password}"
 				pt:placeholder="#{msg.password}" />
 			<h:commandButton action="#{login.validateUsernamePassword}" value="#{msg.login}" />
@@ -24,7 +24,7 @@
 
 		<div id="logged" style="display: #{login.isLoggedIn}">
 			<h:outputLabel id="welcome"
-				value="#{msg.welcomeUsername} #{login.username}" />
+				value="#{msg.welcomeUsername} #{login.nameAndLastname}" />
 			<h:commandButton action="#{login.logout}" value="#{msg.logout}" />
 		</div>
 	</h:form>

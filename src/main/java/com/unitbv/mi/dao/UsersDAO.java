@@ -8,11 +8,12 @@ import java.sql.SQLException;
 public class UsersDAO {
 
 	public static boolean validate(String user, String password) {
-	/**	Connection con = null;
+		Connection con = null;
 		PreparedStatement ps = null;
 
 		try {
 			con = DataConnect.getConnection();
+			
 			ps = con.prepareStatement("Select username, password from User where username = ? and password = ?");
 			ps.setString(1, user);
 			ps.setString(2, password);
@@ -20,31 +21,38 @@ public class UsersDAO {
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.next()) {
-				// result found, means valid inputs
+				return true;
+			}
+			
+			ps = con.prepareStatement("Select email, password from User where email = ? and password = ?");
+			ps.setString(1, user);
+			ps.setString(2, password);
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
 				return true;
 			}
 		} catch (SQLException ex) {
 			System.out.println("Login error -->" + ex.getMessage());
 			ex.printStackTrace();
-			return false;
 		} finally {
 			DataConnect.close(con);
-		}*/
-
-		if (user.equals("iulia.ilie") && password.equals("iulia123"))
-			return true;
+		}
 		return false;
 	}
 
-	public String getNameAndLastname(String username) {
+	public static String getNameAndLastname(String username) {
 
 		Connection con = null;
 		PreparedStatement ps = null;
 		String nameAndLastname = null;
 		try {
 			con = DataConnect.getConnection();
-			ps = con.prepareStatement("Select name, lastname from User where username = ?");
+			ps = con.prepareStatement("Select name, lastname from User where username = ? or email = ?");
 			ps.setString(1, username);
+			ps.setString(2, username);
+
 
 			ResultSet rs = ps.executeQuery();
 

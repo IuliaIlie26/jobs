@@ -18,7 +18,17 @@ public class LoginBean implements Serializable {
 	private String password;
 	private String msg;
 	private String username;
-	private String isLoggedIn = " none";
+	private static String isLoggedIn = " none";
+	private String nameAndLastname = "";
+
+	public String getNameAndLastname() {
+		nameAndLastname = UsersDAO.getNameAndLastname(username);
+		return nameAndLastname;
+	}
+
+	public void setNameAndLastname(String nameAndLastname) {
+		this.nameAndLastname = nameAndLastname;
+	}
 
 	public String getIsLoggedIn() {
 		return isLoggedIn;
@@ -36,7 +46,7 @@ public class LoginBean implements Serializable {
 		this.isLoggedOut = isLoggedOut;
 	}
 
-	private String isLoggedOut = " block";
+	private static String isLoggedOut = " block";
 
 	public void setPassword(String password) {
 		this.password = password;

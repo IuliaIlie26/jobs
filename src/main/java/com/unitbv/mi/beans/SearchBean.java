@@ -82,15 +82,11 @@ public class SearchBean implements Serializable {
 	}
 
 	public List<SelectItem> domainsAll() {
-		list.add(new SelectItem("test domain"));
-		return list;
-		//return SearchDAO.selectDomains();
+		return SearchDAO.selectDomains();
 	}
 	
 	public List<SelectItem> citiesAll(){
-		city.add(new SelectItem("test city"));
-		return city;
-		//return SearchDAO.getCities();
+		return SearchDAO.getCities();
 	}
 	
 	public String search() {

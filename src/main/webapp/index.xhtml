@@ -48,8 +48,21 @@
 			</p:tab>
 			<p:tab title="#{msg.createCV}">
 				<h:outputLabel id="label" value="#{msg.CVlabel}" />
-				<ui:include src="personalData.xhtml" />
-				<h:commandButton id="next" value="#{msg.next}" action="#{cvBean.next}" style="text-align:right"/>
+
+				<p:carousel numVisible="1" effect="easeInStrong" style="margin-bottom:0" >
+					<p:tab value="#{msg.personal}">
+						<ui:include src="personalData.xhtml" />
+					</p:tab>
+					<p:tab value="#{msg.education}">
+						<ui:include src="education.xhtml" />
+					</p:tab>
+					<p:tab value="#{msg.prevexperience}">
+						<ui:include src="prev_experience.xhtml" />
+					</p:tab>
+					<p:tab value="#{msg.experience}">
+						<ui:include src="experience.xhtml" />
+					</p:tab>
+				</p:carousel>
 			</p:tab>
 		</p:tabView>
 	</h:form>

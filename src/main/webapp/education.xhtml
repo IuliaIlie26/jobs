@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<head>
+<script type="text/javascript">
+	var i = 0;
+	document.getElementById('button').onclick = duplicate;
+	function duplicate(id) {
+		var original = document.getElementById(id);
+		var clone = original.cloneNode(true); 
+		clone.id = id + ++i; 
+		clone.onclick = duplicate;
+		original.parentNode.appendChild(clone);
+	}
+</script>
+</head>
+<h:body>
+	<h:form>
+		<div id="education">
+			<h:outputLabel id="education" value="#{msg.education}" />
+			<br />
+			<h:outputLabel id="uni" value="#{msg.uni}" />
+			<h:inputText id="inputUni" value="#{cvBean.university}" />
+			<br />
+			<h:outputLabel id="degree" value="#{msg.degree}" />
+			<h:inputText id="inputDegree" value="#{cvBean.degree}" /><br/>
+			<h:commandButton id="button" onclick="duplicate('education')" value="#{msg.duplicate}"/>
+		</div>
+	</h:form>
+</h:body>
+</html>

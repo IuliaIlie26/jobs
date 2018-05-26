@@ -9,69 +9,33 @@
 <head>
 <script type="text/javascript">
 	var i = 0;
-
-	function duplicate() {
-		var original = document.getElementById('duplicater' + i);
-		var clone = original.cloneNode(true); // "deep" clone
-		clone.id = "duplicater" + ++i; // there can only be one element with an ID
-		clone.onclick = duplicate; // event handlers are not cloned
+	document.getElementById('button').onclick = duplicate;
+	function duplicate(id) {
+		var original = document.getElementById(id);
+		var clone = original.cloneNode(true);
+		clone.id = id + ++i;
+		clone.onclick = duplicate;
 		original.parentNode.appendChild(clone);
 	}
 </script>
 </head>
 <h:body>
 	<h:form>
-		<div id="education">
-			<h:outputLabel id="experience" value="#{msg.experience}" />
-			<br />
-			<h:outputLabel id="uni" value="#{msg.uni}" />
-			<h:inputText id="inputUni" value="#{cvBean.university}"
-				required="true" />
-			<br />
-			<h:outputLabel id="degree" value="#{msg.degree}" />
-			<h:inputText id="inputDegree" value="#{cvBean.degree}"
-				required="true" />
-			<p:commandLink onclick="duplicate()">
-				<h:graphicImage name="../..img/plus.png" />
-			</p:commandLink>
-		</div>
-
-		<div id="prev">
-			<h:outputLabel id="work" value="#{msg.work}" />
-			<h:inputText id="inputWork" value="#{cvBean.positions}" />
-			<br />
-			<h:outputLabel id="since" value="#{msg.since}" />
-			<h:inputText id="inputDate" value="#{cvBean.sinceDate}" />
-			<br />
-			<h:outputLabel id="to" value="#{msg.to}" />
-			<h:inputText id="inputTo" value="#{cvBean.toDate}" />
-			<br />
-			<h:outputLabel id="domain" value="#{msg.domain}" />
-			<h:selectOneMenu value="#{cvBean.selectedDomainPrev}" required="true">
-				<f:selectItem itemLabel="#{msg.domain}" itemValue="" />
-				<f:selectItems value="#{cv.domainList}" itemValue="" />
-			</h:selectOneMenu>
-			<br />
-			<p:commandLink onclick="duplicate()">
-				<h:graphicImage name="../..img/plus.png" />
-			</p:commandLink>
-		</div>
-
 		<div id="current">
-			<h:outputLabel id="current" value="#{msg.currentPlace}" />
-			<h:inputText id="inputPosition" value="#{cvBean.currentPositions}" />
-			<h:outputLabel id="at" value="#{msg.CVcompany}" />
-			<h:inputText id="inputPosition" value="#{cvBean.currentCompany}" />
-			<h:outputLabel id="since" value="#{msg.since}" />
-			<h:inputText id="inputDate" value="#{cvBean.sinceDateCurrent}" />
+			<h:outputLabel id="experience" value="#{msg.experience}" /><br/>
+			<h:outputLabel id="current" value="#{msg.currentPlace}" /> 
+			<h:inputText id="inputPosition" value="#{cvBean.currentPosition}" /><br/>
+			<h:outputLabel id="comp" value="#{msg.CVcompany}" />
+			<h:inputText id="inputCompany" value="#{cvBean.currentCompany}" /><br/>
+			<h:outputLabel id="sinceCurrent" value="#{msg.since}" />
+			<h:inputText id="inputDateCurrent" value="#{cvBean.sinceDateCurrent}" />
 			<br />
-			<h:selectOneMenu value="#{cvBean.selectedDomain}" required="true">
+			<h:selectOneMenu value="#{cvBean.selectedDomain}">
 				<f:selectItem itemLabel="#{msg.domain}" itemValue="" />
 				<f:selectItems value="#{cv.domainList}" itemValue="" />
-			</h:selectOneMenu>
-			<p:commandLink onclick="duplicate()">
-				<h:graphicImage name="../..img/plus.png" />
-			</p:commandLink>
+			</h:selectOneMenu> <br/>
+			<h:commandButton id="button" onclick="duplicate('current')"
+				value="#{msg.duplicate}" />
 		</div>
 	</h:form>
 </h:body>

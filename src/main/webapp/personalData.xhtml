@@ -13,22 +13,22 @@
 		<h:outputLabel id="personal" value="#{msg.personal}" />
 		<br />
 		<h:outputLabel id="name" value="#{msg.name}" />
-		<h:inputText id="inputName" value="#{cvBean.name}" required="true" />
+		<h:inputText id="inputName" value="#{cvBean.name}"/>
 		<br />
 		<h:outputLabel id="lname" value="#{msg.lastname}" />
-		<h:inputText id="inputLastName" value="#{cvBean.lastname}" required="true"/>
+		<h:inputText id="inputLastName" value="#{cvBean.lastname}"/>
 		<br />
 		<h:outputLabel id="email" value="#{msg.email}" />
-		<h:inputText id="inputEmail" value="#{cvBean.email}" required="true"/>
+		<h:inputText id="inputEmail" value="#{cvBean.email}"/>
 		<br />
 		<h:outputLabel id="phone" value="#{msg.phone}" />
-		<h:inputText id="inputPhone" value="#{cvBean.phone}" required="true"/>
+		<h:inputText id="inputPhone" value="#{cvBean.phone}"/>
 		<br />
 		<h:outputLabel id="city" value="#{msg.city}" />
-		<h:inputText id="inputCity" value="#{cvBean.city}" required="true"/>
+		<h:inputText id="inputCity" value="#{cvBean.city}"/>
 		<br />
 		<h:outputLabel id="country" value="#{msg.country}" />
-		<h:selectOneMenu value="#{cvBean.country}" required="true">
+		<h:selectOneMenu value="#{cvBean.country}">
 			<f:selectItems value="#{cvBean.countryList}" itemValue="" />
 		</h:selectOneMenu>
 	</h:form>

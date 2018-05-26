@@ -60,17 +60,12 @@ public class ResultsBean {
 
 	public List<SearchResultsUtils> getResultsDataTable() {
 		RequestContext.getCurrentInstance().execute("toggle();");
-		selectedDomain =  (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
-				.get("domain");
-		selectedCity =  (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
-				.get("city");
-		job =  (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
-				.get("job");
-		company =  (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
-				.get("company");
-		resultsDataTable.add(new SearchResultsUtils("test", "test", "test", "test"));
-		return resultsDataTable;
-		//return SearchDAO.getResults(selectedDomain, selectedCity, company, job);
+		selectedDomain = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("domain");
+		selectedCity = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("city");
+		job = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("job");
+		company = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("company");
+
+		return SearchDAO.getResults(selectedDomain, selectedCity, company, job);
 	}
 
 }
