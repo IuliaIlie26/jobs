@@ -18,11 +18,12 @@
 </head>
 <h:body>
 	<h:form>
+	<h:outputLabel id="skills" value="#{msg.skills}" style="font-weight:bold; font-size:18px" />
 		<div id="language">
-			<h:outputLabel id="skills" value="#{msg.skills}" style="font-weight:bold; font-size:18px" />
+			
 			<br />
 			<h:outputLabel id="mLang" value="#{msg.mLang}" />
-			<h:inputText id="inputMLang" value="#{cvBean.mLanguage}" required="true" requiredMessage="#{msg.enterMLang}" />
+			<h:inputText id="inputMLang" value="#{cvBean.mLanguage}" required="true" requiredMessage="#{msg.enterMLang}" /> <br/>
 			<h:outputLabel id="lang" value="#{msg.lang}" />
 			<h:inputText id="inputLang" value="#{cvBean.language}" />
 			<br />

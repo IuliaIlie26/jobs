@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
 <f:loadBundle basename="ApplicationResources" var="msg" />
@@ -19,29 +16,39 @@
 		</ui:insert>
 	</div>
 	<div>
-		<ui:insert name="personal">
-			<ui:include src="personalData.xhtml" />
-		</ui:insert>
-		<ui:insert name="education">
-			<ui:include src="education.xhtml" />
-		</ui:insert>
-		<ui:insert name="prevExp">
-			<ui:include src="prev_experience.xhtml" />
-		</ui:insert>
-		<ui:insert name="experience">
-			<ui:include src="experience.xhtml" />
-		</ui:insert>
-		<ui:insert name="skills">
-			<ui:include src="skills.xhtml" />
-		</ui:insert>
+		
+			<p:tab value="#{msg.personal}">
+				<h:panelGrid columns="1" cellpadding="5">
+					<ui:include src="personalData.xhtml" />
+				</h:panelGrid>
+			</p:tab>
+			<p:tab value="#{msg.education}">
+				<h:panelGrid columns="1" cellpadding="5">
+					<ui:include src="education.xhtml" />
+				</h:panelGrid>
+			</p:tab>
+			<p:tab value="#{msg.prevexperience}">
+				<h:panelGrid columns="1" cellpadding="5">
+					<ui:include src="prev_experience.xhtml" />
+				</h:panelGrid>
+			</p:tab>
+			<p:tab value="#{msg.experience}">
+				<h:panelGrid columns="1" cellpadding="5">
+					<ui:include src="experience.xhtml" />
+				</h:panelGrid>
+			</p:tab>
+			<p:tab value="#{msg.skills}">
+				<h:panelGrid columns="1" cellpadding="5">
+					<ui:include src="skills.xhtml" />
+				</h:panelGrid>
+			</p:tab>
+	
 	</div>
 	<h:form>
-		<h:outputLabel id="onSave" value="#{msg.message}"
-			style="font-weight:bold" /> <br/>
-		<h:commandButton id="save" action="#{cvBean.saveCV}"
-			value="#{msg.justSave}" />
-		<h:commandButton id="publish" action="#{cvBean.publishCV}"
-			value="#{msg.publishCV}" />
+		<h:outputLabel id="onSave" value="#{msg.message}" style="font-weight:bold" />
+		<br />
+		<h:commandButton id="save" action="#{cvBean.saveCV}" value="#{msg.justSave}" />
+		<h:commandButton id="publish" action="#{cvBean.publishCV}" value="#{msg.publishCV}" />
 	</h:form>
 
 </h:body>
