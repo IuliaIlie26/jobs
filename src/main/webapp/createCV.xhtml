@@ -15,9 +15,34 @@
 <h:body>
 	<div id="header">
 		<ui:insert name="header">
-			<ui:include src="personalData.xhtml" />
-			<ui:include src="experience.xhtml" />
+			<ui:include src="header.xhtml" />
 		</ui:insert>
 	</div>
+	<div>
+		<ui:insert name="personal">
+			<ui:include src="personalData.xhtml" />
+		</ui:insert>
+		<ui:insert name="education">
+			<ui:include src="education.xhtml" />
+		</ui:insert>
+		<ui:insert name="prevExp">
+			<ui:include src="prev_experience.xhtml" />
+		</ui:insert>
+		<ui:insert name="experience">
+			<ui:include src="experience.xhtml" />
+		</ui:insert>
+		<ui:insert name="skills">
+			<ui:include src="skills.xhtml" />
+		</ui:insert>
+	</div>
+	<h:form>
+		<h:outputLabel id="onSave" value="#{msg.message}"
+			style="font-weight:bold" /> <br/>
+		<h:commandButton id="save" action="#{cvBean.saveCV}"
+			value="#{msg.justSave}" />
+		<h:commandButton id="publish" action="#{cvBean.publishCV}"
+			value="#{msg.publishCV}" />
+	</h:form>
+
 </h:body>
 </html>

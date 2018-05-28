@@ -4,8 +4,6 @@ import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.servlet.http.HttpSession;
-import org.primefaces.context.RequestContext;
-
 import com.unitbv.mi.dao.UsersDAO;
 import com.unitbv.mi.utils.SessionUtils;
 
@@ -16,10 +14,10 @@ public class LoginBean implements Serializable {
 	private static final long serialVersionUID = 1094801825228386363L;
 
 	private String password;
-	private String msg;
 	private String username;
 	private static String isLoggedIn = " none";
-	private String nameAndLastname = "";
+	private static String isLoggedOut = " block";
+	private String nameAndLastname = null;
 
 	public String getNameAndLastname() {
 		nameAndLastname = UsersDAO.getNameAndLastname(username);
@@ -34,30 +32,24 @@ public class LoginBean implements Serializable {
 		return isLoggedIn;
 	}
 
-	public void setIsLoggedIn(String isLoggedIn) {
-		this.isLoggedIn = isLoggedIn;
+	public static void setIsLoggedIn(String log) {
+		isLoggedIn = log;
 	}
 
 	public String getIsLoggedOut() {
 		return isLoggedOut;
 	}
 
-	public void setIsLoggedOut(String isLoggedOut) {
-		this.isLoggedOut = isLoggedOut;
+	public static void setIsLoggedOut(String log) {
+		isLoggedOut = log;
 	}
-
-	private static String isLoggedOut = " block";
 
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	public void setMsg(String msg) {
-		this.msg = msg;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUsername(String user) {
+		this.username = user;
 	}
 
 	public static long getSerialversionuid() {
@@ -68,35 +60,23 @@ public class LoginBean implements Serializable {
 		return password;
 	}
 
-	public String getMsg() {
-		return msg;
-	}
-
 	public String getUsername() {
 		return username;
 	}
 
-	// validate login
-	public String validateUsernamePassword() {
-		boolean valid = UsersDAO.validate(username, password);
-		if (valid) {
-			HttpSession session = SessionUtils.getSession();
-			session.setAttribute("username", username);
-			isLoggedIn = " block";
-			isLoggedOut = " none";
-			return "index";
-		} else {
-			// TODO internationalizare!
-			RequestContext.getCurrentInstance().execute("alert('Incorrect username or password!');");
-			return "index";
-		}
+	public void validateUsernamePassword() {
+
+		HttpSession session = SessionUtils.getSession();
+		session.setAttribute("username", username);
+		isLoggedIn = " block";
+		isLoggedOut = " none";
+
 	}
 
-	public String logout() {
+	public void logout() {
 		HttpSession session = SessionUtils.getSession();
 		session.invalidate();
 		isLoggedIn = " none";
 		isLoggedOut = " block";
-		return "index";
 	}
 }

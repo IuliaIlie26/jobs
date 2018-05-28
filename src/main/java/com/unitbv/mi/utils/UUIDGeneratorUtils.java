@@ -6,7 +6,7 @@ public class UUIDGeneratorUtils {
 
 	public static String generate() {
 
-		return UUID.randomUUID().toString();
+		return UUID.randomUUID().toString().substring(0, 32);
 
 	}
 }

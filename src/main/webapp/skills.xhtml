@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<head>
+<script type="text/javascript">
+	var i = 0;
+	document.getElementById('button').onclick = duplicate;
+	function duplicate(id) {
+		var original = document.getElementById(id);
+		var clone = original.cloneNode(true);
+		clone.id = id + ++i;
+		clone.onclick = duplicate;
+		original.parentNode.appendChild(clone);
+	}
+</script>
+</head>
+<h:body>
+	<h:form>
+		<div id="language">
+			<h:outputLabel id="skills" value="#{msg.skills}" style="font-weight:bold; font-size:18px" />
+			<br />
+			<h:outputLabel id="mLang" value="#{msg.mLang}" />
+			<h:inputText id="inputMLang" value="#{cvBean.mLanguage}" required="true" requiredMessage="#{msg.enterMLang}" />
+			<h:outputLabel id="lang" value="#{msg.lang}" />
+			<h:inputText id="inputLang" value="#{cvBean.language}" />
+			<br />
+			<h:outputLabel id="level" value="#{msg.level}" />
+			<h:selectOneMenu value="#{cvBean.selectedLevel}">
+				<f:selectItems value="#{cvBean.levelList}" itemValue="" />
+			</h:selectOneMenu>
+			<br />
+			<h:commandButton id="button" onclick="duplicate('language')" value="#{msg.duplicate}" />
+		</div>
+		<div id="skills">
+			<h:outputLabel id="skill" value="#{msg.otherSkills}" />
+			<h:inputText id="inputSkills" value="#{cvBean.skills}" />
+			<h:commandButton id="button2" onclick="duplicate('skills')" value="#{msg.duplicate}" />
+		</div>
+
+	</h:form>
+</h:body>
+</html>

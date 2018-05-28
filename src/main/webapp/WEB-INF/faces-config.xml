@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<faces-config
-    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
-    version="2.2">
+<faces-config xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+	version="2.2">
 
-<navigation-rule>
+	<navigation-rule>
 		<from-view-id>/index.xhtml</from-view-id>
-		
-		 <navigation-case>
+
+		<navigation-case>
 			<from-outcome>welcome</from-outcome>
 			<to-view-id>/welcome.xhtml</to-view-id>
 		</navigation-case>
@@ -26,5 +25,9 @@
 		</navigation-case>
 	</navigation-rule>
 
+	<application>
+		<!-- This supports resources referenced from within css files e.g. url(../fonts/glyphicons) -->
+		<resource-handler>org.omnifaces.resourcehandler.UnmappedResourceHandler</resource-handler>
+	</application>
 
 </faces-config>

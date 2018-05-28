@@ -7,124 +7,238 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
-import javax.servlet.http.HttpSession;
-
-import com.unitbv.mi.classes.PersonalData;
 import com.unitbv.mi.dao.CVDAO;
-import com.unitbv.mi.utils.SessionUtils;
 
 @ManagedBean(name = "cvBean")
 @SessionScoped
 public class CVBean {
 
-	private String name, lastname, email, phone, city, country;
-	private List<String>	university, degree, prevCompany, sinceDate, toDate, selectedDomain, currentPosition, position, currentCompany, domain, sinceDateCurrent, selectedDomainPrev;
+	private String name, lastname, email, phone, city, country, gender;
+	private String selectedLevel;
+	private List<SelectItem> countryList;
+	private String university, prevCompany, selectedDomainCurrent, currentPosition, position, currentCompany, selectedDomainPrev,
+			selectedDegree, selectedLast;
+	private String sinceDate, toDate, sinceDateCurrent;
+	private List<SelectItem> degree;
+	private String language;
+	private List<SelectItem> levelList;
+	private List<String> skills;
+	private String mLanguage;
+	private List<SelectItem> last;
+
 	
-	public List<String> getPrevCompany() {
+	public String getSelectedLast() {
+		return selectedLast;
+	}
+
+	public void setSelectedLast(String selectedLast) {
+		this.selectedLast = selectedLast;
+	}
+
+	public List<SelectItem> getLast() {
+		last= new ArrayList<>();
+		last.add(new SelectItem("None"));
+		last.add(new SelectItem("Highschool"));
+		last.add(new SelectItem("Professional school"));
+		last.add(new SelectItem("University - Bachelor"));
+		last.add(new SelectItem("University - Master"));
+		last.add(new SelectItem("University - PhD"));
+		return last;
+	}
+
+	public void setLast(List<SelectItem> last) {
+		this.last = last;
+	}
+
+	public String getmLanguage() {
+		return mLanguage;
+	}
+
+	public void setmLanguage(String mLanguage) {
+		this.mLanguage = mLanguage;
+	}
+
+	public String getSelectedDomainCurrent() {
+		return selectedDomainCurrent;
+	}
+
+	public void setSelectedDomainCurrent(String selectedDomainCurrent) {
+		this.selectedDomainCurrent = selectedDomainCurrent;
+	}
+
+	public List<String> getSkills() {
+		return skills;
+	}
+
+	public void setSkills(List<String> skills) {
+		this.skills = skills;
+	}
+
+	public String getSelectedLevel() {
+		return selectedLevel;
+	}
+
+	public void setSelectedLevel(String selectedLevel) {
+		this.selectedLevel = selectedLevel;
+	}
+
+	public String getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+
+	public List<SelectItem> getLevelList() {
+		levelList = new ArrayList<>();
+		levelList.add(new SelectItem("A1"));
+		levelList.add(new SelectItem("A2"));
+		levelList.add(new SelectItem("B1"));
+		levelList.add(new SelectItem("B2"));
+		levelList.add(new SelectItem("C1"));
+		levelList.add(new SelectItem("C2"));
+		return levelList;
+	}
+
+	public void setLevelList(List<SelectItem> levelList) {
+		this.levelList = levelList;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getSelectedDegree() {
+		return selectedDegree;
+	}
+
+	public void setSelectedDegree(String selectedDegree) {
+		this.selectedDegree = selectedDegree;
+	}
+
+	public String getPrevCompany() {
 		return prevCompany;
 	}
 
-	public void setPrevCompany(List<String> prevCompany) {
+	public void setPrevCompany(String prevCompany) {
 		this.prevCompany = prevCompany;
 	}
 
 	private List<SelectItem> domainList;
-	
-	public List<String> getSelectedDomain() {
-		return selectedDomain;
+
+	public String getSelectedDomain() {
+		return selectedDomainCurrent;
 	}
 
-	public void setSelectedDomain(List<String> selectedDomain) {
-		this.selectedDomain = selectedDomain;
+	public void setSelectedDomain(String selectedDomain) {
+		this.selectedDomainCurrent = selectedDomain;
 	}
-	
-	public List<String> getDegree() {
+
+	public List<SelectItem> getDegree() {
+		degree = new ArrayList<>();
+		degree.add(new SelectItem("Bachelor"));
+		degree.add(new SelectItem("Master"));
+		degree.add(new SelectItem("PhD"));
 		return degree;
 	}
 
-	public void setDegree(List<String> degree) {
+	public void setDegree(List<SelectItem> degree) {
 		this.degree = degree;
 	}
 
-	public List<String> getSinceDate() {
+	public String getSinceDate() {
 		return sinceDate;
 	}
 
-	public void setSinceDate(List<String> sinceDate) {
+	public void setSinceDate(String sinceDate) {
 		this.sinceDate = sinceDate;
 	}
 
-	public List<String> getToDate() {
+	public String getToDate() {
 		return toDate;
 	}
 
-	public void setToDate(List<String> toDate) {
+	public void setToDate(String toDate) {
 		this.toDate = toDate;
 	}
 
-	public List<String> getSinceDateCurrent() {
+	public String getSinceDateCurrent() {
 		return sinceDateCurrent;
 	}
 
-	public void setSinceDateCurrent(List<String> sinceDateCurrent) {
+	public void setSinceDateCurrent(String sinceDateCurrent) {
 		this.sinceDateCurrent = sinceDateCurrent;
 	}
 
-	public List<String> getUniversity() {
+	public String getUniversity() {
 		return university;
 	}
 
-	public void setUniversity(List<String> university) {
+	public void setUniversity(String university) {
 		this.university = university;
 	}
 
-	public List<String> getCurrentPosition() {
+	public String getCurrentPosition() {
 		return currentPosition;
 	}
 
-	public void setCurrentPosition(List<String> currentPositions) {
+	public void setCurrentPosition(String currentPositions) {
 		this.currentPosition = currentPositions;
 	}
 
-	public List<String> getPosition() {
+	public String getPosition() {
 		return position;
 	}
 
-	public void setPosition(List<String> position) {
+	public void setPosition(String position) {
 		this.position = position;
 	}
 
-	public List<String> getCurrentCompany() {
+	public String getCurrentCompany() {
 		return currentCompany;
 	}
 
-	public void setCurrentCompany(List<String> currentCompany) {
+	public void setCurrentCompany(String currentCompany) {
 		this.currentCompany = currentCompany;
 	}
 
-	public List<String> getDomain() {
-		return domain;
-	}
-
-	public void setDomain(List<String> domain) {
-		this.domain = domain;
-	}
-
-	public List<String> getSelectedDomainPrev() {
+	public String getSelectedDomainPrev() {
 		return selectedDomainPrev;
 	}
 
-	public void setSelectedDomainPrev(List<String> selectedDomainPrev) {
+	public void setSelectedDomainPrev(String selectedDomainPrev) {
 		this.selectedDomainPrev = selectedDomainPrev;
 	}
 
 	public List<SelectItem> getDomainList() {
+		domainList = new ArrayList<>();
+
+		try (FileReader fr = new FileReader(new File("D:\\USEFUL\\licenta\\project\\jobs\\src\\main\\resources\\domains_EN.txt"));
+				BufferedReader br = new BufferedReader(fr);) {
+			String line;
+			line = br.readLine();
+			while (line != null) {
+				domainList.add(new SelectItem(line));
+				line = br.readLine();
+			}
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return domainList;
 	}
 
@@ -180,7 +294,7 @@ public class CVBean {
 		this.country = country;
 	}
 
-	public List<String> getCountryList() {
+	public List<SelectItem> getCountryList() {
 		countryList = new ArrayList<>();
 
 		try (FileReader fr = new FileReader(new File("D:\\USEFUL\\licenta\\project\\jobs\\src\\main\\resources\\countries_EN.txt"));
@@ -188,7 +302,7 @@ public class CVBean {
 			String line;
 			line = br.readLine();
 			while (line != null) {
-				countryList.add(line);
+				countryList.add(new SelectItem(line));
 				line = br.readLine();
 			}
 
@@ -202,11 +316,9 @@ public class CVBean {
 		return countryList;
 	}
 
-	public void setCountryList(List<String> countryList) {
+	public void setCountryList(List<SelectItem> countryList) {
 		this.countryList = countryList;
 	}
-
-	private List<String> countryList;
 
 	public String apply() {
 
@@ -239,9 +351,11 @@ public class CVBean {
 		return false;
 	}
 
-	public void finishCV() {
-		PersonalData personalData = new PersonalData(name, lastname, email, phone, city, country);
-		HttpSession session = SessionUtils.getSession();
-		session.setAttribute("personalData", personalData);
+	public void publishCV() {
+
+	}
+
+	public void saveCV() {
+
 	}
 }

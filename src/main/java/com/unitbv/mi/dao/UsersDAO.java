@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import com.unitbv.mi.utils.UUIDGeneratorUtils;
 
 public class UsersDAO {
 
@@ -13,7 +14,7 @@ public class UsersDAO {
 
 		try {
 			con = DataConnect.getConnection();
-			
+
 			ps = con.prepareStatement("Select username, password from User where username = ? and password = ?");
 			ps.setString(1, user);
 			ps.setString(2, password);
@@ -23,7 +24,7 @@ public class UsersDAO {
 			if (rs.next()) {
 				return true;
 			}
-			
+
 			ps = con.prepareStatement("Select email, password from User where email = ? and password = ?");
 			ps.setString(1, user);
 			ps.setString(2, password);
@@ -52,7 +53,6 @@ public class UsersDAO {
 			ps = con.prepareStatement("Select name, lastname from User where username = ? or email = ?");
 			ps.setString(1, username);
 			ps.setString(2, username);
-
 
 			ResultSet rs = ps.executeQuery();
 
@@ -90,5 +90,30 @@ public class UsersDAO {
 			DataConnect.close(con);
 		}
 		return id;
+	}
+
+	public static boolean validateRegistration(String name, String lastname, String username, String password, String phone, String email) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con = DataConnect.getConnection();
+			ps = con.prepareStatement("insert into user values (?,?,?,?,?,?,?)");
+			ps.setString(1, UUIDGeneratorUtils.generate());
+			ps.setString(2,name);
+			ps.setString(3,lastname);
+			ps.setString(7,username);
+			ps.setString(6,password);
+			ps.setString(5,phone);
+			ps.setString(4,email);
+			ps.executeUpdate();
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+			return false;
+
+		} finally {
+			DataConnect.close(con);
+		}
+
+		return true;
 	}
 }

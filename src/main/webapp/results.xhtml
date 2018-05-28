@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
 <f:loadBundle basename="ApplicationResources" var="msg" />
@@ -23,8 +20,7 @@
 		<h:outputLabel
 			value="#{msg.result} #{searchBean.job} #{searchBean.company} #{searchBean.selectedDomain} #{searchBean.selectedCity}" />
 		<br />
-		<h:dataTable var="row" value="#{resultsBean.resultsDataTable}"
-			border="1">
+		<h:dataTable var="row" value="#{resultsBean.resultsDataTable}" border="1">
 			<h:column>
 				<f:facet name="header">#{msg.job}</f:facet>
             #{row.position}
@@ -43,8 +39,7 @@
         </h:column>
 			<h:column>
 				<f:facet name="header"></f:facet>
-				<h:commandButton type="submit" name="apply" value="#{msg.apply}"
-					action="#{cvBean.apply}" />
+				<h:commandButton type="submit" name="apply" value="#{msg.apply}" action="#{cvBean.apply}" />
 				<f:param name="position" value="#{row.position}" />
 				<f:param name="company" value="#{row.company}" />
 				<f:param name="city" value=" #{row.city}" />

@@ -9,24 +9,35 @@
 
 <f:loadBundle basename="ApplicationResources" var="msg" />
 <h:head>
-		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<title></title>
 </h:head>
 <body>
 	<h:form style="text-align:right">
 		<div id="log" style="display: #{login.isLoggedOut}">
 			<h:inputText id="username" value="#{login.username}"
-				pt:placeholder="#{msg.username}" style="width:200px;"/>
-			<h:inputSecret id="password" value="#{login.password}"
-				pt:placeholder="#{msg.password}" />
-			<h:commandButton action="#{login.validateUsernamePassword}" value="#{msg.login}" />
+				pt:placeholder="#{msg.username}" style="width:200px;"
+				required="true" requiredMessage="Please enter the username">
+				<f:attribute name="password" value="#{password}" />
+				<f:validator validatorId="login" />
+			</h:inputText>
+			<h:inputSecret id="password" value="#{login.password}" pt:placeholder="#{msg.password}" binding="#{password}"
+				required="true" requiredMessage="Please enter the password" />
+			<h:commandButton action="#{login.validateUsernamePassword}"
+				value="#{msg.login}" />
 		</div>
-
+	</h:form>
+	<h:form style="text-align:right">
 		<div id="logged" style="display: #{login.isLoggedIn}">
 			<h:outputLabel id="welcome"
-				value="#{msg.welcomeUsername} #{login.nameAndLastname}" />
-			<h:commandButton action="#{login.logout}" value="#{msg.logout}" />
+				value="#{msg.welcomeUsername} #{ login.nameAndLastname != null ? login.nameAndLastname : userBean.nameAndLastname}" />
+			<h:commandButton action="#{login.logout()}" value="#{msg.logout}" />
 		</div>
+	</h:form>
+	<h:form>
+		<h:commandLink action="index" value="#{msg.search}" />
+		<h:commandLink action="createCV" value="#{msg.createCV}" />
+		<h:commandLink action="register" value="#{msg.register}" />
 	</h:form>
 </body>
 </html>

@@ -7,6 +7,20 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 <h:head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+  <link rel="stylesheet" href="/resources/demos/style.css"/>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $(document).ready(function() {
+	  $(".datepicker").datepicker({
+	    showOn: "button",
+	    buttonImage: "images/calendar.gif",
+	    buttonImageOnly: true})
+	});
+</script>
 <script type="text/javascript">
 	var i = 0;
 	document.getElementById('button').onclick = duplicate;
@@ -22,21 +36,20 @@
 <h:body>
 <h:form>
 		<div id="prev">
-		<h:outputLabel id="experience" value="#{msg.experience}" />
+		<h:outputLabel id="experience" value="#{msg.experience}"  style="font-weight:bold; font-size:18px"/><br/>
 			<h:outputLabel id="work" value="#{msg.work}" />
 			<h:inputText id="inputWork" value="#{cvBean.position}" />
 			<br />
 			<h:outputLabel id="at" value="#{msg.CVcompany}" />
 			<h:inputText id="inputCompanyPrev" value="#{cvBean.prevCompany}" /><br/>
 			<h:outputLabel id="since" value="#{msg.since}" />
-			<h:inputText id="inputDate" value="#{cvBean.sinceDate}" />
+			<h:inputText id="inputDate"  styleClass="datepicker" value="#{cvBean.sinceDate}" />
 			<br />
 			<h:outputLabel id="to" value="#{msg.to}" />
-			<h:inputText id="inputTo" value="#{cvBean.toDate}" />
+			<h:inputText id="inputTo"  styleClass="datepicker" value="#{cvBean.toDate}" />
 			<br />
 			<h:outputLabel id="domain" value="#{msg.domain}" />
 			<h:selectOneMenu value="#{cvBean.selectedDomainPrev}">
-				<f:selectItem itemLabel="#{msg.domain}" itemValue="" />
 				<f:selectItems value="#{cvBean.domainList}" itemValue="" />
 			</h:selectOneMenu>
 			<br />

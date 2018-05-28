@@ -6,7 +6,21 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
-<head>
+<h:head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+  <link rel="stylesheet" href="/resources/demos/style.css"/>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $(document).ready(function() {
+	  $(".datepicker").datepicker({
+	    showOn: "button",
+	    buttonImage: "images/calendar.gif",
+	    buttonImageOnly: true})
+	});
+</script>
 <script type="text/javascript">
 	var i = 0;
 	document.getElementById('button').onclick = duplicate;
@@ -18,25 +32,27 @@
 		original.parentNode.appendChild(clone);
 	}
 </script>
-</head>
+</h:head>
 <h:body>
 	<h:form>
 		<div id="current">
-			<h:outputLabel id="experience" value="#{msg.experience}" /><br/>
-			<h:outputLabel id="current" value="#{msg.currentPlace}" /> 
-			<h:inputText id="inputPosition" value="#{cvBean.currentPosition}" /><br/>
-			<h:outputLabel id="comp" value="#{msg.CVcompany}" />
-			<h:inputText id="inputCompany" value="#{cvBean.currentCompany}" /><br/>
-			<h:outputLabel id="sinceCurrent" value="#{msg.since}" />
-			<h:inputText id="inputDateCurrent" value="#{cvBean.sinceDateCurrent}" />
+			<h:outputLabel id="current" value="#{msg.currentPlace}" />
+			<h:inputText id="inputPosition" value="#{cvBean.currentPosition}" />
 			<br />
+			<h:outputLabel id="comp" value="#{msg.CVcompany}" />
+			<h:inputText id="inputCompany" value="#{cvBean.currentCompany}" />
+			<br />
+			<h:outputLabel id="sinceCurrent" value="#{msg.since}" />
+			<h:inputText id="datepicker"  styleClass="datepicker" value="#{cvBean.sinceDateCurrent}" />
+			<br />
+			<h:outputLabel id="domain" value="#{msg.domain}" />
 			<h:selectOneMenu value="#{cvBean.selectedDomain}">
-				<f:selectItem itemLabel="#{msg.domain}" itemValue="" />
-				<f:selectItems value="#{cv.domainList}" itemValue="" />
-			</h:selectOneMenu> <br/>
+				<f:selectItems value="#{cvBean.domainList}" itemValue="" />
+			</h:selectOneMenu>
+			<br />
 			<h:commandButton id="button" onclick="duplicate('current')"
 				value="#{msg.duplicate}" />
-		</div>
+			</div>
 	</h:form>
 </h:body>
 </html>

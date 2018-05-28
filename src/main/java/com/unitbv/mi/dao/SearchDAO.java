@@ -39,7 +39,7 @@ public class SearchDAO {
 
 	public static List<SearchResultsUtils> getResults(String domain, String city, String company, String position) {
 
-		List<SearchResultsUtils> results = new ArrayList<>();
+		List<SearchResultsUtils> results = null;
 		
 		try {
 			con = DataConnect.getConnection();
@@ -47,17 +47,17 @@ public class SearchDAO {
 			String sql = "select position, company, city, description from jobs where domain= ? and city= ? ";
 			if (company != null && (!company.equals(""))) {
 				if (position != null && (!position.equals(""))) {
-					sql += " and company = ?  and position = ?";
+					sql += " and company like ?  and position like ?";
 					ps = con.prepareStatement(sql);
 					ps.setString(3, "%" + company + "%");
 					ps.setString(4, "%" + position + "%");
 				} else {
-					sql += " and company = ?";
+					sql += " and company like ?";
 					ps = con.prepareStatement(sql);
 					ps.setString(3, "%" + company + "%");
 				}
 			} else if (position != null && (!position.equals(""))) {
-				sql += " and position = ?";
+				sql += " and position like ?";
 				ps = con.prepareStatement(sql);
 				ps.setString(3, "%" + position + "%");
 			} else {
@@ -67,7 +67,11 @@ public class SearchDAO {
 			ps.setString(2, city);
 
 			ResultSet rs = ps.executeQuery();
-
+			if(rs.next()) {
+				results = new ArrayList<>();
+				SearchResultsUtils row = new SearchResultsUtils(rs.getString("position"),rs.getString("company"),rs.getString("city"),rs.getString("description"));	
+				results.add(row);
+			}
 			while (rs.next()) {
 				
 				SearchResultsUtils row = new SearchResultsUtils(rs.getString("position"),rs.getString("company"),rs.getString("city"),rs.getString("description"));	

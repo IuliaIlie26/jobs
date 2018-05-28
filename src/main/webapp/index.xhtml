@@ -20,51 +20,27 @@
 			<ui:include src="header.xhtml" />
 		</ui:insert>
 	</div>
-	<h:form style="width:1000px;">
-		<p:growl id="message"></p:growl>
-		<p:tabView>
-			<p:tab title="#{msg.search}">
-				<h:inputText value="#{searchBean.job}" pt:placeholder="#{msg.job}">
+	<h:form>
+		<h:inputText value="#{searchBean.job}" pt:placeholder="#{msg.job}">
 
-				</h:inputText>
-				<h:inputText value="#{searchBean.company}"
-					pt:placeholder="#{msg.company}">
+		</h:inputText>
+		<h:inputText value="#{searchBean.company}"
+			pt:placeholder="#{msg.company}">
 
-				</h:inputText>
-				<h:selectOneMenu value="#{searchBean.selectedDomain}"
-					required="true">
-					<f:selectItem itemLabel="#{msg.domainsAll}" itemValue="" />
-					<f:selectItems value="#{searchBean.list}" itemValue="" />
+		</h:inputText>
+		<h:selectOneMenu value="#{searchBean.selectedDomain}" required="true" requiredMessage="#{msg.selectDomain}">
+			<f:selectItem itemLabel="#{msg.domainsAll}" itemValue="" />
+			<f:selectItems value="#{searchBean.list}" itemValue="" />
 
-				</h:selectOneMenu>
-				<h:selectOneMenu value="#{searchBean.selectedCity}" required="true">
-					<f:selectItem itemLabel="#{msg.citiesAll}" itemValue="" />
-					<f:selectItems value="#{searchBean.city}" itemValue="" />
+		</h:selectOneMenu>
+		<h:selectOneMenu value="#{searchBean.selectedCity}"  required="true" requiredMessage="#{msg.selectCity}">
+			<f:selectItem itemLabel="#{msg.citiesAll}" itemValue="" />
+			<f:selectItems value="#{searchBean.city}" itemValue="" />
 
-				</h:selectOneMenu>
-				<h:commandButton value="#{msg.search}" type="submit"
-					action="#{searchBean.search}">
-				</h:commandButton>
-			</p:tab>
-			<p:tab title="#{msg.createCV}">
-				<h:outputLabel id="label" value="#{msg.CVlabel}" />
-
-				<p:carousel numVisible="1" effect="easeInStrong" style="margin-bottom:0" >
-					<p:tab value="#{msg.personal}">
-						<ui:include src="personalData.xhtml" />
-					</p:tab>
-					<p:tab value="#{msg.education}">
-						<ui:include src="education.xhtml" />
-					</p:tab>
-					<p:tab value="#{msg.prevexperience}">
-						<ui:include src="prev_experience.xhtml" />
-					</p:tab>
-					<p:tab value="#{msg.experience}">
-						<ui:include src="experience.xhtml" />
-					</p:tab>
-				</p:carousel>
-			</p:tab>
-		</p:tabView>
+		</h:selectOneMenu>
+		<h:commandButton value="#{msg.search}" type="submit"
+			action="#{searchBean.search}">
+		</h:commandButton>
 	</h:form>
 </h:body>
 </html>

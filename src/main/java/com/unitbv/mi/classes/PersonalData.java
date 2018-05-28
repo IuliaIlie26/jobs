@@ -6,9 +6,15 @@ public class PersonalData {
 	private String email;
 	private String phoneNumber;
 	private String city;
-	private String country; 
+	private String country, gender; 
 		
-	public PersonalData(String lastname, String email, String phoneNumber, String city, String country, String name) {
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	public PersonalData(String name, String lastname,  String gender, String email, String phoneNumber,  String city, String country) {
 		super();
 		this.lastname = lastname;
 		this.email = email;
@@ -16,6 +22,7 @@ public class PersonalData {
 		this.city = city;
 		this.country = country;
 		this.name = name;
+		this.gender=gender;
 	}
 	private String name;
 	public String getName() {

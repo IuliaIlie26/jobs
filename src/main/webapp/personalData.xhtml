@@ -10,25 +10,31 @@
 <f:loadBundle basename="ApplicationResources" var="msg" />
 <h:body>
 	<h:form>
-		<h:outputLabel id="personal" value="#{msg.personal}" />
+		<h:outputLabel id="personal" value="#{msg.personal}" style="font-weight:bold; font-size:18px"/>
 		<br />
-		<h:outputLabel id="name" value="#{msg.name}" />
-		<h:inputText id="inputName" value="#{cvBean.name}"/>
+		<h:outputLabel id="name" value="#{msg.name}"/>
+		<h:inputText id="inputName" value="#{cvBean.name}" required="true" requiredMessage="#{msg.enterName}"/>
 		<br />
 		<h:outputLabel id="lname" value="#{msg.lastname}" />
-		<h:inputText id="inputLastName" value="#{cvBean.lastname}"/>
+		<h:inputText id="inputLastName" value="#{cvBean.lastname}" required="true" requiredMessage="#{msg.enterLName}" />
+		<br />
+		<h:outputLabel id="gender" value="#{msg.gender}"/>
+		<h:selectOneRadio value="#{cvBean.gender}" required="true" requiredMessage="#{msg.enterGender}">
+			<f:selectItem itemValue="#{msg.female}" itemLabel="#{msg.female}" />
+			<f:selectItem itemValue="#{msg.male}" itemLabel="#{msg.male}" />
+		</h:selectOneRadio>
 		<br />
 		<h:outputLabel id="email" value="#{msg.email}" />
-		<h:inputText id="inputEmail" value="#{cvBean.email}"/>
+		<h:inputText id="inputEmail" value="#{cvBean.email}" required="true" requiredMessage="#{msg.enterEmail}"/>
 		<br />
 		<h:outputLabel id="phone" value="#{msg.phone}" />
-		<h:inputText id="inputPhone" value="#{cvBean.phone}"/>
+		<h:inputText id="inputPhone" value="#{cvBean.phone}" required="true" requiredMessage="#{msg.enterPhone}"/>
 		<br />
 		<h:outputLabel id="city" value="#{msg.city}" />
-		<h:inputText id="inputCity" value="#{cvBean.city}"/>
+		<h:inputText id="inputCity" value="#{cvBean.city}" required="true" requiredMessage="#{msg.enterCity}"/>
 		<br />
 		<h:outputLabel id="country" value="#{msg.country}" />
-		<h:selectOneMenu value="#{cvBean.country}">
+		<h:selectOneMenu value="#{cvBean.country}" required="true" requiredMessage="#{msg.enterCountry}">
 			<f:selectItems value="#{cvBean.countryList}" itemValue="" />
 		</h:selectOneMenu>
 	</h:form>

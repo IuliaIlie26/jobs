@@ -12,8 +12,8 @@
 	document.getElementById('button').onclick = duplicate;
 	function duplicate(id) {
 		var original = document.getElementById(id);
-		var clone = original.cloneNode(true); 
-		clone.id = id + ++i; 
+		var clone = original.cloneNode(true);
+		clone.id = id + ++i;
 		clone.onclick = duplicate;
 		original.parentNode.appendChild(clone);
 	}
@@ -22,14 +22,22 @@
 <h:body>
 	<h:form>
 		<div id="education">
-			<h:outputLabel id="education" value="#{msg.education}" />
+			<h:outputLabel id="education" value="#{msg.education}"  style="font-weight:bold; font-size:18px"/>
 			<br />
+			<h:outputLabel id="last" value="#{msg.last}" />
+			<h:selectOneMenu value="#{cvBean.selectedLast}" required="true" requiredMessage="#{msg.enterLast}">
+				<f:selectItems value="#{cvBean.last}" itemValue="" />
+			</h:selectOneMenu>
 			<h:outputLabel id="uni" value="#{msg.uni}" />
-			<h:inputText id="inputUni" value="#{cvBean.university}" />
+			<h:inputText id="inputUni" value="#{cvBean.university}"/>
 			<br />
 			<h:outputLabel id="degree" value="#{msg.degree}" />
-			<h:inputText id="inputDegree" value="#{cvBean.degree}" /><br/>
-			<h:commandButton id="button" onclick="duplicate('education')" value="#{msg.duplicate}"/>
+			<h:selectOneMenu value="#{cvBean.selectedDegree}">
+				<f:selectItems value="#{cvBean.degree}" itemValue="" />
+			</h:selectOneMenu>
+			<br />
+			<h:commandButton id="button" onclick="duplicate('education')"
+				value="#{msg.duplicate}" />
 		</div>
 	</h:form>
 </h:body>

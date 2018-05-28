@@ -2,12 +2,13 @@ package com.unitbv.mi.beans;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-
-import org.primefaces.context.RequestContext;
+import javax.faces.validator.ValidatorException;
 
 import com.unitbv.mi.dao.SearchDAO;
 import com.unitbv.mi.utils.SearchResultsUtils;
@@ -59,13 +60,11 @@ public class ResultsBean {
 	}
 
 	public List<SearchResultsUtils> getResultsDataTable() {
-		RequestContext.getCurrentInstance().execute("toggle();");
 		selectedDomain = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("domain");
 		selectedCity = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("city");
 		job = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("job");
 		company = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("company");
-
-		return SearchDAO.getResults(selectedDomain, selectedCity, company, job);
+		resultsDataTable = SearchDAO.getResults(selectedDomain, selectedCity, company, job);
+		return resultsDataTable;
 	}
-
 }
