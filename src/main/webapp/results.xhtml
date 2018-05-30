@@ -2,15 +2,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
-	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	 xmlns:b="http://bootsfaces.net/ui">
 
 <f:loadBundle basename="ApplicationResources" var="msg" />
 
-<head>
+<h:head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Search results</title>
-</head>
-<body>
+</h:head>
+<h:body>
 	<div id="header">
 		<ui:insert name="header">
 			<ui:include src="header.xhtml" />
@@ -20,33 +21,33 @@
 		<h:outputLabel
 			value="#{msg.result} #{searchBean.job} #{searchBean.company} #{searchBean.selectedDomain} #{searchBean.selectedCity}" />
 		<br />
-		<h:dataTable var="row" value="#{resultsBean.resultsDataTable}" border="1">
-			<h:column>
+		<b:dataTable var="row" value="#{resultsBean.resultsDataTable}" border="1">
+			<b:dataTableColumn>
 				<f:facet name="header">#{msg.job}</f:facet>
             #{row.position}
-        </h:column>
-			<h:column>
+        </b:dataTableColumn>
+			<b:dataTableColumn>
 				<f:facet name="header">#{msg.resultCompany}</f:facet>
             #{row.company}
-        </h:column>
-			<h:column>
+        </b:dataTableColumn>
+			<b:dataTableColumn>
 				<f:facet name="header">#{msg.city}</f:facet>
             #{row.city}
-        </h:column>
-			<h:column>
+        </b:dataTableColumn>
+			<b:dataTableColumn>
 				<f:facet name="header">#{msg.description}</f:facet>
             #{row.description}
-        </h:column>
-			<h:column>
-				<f:facet name="header"></f:facet>
-				<h:commandButton type="submit" name="apply" value="#{msg.apply}" action="#{cvBean.apply}" />
+        </b:dataTableColumn>
+			<b:dataTableColumn>
+				<f:facet name="header">#{msg.apply}</f:facet>
+				<b:commandButton type="submit" name="apply" value="#{msg.apply}" action="#{cvBean.apply}" />
 				<f:param name="position" value="#{row.position}" />
 				<f:param name="company" value="#{row.company}" />
 				<f:param name="city" value=" #{row.city}" />
 
-			</h:column>
-		</h:dataTable>
+			</b:dataTableColumn>
+		</b:dataTable>
 		<p />
 	</h:form>
-</body>
+</h:body>
 </html>

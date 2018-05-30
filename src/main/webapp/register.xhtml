@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
-	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough" xmlns:b="http://bootsfaces.net/ui">
 
 <f:loadBundle basename="ApplicationResources" var="msg" />
 <head>
@@ -15,7 +15,7 @@
 			<ui:include src="header.xhtml" />
 		</ui:insert>
 	</div>
-	<h:form>
+	<h:form style="padding-top:10px">
 		<h:outputLabel id="name" value="#{msg.name}" />
 		<h:inputText id="inputName" value="#{userBean.name}" required="true" requiredMessage="#{msg.enterName}">
 		</h:inputText>
@@ -41,15 +41,16 @@
 		<br />
 		<h:outputLabel id="email" value="#{msg.email}" />
 		<h:inputText id="inputEmail" value="#{userBean.email}" required="true" requiredMessage="#{msg.enterEmail}">
-			<f:validator validatorId="email"/>
+			<f:validator validatorId="email" />
 		</h:inputText>
 		<br />
 		<h:outputLabel id="phone" value="#{msg.phone}" />
 		<h:inputText id="inputPhone" value="#{userBean.phone}" required="true" requiredMessage="#{msg.enterPhone}">
-			<f:validator validatorId="phone"/>
+			<f:validator validatorId="phone" />
 		</h:inputText>
 		<br />
-		<h:commandButton id="submit" value="#{msg.register}" action="#{userBean.register}" />
+		<h:message for="password" style="display-color: red"/>
+		<b:commandButton id="submit" value="#{msg.register}" action="#{userBean.register}" />
 	</h:form>
 </body>
 </html>

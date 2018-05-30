@@ -1,43 +1,42 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough" xmlns:b="http://bootsfaces.net/ui">
 
 <f:loadBundle basename="ApplicationResources" var="msg" />
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<title></title>
 </h:head>
-<body>
-	<h:form style="text-align:right">
-		<div id="log" style="display: #{login.isLoggedOut}">
-			<h:inputText id="username" value="#{login.username}"
-				pt:placeholder="#{msg.username}" style="width:200px;"
-				required="true" requiredMessage="Please enter the username">
-				<f:attribute name="password" value="#{password}" />
-				<f:validator validatorId="login" />
-			</h:inputText>
-			<h:inputSecret id="password" value="#{login.password}" pt:placeholder="#{msg.password}" binding="#{password}"
-				required="true" requiredMessage="Please enter the password" />
-			<h:commandButton action="#{login.validateUsernamePassword}"
-				value="#{msg.login}" />
-		</div>
-	</h:form>
-	<h:form style="text-align:right">
-		<div id="logged" style="display: #{login.isLoggedIn}">
-			<h:outputLabel id="welcome"
-				value="#{msg.welcomeUsername} #{ login.nameAndLastname != null ? login.nameAndLastname : userBean.nameAndLastname}" />
-			<h:commandButton action="#{login.logout()}" value="#{msg.logout}" />
-		</div>
-	</h:form>
-	<h:form>
-		<h:commandLink action="index" value="#{msg.search}" />
-		<h:commandLink action="createCV" value="#{msg.createCV}" />
-		<h:commandLink action="register" value="#{msg.register}" />
-	</h:form>
-</body>
+<h:body>
+	<b:navBar brand="" brandHref="#" fluid="true">
+		<b:navbarLinks>
+			<b:navLink value="#{msg.search}" href="index.xhtml"></b:navLink>
+			<b:navLink value="#{msg.createCV}" href="createCV.xhtml"></b:navLink>
+			<b:navLink value="#{msg.register}" href="register.xhtml"></b:navLink>
+		</b:navbarLinks>
+		<b:form style="text-align:right; padding-top:5px">
+			<div id="log" style="display: #{login.isLoggedOut}">
+				<h:inputText id="username" value="#{login.username}" pt:placeholder="#{msg.username}" style="width:200px;"
+					required="true" requiredMessage="Please enter the username">
+					<f:attribute name="password" value="#{password}" />
+					<f:validator validatorId="login" />
+				</h:inputText>
+				<h:inputSecret id="password" value="#{login.password}" pt:placeholder="#{msg.password}" binding="#{password}"
+					required="true" requiredMessage="Please enter the password" />
+				<b:commandButton action="#{login.validateUsernamePassword}" value="#{msg.login}" />
+			</div>
+		</b:form>
+		<b:form style="text-align:right; padding-top:5px">
+			<div id="logged" style="display: #{login.isLoggedIn}">
+				<b:dropMenu value="#{msg.welcomeUsername} #{ login.nameAndLastname != null ? login.nameAndLastname : userBean.nameAndLastname}!"  iconAwesome="fa-align-justify">
+					<b:navLink value="#{msg.myAccount}" href="myAccount.xhtml"></b:navLink>
+					<b:navLink value="#{msg.myCV}" href="viewCV.xhtml"></b:navLink>
+					<b:navCommandLink  value="#{msg.logout}" actionListener="#{login.logout}"/>
+				</b:dropMenu>
+			</div>
+		</b:form>
+	</b:navBar>
+
+</h:body>
 </html>

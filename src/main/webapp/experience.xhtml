@@ -5,7 +5,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	 xmlns:b="http://bootsfaces.net/ui">
 <h:head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -13,14 +14,6 @@
   <link rel="stylesheet" href="/resources/demos/style.css"/>
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script>
-  $(document).ready(function() {
-	  $(".datepicker").datepicker({
-	    showOn: "button",
-	    buttonImage: "images/calendar.gif",
-	    buttonImageOnly: true})
-	});
-</script>
 <script type="text/javascript">
 	var i = 0;
 	document.getElementById('button').onclick = duplicate;
@@ -35,22 +28,21 @@
 </h:head>
 <h:body>
 	<h:form>
-		<div id="current">
+		<div id="current" style="padding-top:10px">
 			<h:outputLabel id="current" value="#{msg.currentPlace}" />
 			<h:inputText id="inputPosition" value="#{cvBean.currentPosition}" />
 			<br />
 			<h:outputLabel id="comp" value="#{msg.CVcompany}" />
 			<h:inputText id="inputCompany" value="#{cvBean.currentCompany}" />
 			<br />
-			<h:outputLabel id="sinceCurrent" value="#{msg.since}" />
-			<h:inputText id="datepicker"  styleClass="datepicker" value="#{cvBean.sinceDateCurrent}" />
+			<b:dateTimePicker id="datepicker" label="#{msg.since}" value="#{cvBean.sinceDateCurrent}" />
 			<br />
 			<h:outputLabel id="domain" value="#{msg.domain}" />
 			<h:selectOneMenu value="#{cvBean.selectedDomain}">
 				<f:selectItems value="#{cvBean.domainList}" itemValue="" />
 			</h:selectOneMenu>
 			<br />
-			<h:commandButton id="button" onclick="duplicate('current')"
+			<b:commandButton id="button" onclick="duplicate('current')"
 				value="#{msg.duplicate}" />
 			</div>
 	</h:form>

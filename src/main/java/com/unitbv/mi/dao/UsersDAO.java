@@ -50,17 +50,16 @@ public class UsersDAO {
 		String nameAndLastname = null;
 		try {
 			con = DataConnect.getConnection();
-			ps = con.prepareStatement("Select name, lastname from User where username = ? or email = ?");
+			ps = con.prepareStatement("Select lastname, name from User where username = ? or email = ?");
 			ps.setString(1, username);
 			ps.setString(2, username);
 
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.next()) {
-				nameAndLastname = rs.getString("name") + " " + rs.getString("lastname");
+				nameAndLastname = rs.getString("lastname") + " " + rs.getString("name");
 			}
 		} catch (SQLException ex) {
-			System.out.println("Login error -->" + ex.getMessage());
 			ex.printStackTrace();
 
 		} finally {
@@ -99,12 +98,12 @@ public class UsersDAO {
 			con = DataConnect.getConnection();
 			ps = con.prepareStatement("insert into user values (?,?,?,?,?,?,?)");
 			ps.setString(1, UUIDGeneratorUtils.generate());
-			ps.setString(2,name);
-			ps.setString(3,lastname);
-			ps.setString(7,username);
-			ps.setString(6,password);
-			ps.setString(5,phone);
-			ps.setString(4,email);
+			ps.setString(2, name);
+			ps.setString(3, lastname);
+			ps.setString(7, username);
+			ps.setString(6, password);
+			ps.setString(5, phone);
+			ps.setString(4, email);
 			ps.executeUpdate();
 		} catch (SQLException ex) {
 			ex.printStackTrace();
@@ -114,6 +113,25 @@ public class UsersDAO {
 			DataConnect.close(con);
 		}
 
+		return true;
+	}
+
+	public static boolean update(String value, String username, String column) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con = DataConnect.getConnection();
+			ps = con.prepareStatement("update user set "+ column +" = ? where username = ?");
+			ps.setString(1, value);
+			ps.setString(2, username);
+			ps.executeUpdate();
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+			return false;
+
+		} finally {
+			DataConnect.close(con);
+		}
 		return true;
 	}
 }

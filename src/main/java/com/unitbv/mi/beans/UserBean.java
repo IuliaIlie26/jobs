@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import javax.servlet.http.HttpSession;
 import com.unitbv.mi.dao.UsersDAO;
@@ -17,7 +18,25 @@ public class UserBean implements Serializable {
 
 	private static final long serialVersionUID = 2608783053609184582L;
 	private String name, lastname, email, username, password, passwordRepeat, phone;
-	private String nameAndLastname = "test";
+	private String nameAndLastname = "";
+	private String selectedMyAccount;
+	private String oldPassword;
+
+	public String getOldPassword() {
+		return oldPassword;
+	}
+
+	public void setOldPassword(String oldPassword) {
+		this.oldPassword = oldPassword;
+	}
+
+	public String getSelectedMyAccount() {
+		return selectedMyAccount;
+	}
+
+	public void setSelectedMyAccount(String selectedMyAccount) {
+		this.selectedMyAccount = selectedMyAccount;
+	}
 
 	public String getNameAndLastname() {
 		nameAndLastname = UsersDAO.getNameAndLastname(username);
@@ -27,6 +46,7 @@ public class UserBean implements Serializable {
 	public void setNameAndLastname(String nameAndLastname) {
 		this.nameAndLastname = nameAndLastname;
 	}
+
 	public String getName() {
 		return name;
 	}
@@ -84,7 +104,7 @@ public class UserBean implements Serializable {
 	}
 
 	public String register() {
-
+		System.out.println("intra");
 		try {
 			password = MD5EncryptionUtils.encrypt(password);
 			boolean valid = UsersDAO.validateRegistration(name, lastname, username, password, phone, email);
@@ -102,5 +122,60 @@ public class UserBean implements Serializable {
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			throw new ValidatorException(msg);
 		}
+	}
+
+	public void saveChanges() {
+
+		String username = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("username");
+		boolean ok = true;
+		if (username != null) {
+			if (name != null) {
+				ok = ok && UsersDAO.update(name, username, "name");
+			}
+			if (lastname != null) {
+				ok = ok && UsersDAO.update(lastname, username, "lastname");
+			}
+
+			if (email != null) {
+				ok = ok && UsersDAO.update(email, username, "email");
+			}
+
+			if (phone != null) {
+				ok = ok && UsersDAO.update(phone, username, "phone");
+			}
+
+		}
+
+		if (!ok) {
+			final ResourceBundle bundle = ResourceBundle.getBundle("ApplicationResources");
+			final FacesMessage msg = new FacesMessage(bundle.getString("DBerror"));
+			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+		}
+		if (!ok) {
+			final ResourceBundle bundle = ResourceBundle.getBundle("ApplicationResources");
+			final FacesMessage msg = new FacesMessage(bundle.getString("updateOK"));
+			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+		}
+
+	}
+
+	public void changePassword() {
+		String username = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("username");
+		if (UsersDAO.validate(username, oldPassword)) {
+			try {
+				password = MD5EncryptionUtils.encrypt(password);
+				boolean ok = UsersDAO.update(password, username, "password");
+				if (!ok)
+					throw new Exception();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			final ResourceBundle bundle = ResourceBundle.getBundle("ApplicationResources");
+			final FacesMessage msg = new FacesMessage(bundle.getString("loginError"));
+			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+		}
+
 	}
 }

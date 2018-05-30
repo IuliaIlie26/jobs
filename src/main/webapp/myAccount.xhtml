@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough" xmlns:b="http://bootsfaces.net/ui">
+<head>
+	<f:loadBundle basename="ApplicationResources" var="msg" />
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>My Account</title>
+</head>
+<body>
+	<div id="header">
+		<ui:insert name="header">
+			<ui:include src="header.xhtml" />
+		</ui:insert>
+	</div>
+	<h:form>
+		<b:tabView tabPosition="left" contentStyle="border: 1px solid #ddd;padding:10px">
+			<b:tab title="#{msg.editDetails}" look="info">
+				<h:outputLabel id="name" value="#{msg.name}" />
+				<h:inputText id="inputName" value="#{userBean.name}">
+				</h:inputText>
+				<br />
+				<h:outputLabel id="lname" value="#{msg.lastname}" />
+				<h:inputText id="inputLastName" value="#{userBean.lastname}">
+				</h:inputText>
+				<br />
+				<h:outputLabel id="email" value="#{msg.email}" />
+				<h:inputText id="inputEmail" value="#{userBean.email}">
+					<f:validator validatorId="email" />
+				</h:inputText>
+				<br />
+				<h:outputLabel id="phone" value="#{msg.phone}" />
+				<h:inputText id="inputPhone" value="#{userBean.phone}">
+					<f:validator validatorId="phone" />
+				</h:inputText>
+				<br />
+				<b:commandButton value="#{msg.saveChanges}" action="#{userBean.saveChanges}" iconAwesome="fa-pencil" />
+			</b:tab>
+			<b:tab title="#{msg.changePassword}" look="info">
+				<h:outputLabel id="passwordOld" value="#{msg.oldPassword}" />
+				<h:inputSecret id="passwordInputOld" value="#{userBean.oldPassword}" required="true" requiredMessage="#{msg.enterOld}" />
+				<br />
+				<h:outputLabel id="password" value="#{msg.newPassword}" />
+				<h:inputSecret id="passwordInput" value="#{userBean.password}">
+					<f:validator validatorId="password" />
+					<f:attribute name="confirmationPassword" value="#{confirmationPassword}" />
+				</h:inputSecret>
+				<br />
+				<h:outputLabel id="passw" value="#{msg.passwordRepeat}" />
+				<h:inputSecret id="confirmationPassword" value="#{userBean.passwordRepeat}" binding="#{confirmationPassword}">
+				</h:inputSecret>
+				<br />
+				<b:commandButton value="#{msg.saveChanges}" action="#{userBean.changePassword}" iconAwesome="fa-pencil" />
+			</b:tab>
+			<b:tab title="#{msg.myCV}" look="info">
+				
+			</b:tab>
+		</b:tabView>
+	</h:form>
+</body>
+</html>

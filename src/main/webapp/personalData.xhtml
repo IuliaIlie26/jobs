@@ -5,11 +5,12 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
-
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	 xmlns:b="http://bootsfaces.net/ui">
+<h:head></h:head>
 <f:loadBundle basename="ApplicationResources" var="msg" />
 <h:body>
-	<h:form>
+	<h:form style="padding-top:10px">
 		<h:outputLabel id="personal" value="#{msg.personal}" style="font-weight:bold; font-size:18px"/>
 		<br />
 		<h:outputLabel id="name" value="#{msg.name}"/>
