@@ -5,10 +5,10 @@
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough" xmlns:b="http://bootsfaces.net/ui">
 
 <f:loadBundle basename="ApplicationResources" var="msg" />
-<h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-</h:head>
-<h:body>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+</head>
+<body>
 	<b:navBar brand="" brandHref="#" fluid="true">
 		<b:navbarLinks>
 			<b:navLink value="#{msg.search}" href="index.xhtml"></b:navLink>
@@ -29,14 +29,16 @@
 		</b:form>
 		<b:form style="text-align:right; padding-top:5px">
 			<div id="logged" style="display: #{login.isLoggedIn}">
-				<b:dropMenu value="#{msg.welcomeUsername} #{ login.nameAndLastname != null ? login.nameAndLastname : userBean.nameAndLastname}!"  iconAwesome="fa-align-justify">
+				<b:dropMenu
+					value="#{msg.welcomeUsername} #{ login.nameAndLastname != null ? login.nameAndLastname : userBean.nameAndLastname}!"
+					iconAwesome="fa-align-justify">
 					<b:navLink value="#{msg.myAccount}" href="myAccount.xhtml"></b:navLink>
 					<b:navLink value="#{msg.myCV}" href="viewCV.xhtml"></b:navLink>
-					<b:navCommandLink  value="#{msg.logout}" actionListener="#{login.logout}"/>
+					<b:navCommandLink value="#{msg.logout}" actionListener="#{login.logout}" />
 				</b:dropMenu>
 			</div>
 		</b:form>
 	</b:navBar>
 
-</h:body>
+</body>
 </html>
