@@ -11,6 +11,7 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
+import com.unitbv.mi.beans.LoginBean;
 import com.unitbv.mi.dao.UsersDAO;
 import com.unitbv.mi.utils.MD5EncryptionUtils;
 
@@ -32,12 +33,18 @@ public class LoginValidator implements Validator {
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			throw new ValidatorException(msg);
 		}
-		boolean valid = UsersDAO.validate(username, password);
-		if (!valid) {
+		int valid = UsersDAO.validate(username, password);
+		if (valid==0) {
 			bundle = ResourceBundle.getBundle("ApplicationResources");
 			msg = new FacesMessage(bundle.getString("failed"));
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			throw new ValidatorException(msg);
+		}
+		if(valid == 1) {
+			LoginBean.setRecruiter(false);
+		}
+		else {
+			LoginBean.setRecruiter(true);
 		}
 	}
 }

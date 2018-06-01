@@ -18,6 +18,40 @@ public class LoginBean implements Serializable {
 	private static String isLoggedIn = " none";
 	private static String isLoggedOut = " block";
 	private String nameAndLastname = null;
+	private static boolean isRecruiter = false;
+	private String userDisplay, recruiterDisplay;
+
+	public String getRecruiterDisplay() {
+		if (isRecruiter == true)
+			recruiterDisplay = " block";
+		else
+			recruiterDisplay = " none";
+		return recruiterDisplay;
+	}
+
+	public void setRecruiterDisplay(String recruiterDisplay) {
+		this.recruiterDisplay = recruiterDisplay;
+	}
+
+	public String getUserDisplay() {
+		if (isRecruiter == false)
+			userDisplay = " block";
+		else
+			userDisplay = " none";
+		return userDisplay;
+	}
+
+	public void setUserDisplay(String recruiterDisplay) {
+		this.userDisplay = recruiterDisplay;
+	}
+
+	public static boolean isRecruiter() {
+		return isRecruiter;
+	}
+
+	public static void setRecruiter(boolean isRec) {
+		isRecruiter = isRec;
+	}
 
 	public String getNameAndLastname() {
 		nameAndLastname = UsersDAO.getNameAndLastname(username);
@@ -64,19 +98,27 @@ public class LoginBean implements Serializable {
 		return username;
 	}
 
-	public void validateUsernamePassword() {
+	public String validateUsernamePassword() {
 
 		HttpSession session = SessionUtils.getSession();
 		session.setAttribute("username", username);
 		isLoggedIn = " block";
 		isLoggedOut = " none";
+		if (isRecruiter) {
+			return "publishJobs";
+		} else {
+			return "index";
+		}
 
 	}
 
-	public void logout() {
+	public String logout() {
+
 		HttpSession session = SessionUtils.getSession();
 		session.invalidate();
 		isLoggedIn = " none";
 		isLoggedOut = " block";
+		isRecruiter = false;
+		return "index";
 	}
 }

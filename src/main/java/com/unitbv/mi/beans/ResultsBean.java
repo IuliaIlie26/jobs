@@ -2,14 +2,9 @@ package com.unitbv.mi.beans;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
-
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.validator.ValidatorException;
-
 import com.unitbv.mi.dao.SearchDAO;
 import com.unitbv.mi.utils.SearchResultsUtils;
 

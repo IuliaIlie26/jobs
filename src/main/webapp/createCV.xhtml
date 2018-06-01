@@ -6,8 +6,8 @@
 
 <f:loadBundle basename="ApplicationResources" var="msg" />
 <h:head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>CV Tool</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>CV Tool</title>
 </h:head>
 <h:body>
 	<div id="header">
@@ -16,33 +16,33 @@
 		</ui:insert>
 	</div>
 	<div>
-		
-			<p:tab value="#{msg.personal}">
-				<h:panelGrid columns="1" cellpadding="5">
-					<ui:include src="personalData.xhtml" />
-				</h:panelGrid>
-			</p:tab>
-			<p:tab value="#{msg.education}">
-				<h:panelGrid columns="1" cellpadding="5">
-					<ui:include src="education.xhtml" />
-				</h:panelGrid>
-			</p:tab>
-			<p:tab value="#{msg.prevexperience}">
-				<h:panelGrid columns="1" cellpadding="5">
-					<ui:include src="prev_experience.xhtml" />
-				</h:panelGrid>
-			</p:tab>
-			<p:tab value="#{msg.experience}">
-				<h:panelGrid columns="1" cellpadding="5">
-					<ui:include src="experience.xhtml" />
-				</h:panelGrid>
-			</p:tab>
-			<p:tab value="#{msg.skills}">
-				<h:panelGrid columns="1" cellpadding="5">
-					<ui:include src="skills.xhtml" />
-				</h:panelGrid>
-			</p:tab>
-	
+
+		<p:tab value="#{msg.personal}">
+			<h:panelGrid columns="1" cellpadding="5">
+				<ui:include src="personalData.xhtml" />
+			</h:panelGrid>
+		</p:tab>
+		<p:tab value="#{msg.education}">
+			<h:panelGrid columns="1" cellpadding="5">
+				<ui:include src="education.xhtml" />
+			</h:panelGrid>
+		</p:tab>
+		<p:tab value="#{msg.experience}">
+			<h:panelGrid columns="1" cellpadding="5">
+				<ui:include src="prev_experience.xhtml" />
+			</h:panelGrid>
+		</p:tab>
+		<p:tab>
+			<h:panelGrid columns="1" cellpadding="5">
+				<ui:include src="experience.xhtml" />
+			</h:panelGrid>
+		</p:tab>
+		<p:tab value="#{msg.skills}">
+			<h:panelGrid columns="1" cellpadding="5">
+				<ui:include src="skills.xhtml" />
+			</h:panelGrid>
+		</p:tab>
+
 	</div>
 	<h:form>
 		<h:outputLabel id="onSave" value="#{msg.message}" style="font-weight:bold" />

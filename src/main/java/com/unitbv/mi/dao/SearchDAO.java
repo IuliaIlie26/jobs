@@ -6,10 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.faces.model.SelectItem;
-import javax.servlet.jsp.jstl.sql.Result;
-import javax.servlet.jsp.jstl.sql.ResultSupport;
 
 import com.unitbv.mi.utils.SearchResultsUtils;
 
@@ -23,7 +20,7 @@ public class SearchDAO {
 
 		try {
 			con = DataConnect.getConnection();
-			ps = con.prepareStatement("select city from jobs order by city");
+			ps = con.prepareStatement("select distinct city from jobs order by city");
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
@@ -40,11 +37,11 @@ public class SearchDAO {
 	public static List<SearchResultsUtils> getResults(String domain, String city, String company, String position) {
 
 		List<SearchResultsUtils> results = null;
-		
+
 		try {
 			con = DataConnect.getConnection();
 
-			String sql = "select position, company, city, description from jobs where domain= ? and city= ? ";
+			String sql = "select position, company, website, city, description from jobs where domain= ? and city= ? ";
 			if (company != null && (!company.equals(""))) {
 				if (position != null && (!position.equals(""))) {
 					sql += " and company like ?  and position like ?";
@@ -67,14 +64,16 @@ public class SearchDAO {
 			ps.setString(2, city);
 
 			ResultSet rs = ps.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				results = new ArrayList<>();
-				SearchResultsUtils row = new SearchResultsUtils(rs.getString("position"),rs.getString("company"),rs.getString("city"),rs.getString("description"));	
+				SearchResultsUtils row = new SearchResultsUtils(rs.getString("position"), rs.getString("company"), rs.getString("website"),
+						rs.getString("city"), rs.getString("description"));
 				results.add(row);
 			}
 			while (rs.next()) {
-				
-				SearchResultsUtils row = new SearchResultsUtils(rs.getString("position"),rs.getString("company"),rs.getString("city"),rs.getString("description"));	
+
+				SearchResultsUtils row = new SearchResultsUtils(rs.getString("position"), rs.getString("company"), rs.getString("website"),
+						rs.getString("city"), rs.getString("description"));
 				results.add(row);
 			}
 		} catch (SQLException e) {
@@ -91,12 +90,12 @@ public class SearchDAO {
 		String sql = "SELECT DOMAIN FROM JOBS ORDER BY DOMAIN	";
 		con = DataConnect.getConnection();
 		try {
-		ps= con.prepareStatement(sql);
-		ResultSet rs= ps.executeQuery();
-		while(rs.next()) {
-			list.add(new SelectItem(rs.getString("domain")));
-		}}
-		catch(SQLException e) {
+			ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				list.add(new SelectItem(rs.getString("domain")));
+			}
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return list;

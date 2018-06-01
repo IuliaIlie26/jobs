@@ -8,7 +8,7 @@ import com.unitbv.mi.utils.UUIDGeneratorUtils;
 
 public class UsersDAO {
 
-	public static boolean validate(String user, String password) {
+	public static int validate(String user, String password) {
 		Connection con = null;
 		PreparedStatement ps = null;
 
@@ -22,7 +22,7 @@ public class UsersDAO {
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.next()) {
-				return true;
+				return 1;
 			}
 
 			ps = con.prepareStatement("Select email, password from User where email = ? and password = ?");
@@ -32,7 +32,27 @@ public class UsersDAO {
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
-				return true;
+				return 1;
+			}
+
+			ps = con.prepareStatement("Select username, password from recruiter where username = ? and password = ?");
+			ps.setString(1, user);
+			ps.setString(2, password);
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				return 2;
+			}
+
+			ps = con.prepareStatement("Select email, password from recruiter where email = ? and password = ?");
+			ps.setString(1, user);
+			ps.setString(2, password);
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				return 2;
 			}
 		} catch (SQLException ex) {
 			System.out.println("Login error -->" + ex.getMessage());
@@ -40,7 +60,7 @@ public class UsersDAO {
 		} finally {
 			DataConnect.close(con);
 		}
-		return false;
+		return 0;
 	}
 
 	public static String getNameAndLastname(String username) {
@@ -55,6 +75,16 @@ public class UsersDAO {
 			ps.setString(2, username);
 
 			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				nameAndLastname = rs.getString("lastname") + " " + rs.getString("name");
+			}
+
+			ps = con.prepareStatement("Select lastname, name from recruiter where username = ? or email = ?");
+			ps.setString(1, username);
+			ps.setString(2, username);
+
+			rs = ps.executeQuery();
 
 			if (rs.next()) {
 				nameAndLastname = rs.getString("lastname") + " " + rs.getString("name");
@@ -74,9 +104,9 @@ public class UsersDAO {
 		PreparedStatement ps = null;
 		try {
 			con = DataConnect.getConnection();
-			ps = con.prepareStatement("Select iduser from User where username = ?");
+			ps = con.prepareStatement("Select iduser from User where username = ? or email = ?");
 			ps.setString(1, username);
-
+			ps.setString(2, username);
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.next()) {
@@ -121,7 +151,7 @@ public class UsersDAO {
 		PreparedStatement ps = null;
 		try {
 			con = DataConnect.getConnection();
-			ps = con.prepareStatement("update user set "+ column +" = ? where username = ?");
+			ps = con.prepareStatement("update user set " + column + " = ? where username = ?");
 			ps.setString(1, value);
 			ps.setString(2, username);
 			ps.executeUpdate();
@@ -132,6 +162,56 @@ public class UsersDAO {
 		} finally {
 			DataConnect.close(con);
 		}
+		return true;
+	}
+
+	public static String select(String value, String username) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		String result = "";
+		try {
+			con = DataConnect.getConnection();
+			ps = con.prepareStatement("select " + value + " from user where username = ?");
+			ps.setString(1, username);
+			ps.executeQuery();
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				result = rs.getString(value);
+			}
+
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+
+		} finally {
+			DataConnect.close(con);
+		}
+		return result;
+	}
+
+	public static boolean validateRecruiterRegistration(String name, String lastname, String username, String password, String email,
+			String company) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con = DataConnect.getConnection();
+			ps = con.prepareStatement("insert into recruiter values (?,?,?,?,?,?,?)");
+			ps.setString(1, UUIDGeneratorUtils.generate());
+			ps.setString(6, name);
+			ps.setString(7, lastname);
+			ps.setString(2, username);
+			ps.setString(3, password);
+			ps.setString(5, company);
+			ps.setString(4, email);
+			ps.executeUpdate();
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+			return false;
+
+		} finally {
+			DataConnect.close(con);
+		}
+
 		return true;
 	}
 }

@@ -11,9 +11,13 @@
 <body>
 	<b:navBar brand="" brandHref="#" fluid="true">
 		<b:navbarLinks>
-			<b:navLink value="#{msg.search}" href="index.xhtml"></b:navLink>
-			<b:navLink value="#{msg.createCV}" href="createCV.xhtml"></b:navLink>
-			<b:navLink value="#{msg.register}" href="register.xhtml"></b:navLink>
+			<b:navLink value="#{msg.publishJob}" href="publishJobs.xhtml" style="display: #{login.recruiterDisplay}"></b:navLink>
+			<b:navLink value="#{msg.viewPublishedJobs}" href="editJobs.xhtml" style="display: #{login.recruiterDisplay}"></b:navLink>
+			<b:navLink value="#{msg.search}" href="index.xhtml" style="display: #{login.userDisplay}"></b:navLink>
+			<b:navLink value="#{msg.createCV}" href="createCV.xhtml" style="display: #{login.userDisplay}"></b:navLink>
+			<b:navLink value="#{msg.register}" href="register.xhtml" style="display: #{login.isLoggedOut}"></b:navLink>
+			<b:navLink value="#{msg.searchApplicants}" href="searchApplicants.xhtml" style="display: #{login.recruiterDisplay}"></b:navLink>
+			<b:navLink value="#{msg.viewApplicants}" href="viewApplicants.xhtml" style="display: #{login.recruiterDisplay}"></b:navLink>
 		</b:navbarLinks>
 		<b:form style="text-align:right; padding-top:5px">
 			<div id="log" style="display: #{login.isLoggedOut}">
@@ -33,8 +37,8 @@
 					value="#{msg.welcomeUsername} #{ login.nameAndLastname != null ? login.nameAndLastname : userBean.nameAndLastname}!"
 					iconAwesome="fa-align-justify">
 					<b:navLink value="#{msg.myAccount}" href="myAccount.xhtml"></b:navLink>
-					<b:navLink value="#{msg.myCV}" href="viewCV.xhtml"></b:navLink>
-					<b:navCommandLink value="#{msg.logout}" actionListener="#{login.logout}" />
+					<b:navLink value="#{msg.myCV}" href="viewCV.xhtml" style="display: #{login.userDisplay}"></b:navLink>
+					<b:navCommandLink value="#{msg.logout}" action="#{login.logout}" />
 				</b:dropMenu>
 			</div>
 		</b:form>

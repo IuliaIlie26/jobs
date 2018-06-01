@@ -16,45 +16,44 @@
 	</div>
 	<b:form>
 		<b:tabView tabPosition="left" contentStyle="border: 1px solid #ddd;padding:10px" immediate="true">
-					<b:tab title="#{msg.editDetails}" look="info" immediate="true">
-					<h:outputLabel id="name" value="#{msg.name}" />
-					<h:inputText id="inputName" value="#{userBean.name}">
-					</h:inputText>
-					<br />
-					<h:outputLabel id="lname" value="#{msg.lastname}" />
-					<h:inputText id="inputLastName" value="#{userBean.lastname}">
-					</h:inputText>
-					<br />
-					<h:outputLabel id="email" value="#{msg.email}" />
-					<h:inputText id="inputEmail" value="#{userBean.email}">
-						<f:validator validatorId="email" />
-					</h:inputText>
-					<br />
-					<h:outputLabel id="phone" value="#{msg.phone}" />
-					<h:inputText id="inputPhone" value="#{userBean.phone}">
-						<f:validator validatorId="phone" />
-					</h:inputText>
-					<br />
-					<b:commandButton value="#{msg.saveChanges}" action="#{userBean.saveChanges}" iconAwesome="fa-pencil" />
-				</b:tab>
-				<b:tab title="#{msg.changePassword}" look="info" immediate="true">
-					<h:outputLabel id="passwordOld" value="#{msg.oldPassword}" />
-					<h:inputSecret id="passwordInputOld" value="#{userBean.oldPassword}" required="true"
-						requiredMessage="#{msg.enterOld}" />
-					<br />
-					<h:outputLabel id="password" value="#{msg.newPassword}" />
-					<h:inputSecret id="passwordInput" value="#{userBean.password}">
-						<f:validator validatorId="password" />
-						<f:attribute name="confirmationPassword" value="#{confirmationPassword}" />
-					</h:inputSecret>
-					<br />
-					<h:outputLabel id="passw" value="#{msg.passwordRepeat}" />
-					<h:inputSecret id="confirmationPassword" value="#{userBean.passwordRepeat}" binding="#{confirmationPassword}">
-					</h:inputSecret>
-					<br />
-					<b:commandButton value="#{msg.saveChanges}" action="#{userBean.changePassword}" iconAwesome="fa-pencil" />
-				</b:tab>
-			<b:tab title="#{msg.myCV}" look="info" immediate="true">
+			<b:tab title="#{msg.editDetails}" look="info">
+				<h:outputLabel id="name" value="#{msg.name}" />
+				<h:inputText id="inputName" value="#{myAccount.name}">
+				</h:inputText>
+				<br />
+				<h:outputLabel id="lname" value="#{msg.lastname}" />
+				<h:inputText id="inputLastName" value="#{myAccount.lastname}">
+				</h:inputText>
+				<br />
+				<h:outputLabel id="email" value="#{msg.email}" />
+				<h:inputText id="inputEmail" value="#{myAccount.email}">
+
+				</h:inputText>
+				<br />
+				<h:outputLabel id="phone" value="#{msg.phone}" />
+				<h:inputText id="inputPhone" value="#{myAccount.phone}">
+
+				</h:inputText>
+				<br />
+				<b:commandButton value="#{msg.saveChanges}" action="#{myAccount.saveChanges}" iconAwesome="fa-pencil">
+
+				</b:commandButton>
+			</b:tab>
+			<b:tab title="#{msg.changePassword}" look="info" immediate="true">
+				<h:outputLabel id="passwordOld" value="#{msg.oldPassword}" />
+				<h:inputSecret id="passwordInputOld" value="#{myAccount.oldPassword}" />
+				<br />
+				<h:outputLabel id="password" value="#{msg.newPassword}" />
+				<h:inputSecret id="passwordInput" value="#{myAccount.password}">
+				</h:inputSecret>
+				<br />
+				<h:outputLabel id="passw" value="#{msg.passwordRepeat}" />
+				<h:inputSecret id="confirmationPassword" value="#{myAccount.passwordRepeat}">
+				</h:inputSecret>
+				<br />
+				<b:commandButton value="#{msg.saveChanges}" action="#{myAccount.changePassword}" iconAwesome="fa-pencil" />
+			</b:tab>
+			<b:tab title="#{msg.myCV}" look="info">
 
 			</b:tab>
 		</b:tabView>
