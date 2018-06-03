@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf15265612904870" configfile="/DreamJob/src/main/webapp/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="122" y="946" id="pf15265613310391" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf15265613310392 pf15265613310393 pf15266468883390 pf15276028984380 pf15276700117190 pf15278602844420" path="/index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="122" y="946" id="pf15265613310391" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf15265613310392 pf15265613310393 pf15266468883390 pf15276028984380 pf15276700117190 pf15278602844420 pf15279611137180" path="/index.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="welcome.xhtml" x="338" y="178" id="pf15265613310444" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf15265613310392" path="/welcome.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="results.xhtml" x="338" y="562" id="pf15265613310445" referenceLink="//@navigationRule.0/@navigationCase.2/@toViewId|" inlinks="pf15265613310393" path="/results.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="createCV.xhtml" x="338" y="946" id="pf15266468883392" referenceLink="//@navigationRule.0/@navigationCase.2/@toViewId|" inlinks="pf15266468883390" path="/createCV.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="results.xhtml" x="338" y="562" id="pf15265613310445" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" inlinks="pf15265613310393" path="/results.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="createCV.xhtml" x="338" y="946" id="pf15266468883392" referenceLink="//@navigationRule.0/@navigationCase.3/@toViewId|" inlinks="pf15266468883390" path="/createCV.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="login.xhtml" x="122" y="1522" id="pf15266468883393" referenceLink="//@navigationRule.0/@navigationCase.3/@toViewId|" path="/login.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="myAccount.xhtml" x="338" y="1330" id="pf15276028984381" referenceLink="//@navigationRule.0/@navigationCase.3/@toViewId|" inlinks="pf15276028984380" path="/myAccount.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="viewCV.xhtml" x="338" y="1714" id="pf15276700117191" referenceLink="//@navigationRule.0/@navigationCase.4/@toViewId|" inlinks="pf15276700117190" path="/viewCV.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="myAccount.xhtml" x="338" y="1330" id="pf15276028984381" referenceLink="//@navigationRule.0/@navigationCase.5/@toViewId|" inlinks="pf15276028984380" path="/myAccount.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="viewCV.xhtml" x="338" y="1714" id="pf15276700117191" referenceLink="//@navigationRule.0/@navigationCase.5/@toViewId|" inlinks="pf15276700117190" path="/viewCV.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="publishJobs.xhtml" id="pf15278602844431" referenceLink="//@navigationRule.0/@navigationCase.2/@toViewId|" inlinks="pf15278602844420" path="/publishJobs.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="editJobs.xhtml" id="pf15279611137181" referenceLink="//@navigationRule.0/@navigationCase.5/@toViewId|" inlinks="pf15279611137180" path="/editJobs.xhtml"/>
   <links id="pf15265613310392" target="pf15265613310444" source="pf15265613310391" outcome="welcome"/>
   <links id="pf15265613310393" target="pf15265613310445" source="pf15265613310391" outcome="results"/>
   <links id="pf15266468883390" target="pf15266468883392" source="pf15265613310391" outcome="createCV"/>
   <links id="pf15276028984380" target="pf15276028984381" source="pf15265613310391" outcome="myAccount"/>
   <links id="pf15276700117190" target="pf15276700117191" source="pf15265613310391" outcome="viewCV"/>
   <links id="pf15278602844420" target="pf15278602844431" source="pf15265613310391" outcome="publishJobs"/>
+  <links id="pf15279611137180" target="pf15279611137181" source="pf15265613310391" outcome="editJobs"/>
 </pageflow:Pageflow>

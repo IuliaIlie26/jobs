@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
-	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough" xmlns:b="http://bootsfaces.net/ui">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:b="http://bootsfaces.net/ui">
 
 <f:loadBundle basename="ApplicationResources" var="msg" />
 
@@ -20,7 +24,8 @@
 		<h:outputLabel
 			value="#{msg.result} #{searchBean.job} #{searchBean.company} #{searchBean.selectedDomain} #{searchBean.selectedCity}" />
 		<br />
-		<b:dataTable var="row" value="#{resultsBean.resultsDataTable}" border="1">
+		<b:dataTable var="row" value="#{resultsBean.resultsDataTable}"
+			border="1">
 			<b:dataTableColumn>
 				<f:facet name="header">#{msg.job}</f:facet>
             #{row.position}
@@ -29,29 +34,30 @@
 				<f:facet name="header">#{msg.resultCompany}</f:facet>
             #{row.company}
         </b:dataTableColumn>
-        <b:dataTableColumn>
-				<f:facet name="header">#{msg.website}</f:facet>
-            #{row.website}
-        </b:dataTableColumn>
 			<b:dataTableColumn>
 				<f:facet name="header">#{msg.city}</f:facet>
-            #{row.city}
-        </b:dataTableColumn>
-		<b:dataTableColumn>
+					#{row.city}
+			</b:dataTableColumn>
+
+			<b:dataTableColumn>
 				<f:facet name="header">#{msg.description}</f:facet>
             #{row.description}
         </b:dataTableColumn>
 			<b:dataTableColumn>
+				<f:facet name="header">#{msg.website}</f:facet>
+			#{row.website}
+				</b:dataTableColumn>
+			<b:dataTableColumn>
 				<f:facet name="header">#{msg.apply}</f:facet>
-				<b:commandButton type="submit" name="apply" value="#{msg.apply}" action="#{cvBean.apply}" />
-				<f:param name="position" value="#{row.position}" />
-				<f:param name="website" value="#{row.website}" />
-				<f:param name="company" value="#{row.company}" />
-				<f:param name="city" value=" #{row.city}" />
-
+				<b:commandButton type="submit" name="apply" value="#{msg.apply}"
+					action="#{cvBean.apply}">
+					<f:param name="position" value="#{row.position}" />
+					<f:param name="website" value="#{row.website}" />
+					<f:param name="company" value="#{row.company}" />
+					<f:param name="city" value=" #{row.city}" />
+				</b:commandButton>
 			</b:dataTableColumn>
 		</b:dataTable>
-		<p />
 	</h:form>
 </h:body>
 </html>

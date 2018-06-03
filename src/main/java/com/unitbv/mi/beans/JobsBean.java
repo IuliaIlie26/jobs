@@ -16,6 +16,7 @@ import javax.faces.model.SelectItem;
 
 import com.unitbv.mi.dao.JobsDAO;
 import com.unitbv.mi.dao.RecruiterDAO;
+import com.unitbv.mi.utils.JobResultsUtils;
 
 @ManagedBean(name = "jobs")
 @SessionScoped
@@ -23,7 +24,65 @@ public class JobsBean implements Serializable {
 
 	private static final long serialVersionUID = -8410585020831478502L;
 	private String company, position, description, city, website, selectedDomain;
+	private static String id;
+
+	public String getId() {
+		return id;
+	}
+
 	private List<SelectItem> domainList;
+	private String editPosition, editDescription, editCity, editWebsite, editSelectedDomain;
+	private List<JobResultsUtils> resultsDataTable = new ArrayList<>();
+
+	public String getEditPosition() {
+		if (id != null)
+			editPosition = JobsDAO.select("position", id);
+		return editPosition;
+	}
+
+	public String getEditDescription() {
+		if (id != null)
+			editDescription = JobsDAO.select("description", id);
+		return editDescription;
+	}
+
+	public String getEditCity() {
+		if (id != null)
+			editCity = JobsDAO.select("city", id);
+		return editCity;
+	}
+
+	public String getEditWebsite() {
+		if (id != null)
+			editWebsite = JobsDAO.select("website", id);
+		return editWebsite;
+	}
+
+	public void setEditPosition(String editPosition) {
+		this.editPosition = editPosition;
+	}
+
+	public void setEditDescription(String editDescription) {
+		this.editDescription = editDescription;
+	}
+
+	public void setEditCity(String editCity) {
+		this.editCity = editCity;
+	}
+
+	public void setEditWebsite(String editWebsite) {
+		this.editWebsite = editWebsite;
+	}
+
+	public void setEditSelectedDomain(String editSelectedDomain) {
+		this.editSelectedDomain = editSelectedDomain;
+	}
+
+	public String getEditSelectedDomain() {
+		if (id != null)
+			editSelectedDomain = JobsDAO.select("domain", id);
+		return editSelectedDomain;
+	}
 
 	public String getSelectedDomain() {
 		return selectedDomain;
@@ -35,7 +94,8 @@ public class JobsBean implements Serializable {
 
 	public List<SelectItem> getDomainList() {
 		domainList = new ArrayList<>();
-		try (FileReader fr = new FileReader(new File("D:\\USEFUL\\licenta\\project\\jobs\\src\\main\\resources\\domains_EN.txt"));
+		try (FileReader fr = new FileReader(new File(
+				"C:\\Users\\IuliaIlie\\Desktop\\USEFUL\\licenta\\project\\jobs\\src\\main\\resources\\domains_EN.txt"));
 				BufferedReader br = new BufferedReader(fr);) {
 			String line;
 			line = br.readLine();
@@ -60,7 +120,8 @@ public class JobsBean implements Serializable {
 	}
 
 	public String getCompany() {
-		String recruiter = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("username");
+		String recruiter = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.get("username");
 		return RecruiterDAO.getCompany(recruiter);
 	}
 
@@ -96,10 +157,39 @@ public class JobsBean implements Serializable {
 		this.website = website;
 	}
 
-	public void submit() {
-		String recruiter = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("username");
+	public String submit() {
+		String recruiter = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.get("username");
 		company = RecruiterDAO.getCompany(recruiter);
 		JobsDAO.publish(position, selectedDomain, company, description, city, recruiter, website);
+		position = "";
+		selectedDomain = "";
+		company = "";
+		description = "";
+		city = "";
+		website = "";
+		return "publishJobs";
+	}
+
+	public List<JobResultsUtils> getResultsDataTable() {
+		resultsDataTable = JobsDAO.getAll(this.getCompany());
+		return resultsDataTable;
+	}
+
+	public void setResultsDataTable(List<JobResultsUtils> resultsDataTable) {
+		this.resultsDataTable = resultsDataTable;
+	}
+
+	public String edit() {
+
+		id = ((String) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id")).trim();
+		return "editJobs";
+	}
+
+	public String saveChanges() {
+
+		JobsDAO.update(id, editPosition, editSelectedDomain, editDescription, editCity, editWebsite);
+		return "publishJobs";
 	}
 
 }

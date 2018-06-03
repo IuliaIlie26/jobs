@@ -36,7 +36,7 @@ public class SearchDAO {
 
 	public static List<SearchResultsUtils> getResults(String domain, String city, String company, String position) {
 
-		List<SearchResultsUtils> results = null;
+		List<SearchResultsUtils> results = new ArrayList<>();
 
 		try {
 			con = DataConnect.getConnection();
@@ -64,16 +64,10 @@ public class SearchDAO {
 			ps.setString(2, city);
 
 			ResultSet rs = ps.executeQuery();
-			if (rs.next()) {
-				results = new ArrayList<>();
-				SearchResultsUtils row = new SearchResultsUtils(rs.getString("position"), rs.getString("company"), rs.getString("website"),
-						rs.getString("city"), rs.getString("description"));
-				results.add(row);
-			}
 			while (rs.next()) {
 
-				SearchResultsUtils row = new SearchResultsUtils(rs.getString("position"), rs.getString("company"), rs.getString("website"),
-						rs.getString("city"), rs.getString("description"));
+				SearchResultsUtils row = new SearchResultsUtils(rs.getString("position"), rs.getString("company"),
+						rs.getString("city"), rs.getString("description"), rs.getString("website"));
 				results.add(row);
 			}
 		} catch (SQLException e) {
@@ -87,7 +81,7 @@ public class SearchDAO {
 
 	public static List<SelectItem> selectDomains() {
 		List<SelectItem> list = new ArrayList<>();
-		String sql = "SELECT DOMAIN FROM JOBS ORDER BY DOMAIN	";
+		String sql = "SELECT distinct DOMAIN FROM JOBS ORDER BY DOMAIN	";
 		con = DataConnect.getConnection();
 		try {
 			ps = con.prepareStatement(sql);

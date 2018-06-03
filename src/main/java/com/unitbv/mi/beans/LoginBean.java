@@ -86,10 +86,6 @@ public class LoginBean implements Serializable {
 		this.username = user;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
 	public String getPassword() {
 		return password;
 	}

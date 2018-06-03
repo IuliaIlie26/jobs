@@ -7,9 +7,10 @@ public class DataConnect {
 
 	public static Connection getConnection() {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("org.postgresql.Driver");
 			Connection con = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/dreamjob?autoReconnect=true&useSSL=false", "root", "iulia");
+					"jdbc:postgresql://localhost/postgres?currentSchema=dreamjob", "postgres", "iulia");
+			System.out.println("ok");
 			return con;
 		} catch (Exception ex) {
 			System.out.println("Database.getConnection() Error -->"

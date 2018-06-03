@@ -12,7 +12,7 @@ public class SearchResultsUtils {
 		this.website = website;
 	}
 
-	public SearchResultsUtils(String position, String company, String website, String description, String city) {
+	public SearchResultsUtils(String position, String company, String city, String description, String website) {
 		super();
 		this.position = position;
 		this.company = company;

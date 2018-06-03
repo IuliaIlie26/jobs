@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
-	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough" xmlns:b="http://bootsfaces.net/ui">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:b="http://bootsfaces.net/ui">
 
 <f:loadBundle basename="ApplicationResources" var="msg" />
 
@@ -15,6 +19,50 @@
 			<ui:include src="header.xhtml" />
 		</ui:insert>
 	</div>
-	test
+	<h:form style="padding-top:10px">
+
+		<h:selectOneMenu value="#{applicationBean.selectedDomain}"
+			required="true" requiredMessage="#{msg.selectDomain}">
+			<f:selectItem itemLabel="#{msg.domainsAll}" itemValue=""
+				itemDisabled="true" />
+			<f:selectItems value="#{applicationBean.domains}" itemValue="" />
+		</h:selectOneMenu>
+		<h:inputText value="#{applicationBean.experience}"
+			pt:placeholder="#{msg.cumulatedExperience}">
+		</h:inputText>
+		<h:inputText value="#{applicationBean.language}"
+			pt:placeholder="#{msg.language}">
+		</h:inputText>
+		<b:commandButton value="#{msg.searchCandidates}" type="submit"
+			action="#{applicationBean.search}">
+		</b:commandButton>
+	</h:form>
+
+	<h:form style="padding-top:10px; display: #{applicationBean.clicked}">
+		<b:dataTable var="row" value="#{applicationBean.resultsDataTable}"
+			border="1">
+			<b:dataTableColumn>
+				<f:facet name="header">#{msg.applicant}</f:facet>
+            #{row.applicant}
+        </b:dataTableColumn>
+			<b:dataTableColumn>
+				<f:facet name="header">#{msg.cumulatedExperience}</f:facet>
+            #{row.experience}
+        </b:dataTableColumn>
+			<b:dataTableColumn>
+				<f:facet name="header">#{msg.city}</f:facet>
+					#{row.city}
+			</b:dataTableColumn>
+
+			<b:dataTableColumn>
+				<f:facet name="header">#{msg.viewCV}</f:facet>
+				<b:commandButton type="submit" name="apply" value="#{msg.viewCV}"
+					action="#{applicationBean.view}">
+					<f:param name="applicant" value="#{row.applicant}" />
+				</b:commandButton>
+			</b:dataTableColumn>
+		</b:dataTable>
+
+	</h:form>
 </h:body>
 </html>

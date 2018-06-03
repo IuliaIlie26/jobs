@@ -223,7 +223,7 @@ public class CVBean {
 	public List<SelectItem> getDomainList() {
 		domainList = new ArrayList<>();
 
-		try (FileReader fr = new FileReader(new File("D:\\USEFUL\\licenta\\project\\jobs\\src\\main\\resources\\domains_EN.txt"));
+		try (FileReader fr = new FileReader(new File("C:\\Users\\IuliaIlie\\Desktop\\USEFUL\\licenta\\project\\jobs\\src\\main\\resources\\domains_EN.txt"));
 				BufferedReader br = new BufferedReader(fr);) {
 			String line;
 			line = br.readLine();

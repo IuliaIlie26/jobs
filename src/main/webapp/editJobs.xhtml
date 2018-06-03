@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
-	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough" xmlns:b="http://bootsfaces.net/ui">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:b="http://bootsfaces.net/ui">
 
 <f:loadBundle basename="ApplicationResources" var="msg" />
 
@@ -16,5 +20,41 @@
 		</ui:insert>
 	</div>
 	test
+	<h:form style="padding-top:10px">
+		<h:outputLabel value="#{msg.publishPosition}" />
+		<h:inputText value="#{jobs.editPosition}" required="true"
+			requiredMessage="#{msg.enterPosition}" />
+		<br />
+
+		<h:outputLabel value="#{msg.publishCompany}" />
+		<h:inputText value="#{jobs.company}" disabled="true" />
+		<br />
+
+		<h:outputLabel value="#{msg.publishLocation}" />
+		<h:inputText value="#{jobs.editCity}" required="true"
+			requiredMessage="#{msg.enterCity}" />
+		<br />
+
+		<h:outputLabel value="#{msg.publishDomain}" />
+		<h:selectOneMenu value="#{jobs.editSelectedDomain}" required="true"
+			requiredMessage="#{msg.chooseDomain}">
+			<f:selectItems value="#{jobs.domainList}" itemValue="" />
+		</h:selectOneMenu>
+		<br />
+
+		<h:outputLabel value="#{msg.publishDescription}" />
+		<h:inputTextarea cols="30" rows="10" value="#{jobs.editDescription}"
+			required="true" requiredMessage="#{msg.enterDescription}">
+			<f:validateLength minimum="20" maximum="1500" />
+		</h:inputTextarea>
+		<br />
+
+		<h:outputLabel value="#{msg.publishWebsite}" />
+		<h:inputText value="#{jobs.editWebsite}" required="true"
+			requiredMessage="#{msg.enterWebsite}" />
+		<br />
+
+		<b:commandButton value="#{msg.publishJ}" action="#{jobs.saveChanges}" />
+	</h:form>
 </h:body>
 </html>

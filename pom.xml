@@ -48,11 +48,6 @@
 			<version>2.1</version>
 		</dependency>
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.41</version>
-		</dependency>
-		<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
 			<version>1.5.0-b01</version>
@@ -62,6 +57,11 @@
 			<artifactId>bootsfaces</artifactId>
 			<version>1.2.0</version>
 			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>9.1-901-1.jdbc4</version>
 		</dependency>
 	</dependencies>
 	<repositories>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:b="http://bootsfaces.net/ui">
+
+<f:loadBundle basename="ApplicationResources" var="msg" />
+
+<h:head>
+	<title>Edit Jobs</title>
+</h:head>
+<h:body>
+	<div id="header">
+		<ui:insert name="header">
+			<ui:include src="header.xhtml" />
+		</ui:insert>
+	</div>
+	<h:form style="width:900px; align:center">
+		<b:dataTable var="row" value="#{jobs.resultsDataTable}" border="1">
+			<b:dataTableColumn>
+				<f:facet name="header">#{msg.id}</f:facet>
+            #{row.id}
+        </b:dataTableColumn>
+			<b:dataTableColumn>
+				<f:facet name="header">#{msg.publishPosition}</f:facet>
+            #{row.position}
+        </b:dataTableColumn>
+			<b:dataTableColumn>
+				<f:facet name="header">#{msg.publishLocation}</f:facet>
+					#{row.city}
+			</b:dataTableColumn>
+
+			<b:dataTableColumn>
+				<f:facet name="header">#{msg.recruiter}</f:facet>
+            #{row.recruiter}
+        </b:dataTableColumn>
+			<b:dataTableColumn>
+				<f:facet name="header">#{msg.editPublished}</f:facet>
+				<b:commandButton type="submit" name="apply"
+					value="#{msg.editPublished}" action="#{jobs.edit}">
+					<f:param name="id" value=" #{row.id}" />
+				</b:commandButton>
+			</b:dataTableColumn>
+		</b:dataTable>
+	</h:form>
+</h:body>
+</html>

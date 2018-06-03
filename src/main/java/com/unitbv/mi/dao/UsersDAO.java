@@ -15,7 +15,7 @@ public class UsersDAO {
 		try {
 			con = DataConnect.getConnection();
 
-			ps = con.prepareStatement("Select username, password from User where username = ? and password = ?");
+			ps = con.prepareStatement("Select username, password from Users where username = ? and password = ?");
 			ps.setString(1, user);
 			ps.setString(2, password);
 
@@ -25,7 +25,7 @@ public class UsersDAO {
 				return 1;
 			}
 
-			ps = con.prepareStatement("Select email, password from User where email = ? and password = ?");
+			ps = con.prepareStatement("Select email, password from Users where email = ? and password = ?");
 			ps.setString(1, user);
 			ps.setString(2, password);
 
@@ -70,7 +70,7 @@ public class UsersDAO {
 		String nameAndLastname = null;
 		try {
 			con = DataConnect.getConnection();
-			ps = con.prepareStatement("Select lastname, name from User where username = ? or email = ?");
+			ps = con.prepareStatement("Select lastname, name from Users where username = ? or email = ?");
 			ps.setString(1, username);
 			ps.setString(2, username);
 
@@ -104,7 +104,7 @@ public class UsersDAO {
 		PreparedStatement ps = null;
 		try {
 			con = DataConnect.getConnection();
-			ps = con.prepareStatement("Select iduser from User where username = ? or email = ?");
+			ps = con.prepareStatement("Select iduser from Users where username = ? or email = ?");
 			ps.setString(1, username);
 			ps.setString(2, username);
 			ResultSet rs = ps.executeQuery();
@@ -126,14 +126,14 @@ public class UsersDAO {
 		PreparedStatement ps = null;
 		try {
 			con = DataConnect.getConnection();
-			ps = con.prepareStatement("insert into user values (?,?,?,?,?,?,?)");
+			ps = con.prepareStatement("insert into users values (?,?,?,?,?,?,?)");
 			ps.setString(1, UUIDGeneratorUtils.generate());
 			ps.setString(2, name);
 			ps.setString(3, lastname);
-			ps.setString(7, username);
-			ps.setString(6, password);
-			ps.setString(5, phone);
-			ps.setString(4, email);
+			ps.setString(4, username);
+			ps.setString(5, password);
+			ps.setString(7, phone);
+			ps.setString(6, email);
 			ps.executeUpdate();
 		} catch (SQLException ex) {
 			ex.printStackTrace();
@@ -151,7 +151,7 @@ public class UsersDAO {
 		PreparedStatement ps = null;
 		try {
 			con = DataConnect.getConnection();
-			ps = con.prepareStatement("update user set " + column + " = ? where username = ?");
+			ps = con.prepareStatement("update users set " + column + " = ? where username = ?");
 			ps.setString(1, value);
 			ps.setString(2, username);
 			ps.executeUpdate();
@@ -171,7 +171,7 @@ public class UsersDAO {
 		String result = "";
 		try {
 			con = DataConnect.getConnection();
-			ps = con.prepareStatement("select " + value + " from user where username = ?");
+			ps = con.prepareStatement("select " + value + " from users where username = ?");
 			ps.setString(1, username);
 			ps.executeQuery();
 			ResultSet rs = ps.executeQuery();
@@ -197,10 +197,10 @@ public class UsersDAO {
 			con = DataConnect.getConnection();
 			ps = con.prepareStatement("insert into recruiter values (?,?,?,?,?,?,?)");
 			ps.setString(1, UUIDGeneratorUtils.generate());
-			ps.setString(6, name);
-			ps.setString(7, lastname);
-			ps.setString(2, username);
-			ps.setString(3, password);
+			ps.setString(2, name);
+			ps.setString(3, lastname);
+			ps.setString(6, username);
+			ps.setString(7, password);
 			ps.setString(5, company);
 			ps.setString(4, email);
 			ps.executeUpdate();
