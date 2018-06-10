@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
-	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough" xmlns:b="http://bootsfaces.net/ui">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:b="http://bootsfaces.net/ui">
 
 <f:loadBundle basename="ApplicationResources" var="msg" />
 
@@ -15,6 +19,19 @@
 			<ui:include src="header.xhtml" />
 		</ui:insert>
 	</div>
-	test
+	<h:form>
+		<h:selectOneMenu value="#{viewApplicationBean.selectedCity}">
+			<f:selectItems value="#{viewApplicationBean.city}" itemValue="" />
+		</h:selectOneMenu>
+
+		<h:selectOneMenu value="#{viewApplicationBean.selectedPosition}"
+			style="dispay: #{viewApplicationBean.displayPosition}">
+			<f:selectItems value="#{viewApplicationBean.positions}" itemValue="" />
+		</h:selectOneMenu>
+
+		<b:commandButton value="#{msg.viewApplicants}" type="submit"
+			action="#{viewApplicationBean.search}">
+		</b:commandButton>
+	</h:form>
 </h:body>
 </html>

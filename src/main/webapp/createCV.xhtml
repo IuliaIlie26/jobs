@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
-	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
 
 <f:loadBundle basename="ApplicationResources" var="msg" />
 <h:head>
@@ -15,41 +17,40 @@
 			<ui:include src="header.xhtml" />
 		</ui:insert>
 	</div>
-	<div>
 
-		<p:tab value="#{msg.personal}">
-			<h:panelGrid columns="1" cellpadding="5">
-				<ui:include src="personalData.xhtml" />
-			</h:panelGrid>
-		</p:tab>
-		<p:tab value="#{msg.education}">
-			<h:panelGrid columns="1" cellpadding="5">
-				<ui:include src="education.xhtml" />
-			</h:panelGrid>
-		</p:tab>
-		<p:tab value="#{msg.experience}">
-			<h:panelGrid columns="1" cellpadding="5">
-				<ui:include src="prev_experience.xhtml" />
-			</h:panelGrid>
-		</p:tab>
-		<p:tab>
-			<h:panelGrid columns="1" cellpadding="5">
-				<ui:include src="experience.xhtml" />
-			</h:panelGrid>
-		</p:tab>
-		<p:tab value="#{msg.skills}">
-			<h:panelGrid columns="1" cellpadding="5">
-				<ui:include src="skills.xhtml" />
-			</h:panelGrid>
-		</p:tab>
+	<h:form style="padding-top:10px">
 
-	</div>
-	<h:form>
-		<h:outputLabel id="onSave" value="#{msg.message}" style="font-weight:bold" />
+		<h:outputLabel id="domain" value="#{msg.domain}" />
+		<h:selectOneMenu value="#{cvBean.selectedDomain}">
+			<f:selectItems value="#{cvBean.domainList}" itemValue="" />
+		</h:selectOneMenu>
 		<br />
-		<h:commandButton id="save" action="#{cvBean.saveCV}" value="#{msg.justSave}" />
-		<h:commandButton id="publish" action="#{cvBean.publishCV}" value="#{msg.publishCV}" />
+		<h:outputLabel value="#{msg.experience}" required="true"
+			requiredMessage="#{msg.enterExperience}" />
+		<h:inputText value="#{cvBean.experience}" />
+		<br />
+		<h:outputLabel value="#{msg.city}:" required="true"
+			requiredMessage="#{msg.enterCity}" />
+		<h:inputText value="#{cvBean.city}" />
+		<br />
+		<h:outputLabel value="#{msg.languages}" required="true"
+			requiredMessage="#{msg.enterLanguages}" />
+		<h:inputTextarea cols="30" rows="10" value="#{cvBean.languages}"
+			required="true" requiredMessage="#{msg.enterLanguages}" />
+		<br />
+		<h:outputLabel value="#{msg.skills}" required="true"
+			requiredMessage="#{msg.enterSkills}" />
+		<h:inputTextarea cols="30" rows="10" value="#{cvBean.skills}"
+			required="true" requiredMessage="#{msg.enterSkills}" />
+		<br />
+		<b:commandButton action="#{cvBean.save}" value="#{msg.save}"
+			type="submit" />
 	</h:form>
-
+	<h:form enctype="multipart/form-data">
+		<p:fileUpload value="#{cvBean.file}" dragDropSupport="true"
+			allowTypes="/(\.|\/)(pdf)$/"
+			fileUploadListener="#{cvBean.fileUploadListener}"
+			sizeLimit="16000000" fileLimit="1" update="@this" />
+	</h:form>
 </h:body>
 </html>

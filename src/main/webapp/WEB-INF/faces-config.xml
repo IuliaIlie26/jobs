@@ -6,11 +6,6 @@
 
 	<navigation-rule>
 		<from-view-id>/index.xhtml</from-view-id>
-
-		<navigation-case>
-			<from-outcome>welcome</from-outcome>
-			<to-view-id>/welcome.xhtml</to-view-id>
-		</navigation-case>
 		<navigation-case>
 			<from-outcome>results</from-outcome>
 			<to-view-id>/results.xhtml</to-view-id>
@@ -34,6 +29,18 @@
 		<navigation-case>
 			<from-outcome>viewCV</from-outcome>
 			<to-view-id>/viewCV.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>viewApplicants_results</from-outcome>
+			<to-view-id>/viewApplicants_results.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>results_recruiter</from-outcome>
+			<to-view-id>/results_recruiter.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>searchApplicants</from-outcome>
+			<to-view-id>/searchApplicants.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 

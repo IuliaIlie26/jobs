@@ -5,6 +5,7 @@
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
 	 xmlns:b="http://bootsfaces.net/ui">
 <h:head>
+<script type="text/javascript" src="jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 	var i = 0;
 	document.getElementById('button').onclick = duplicate;
@@ -38,7 +39,7 @@
 		<div id="skills">
 			<h:outputLabel id="skill" value="#{msg.otherSkills}" />
 			<h:inputText id="inputSkills" value="#{cvBean.skills}" />
-			<b:commandButton id="button2" onclick="duplicate('skills')" value="#{msg.duplicate}" />
+			<b:commandButton id="button2" type="reset" onclick="duplicate('skills')" value="#{msg.duplicate}" />
 		</div>
 
 	</h:form>

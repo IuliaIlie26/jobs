@@ -32,5 +32,8 @@
 	<classpathentry kind="lib" path="C:/Users/IuliaIlie/Desktop/USEFUL/licenta/project/jobs/src/main/webapp/WEB-INF/lib/omnifaces-2.6.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/IuliaIlie/Desktop/USEFUL/licenta/project/jobs/src/main/webapp/WEB-INF/lib/javax.mail.jar"/>
 	<classpathentry kind="lib" path="C:/Users/IuliaIlie/Desktop/USEFUL/licenta/project/jobs/src/main/webapp/WEB-INF/lib/postgresql-9.1-901-1.jdbc4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/IuliaIlie/Desktop/USEFUL/licenta/project/jobs/src/main/webapp/WEB-INF/lib/mongodb-driver-sync-3.7.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/IuliaIlie/Desktop/USEFUL/licenta/project/jobs/src/main/webapp/WEB-INF/lib/javax.servlet-api-4.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/IuliaIlie/Desktop/USEFUL/licenta/project/jobs/src/main/webapp/WEB-INF/lib/javax.servlet.jsp.jstl-3.0.1.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

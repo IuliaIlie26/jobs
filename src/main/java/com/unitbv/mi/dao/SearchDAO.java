@@ -41,7 +41,7 @@ public class SearchDAO {
 		try {
 			con = DataConnect.getConnection();
 
-			String sql = "select position, company, website, city, description from jobs where domain= ? and city= ? ";
+			String sql = "select id, position, company, website, city, description from jobs where domain= ? and city= ? ";
 			if (company != null && (!company.equals(""))) {
 				if (position != null && (!position.equals(""))) {
 					sql += " and company like ?  and position like ?";
@@ -66,7 +66,7 @@ public class SearchDAO {
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 
-				SearchResultsUtils row = new SearchResultsUtils(rs.getString("position"), rs.getString("company"),
+				SearchResultsUtils row = new SearchResultsUtils(rs.getString("id"), rs.getString("position"), rs.getString("company"),
 						rs.getString("city"), rs.getString("description"), rs.getString("website"));
 				results.add(row);
 			}

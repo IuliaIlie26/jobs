@@ -6,39 +6,37 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-	 xmlns:b="http://bootsfaces.net/ui">
+	xmlns:b="http://bootsfaces.net/ui">
 <h:head>
-<script type="text/javascript">
-	var i = 0;
-	document.getElementById('button').onclick = duplicate;
-	function duplicate(id) {
-		var original = document.getElementById(id);
-		var clone = original.cloneNode(true);
-		clone.id = id + ++i;
-		clone.onclick = duplicate;
-		original.parentNode.appendChild(clone);
-	}
-</script>
+	<script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+	<script type="text/javascript">
+		var i = 0;
+		document.getElementById('button').onclick = duplicate;
+		function duplicate() {
+				console.log($("#button").attr("number"));
+		}
+	</script>
 </h:head>
 <h:body>
 	<h:form>
-		<div id="current" style="padding-top:10px">
+		<div id="current" style="padding-top: 10px">
 			<h:outputLabel id="current" value="#{msg.currentPlace}" />
 			<h:inputText id="inputPosition" value="#{cvBean.currentPosition}" />
 			<br />
 			<h:outputLabel id="comp" value="#{msg.CVcompany}" />
 			<h:inputText id="inputCompany" value="#{cvBean.currentCompany}" />
 			<br />
-			<b:dateTimePicker id="datepicker" label="#{msg.since}" value="#{cvBean.sinceDateCurrent}" />
+			<b:dateTimePicker id="datepicker" label="#{msg.since}"
+				value="#{cvBean.sinceDateCurrent}" />
 			<br />
 			<h:outputLabel id="domain" value="#{msg.domain}" />
 			<h:selectOneMenu value="#{cvBean.selectedDomain}">
 				<f:selectItems value="#{cvBean.domainList}" itemValue="" />
 			</h:selectOneMenu>
 			<br />
-			<b:commandButton id="button" onclick="duplicate('current')"
+			<b:commandButton id="button" onclick="duplicate('current')" type="reset"
 				value="#{msg.duplicate}" />
-			</div>
+		</div>
 	</h:form>
 </h:body>
 </html>

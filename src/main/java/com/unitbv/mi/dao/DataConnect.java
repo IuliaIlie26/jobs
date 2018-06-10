@@ -8,13 +8,12 @@ public class DataConnect {
 	public static Connection getConnection() {
 		try {
 			Class.forName("org.postgresql.Driver");
-			Connection con = DriverManager.getConnection(
-					"jdbc:postgresql://localhost/postgres?currentSchema=dreamjob", "postgres", "iulia");
+			Connection con = DriverManager.getConnection("jdbc:postgresql://localhost/postgres?currentSchema=dreamjob",
+					"postgres", "iulia");
 			System.out.println("ok");
 			return con;
 		} catch (Exception ex) {
-			System.out.println("Database.getConnection() Error -->"
-					+ ex.getMessage());
+			System.out.println("Database.getConnection() Error -->" + ex.getMessage());
 			return null;
 		}
 	}

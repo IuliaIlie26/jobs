@@ -2,7 +2,15 @@ package com.unitbv.mi.utils;
 
 public class SearchResultsUtils {
 
-	private String position, company, description, city, website;
+	private String position, company, description, city, website, id;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	public String getWebsite() {
 		return website;
@@ -12,13 +20,14 @@ public class SearchResultsUtils {
 		this.website = website;
 	}
 
-	public SearchResultsUtils(String position, String company, String city, String description, String website) {
+	public SearchResultsUtils(String id, String position, String company, String city, String description, String website) {
 		super();
 		this.position = position;
 		this.company = company;
 		this.description = description;
 		this.city = city;
 		this.website = website;
+		this.id=id;
 	}
 
 	public String getPosition() {

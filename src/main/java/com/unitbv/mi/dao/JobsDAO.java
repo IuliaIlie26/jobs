@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.model.SelectItem;
+
 import com.unitbv.mi.utils.JobResultsUtils;
 import com.unitbv.mi.utils.UUIDGeneratorUtils;
 
@@ -92,6 +94,28 @@ public class JobsDAO {
 		return result;
 	}
 
+	public static String getPositionById(String id) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		String position = null;
+		try {
+			con = DataConnect.getConnection();
+			ps = con.prepareStatement("select position from jobs where id = ?");
+			ps.setString(1, id);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				position = rs.getString("position");
+			}
+		} catch (SQLException ex) {
+
+			ex.printStackTrace();
+
+		} finally {
+			DataConnect.close(con);
+		}
+		return position;
+	}
+
 	public static boolean update(String id, String position, String domain, String description, String city,
 			String website) {
 		Connection con = null;
@@ -120,6 +144,118 @@ public class JobsDAO {
 
 		return true;
 
+	}
+
+	public static String getCityById(String id) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		String city = null;
+		try {
+			con = DataConnect.getConnection();
+			ps = con.prepareStatement("select city from jobs where id = ?");
+			ps.setString(1, id);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				city = rs.getString("city");
+			}
+		} catch (SQLException ex) {
+
+			ex.printStackTrace();
+
+		} finally {
+			DataConnect.close(con);
+		}
+		return city;
+	}
+
+	public static String getCompany(String id) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		String company = null;
+		try {
+			con = DataConnect.getConnection();
+			ps = con.prepareStatement("select company from jobs where id = ?");
+			ps.setString(1, id);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				company = rs.getString("company");
+			}
+		} catch (SQLException ex) {
+
+			ex.printStackTrace();
+
+		} finally {
+			DataConnect.close(con);
+		}
+		return company;
+	}
+
+	public static List<SelectItem> getCitiesByCompany(String company) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		List<SelectItem> cities = new ArrayList<>();
+		try {
+			con = DataConnect.getConnection();
+			ps = con.prepareStatement("select city from jobs where company = ?");
+			ps.setString(1, company);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				cities.add(new SelectItem(rs.getString("city")));
+			}
+		} catch (SQLException ex) {
+
+			ex.printStackTrace();
+
+		} finally {
+			DataConnect.close(con);
+		}
+		return cities;
+	}
+
+	public static List<SelectItem> getPositions(String company) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		List<SelectItem> positions = new ArrayList<>();
+		try {
+			con = DataConnect.getConnection();
+			ps = con.prepareStatement("select position from jobs where company = ?");
+			ps.setString(1, company);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				positions.add(new SelectItem(rs.getString("position")));
+			}
+		} catch (SQLException ex) {
+
+			ex.printStackTrace();
+
+		} finally {
+			DataConnect.close(con);
+		}
+		return positions;
+	}
+
+	public static String getIDByPosition(String selectedPosition, String company, String selectedCity) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		String position = null;
+		try {
+			con = DataConnect.getConnection();
+			ps = con.prepareStatement("select id from jobs where company = ? and city = ? and position = ?");
+			ps.setString(1, company);
+			ps.setString(2, selectedCity);
+			ps.setString(3, selectedPosition);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				position = rs.getString("id");
+			}
+		} catch (SQLException ex) {
+
+			ex.printStackTrace();
+
+		} finally {
+			DataConnect.close(con);
+		}
+		return position;
 	}
 
 }

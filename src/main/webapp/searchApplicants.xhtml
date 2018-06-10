@@ -27,42 +27,12 @@
 				itemDisabled="true" />
 			<f:selectItems value="#{applicationBean.domains}" itemValue="" />
 		</h:selectOneMenu>
-		<h:inputText value="#{applicationBean.experience}"
-			pt:placeholder="#{msg.cumulatedExperience}">
-		</h:inputText>
-		<h:inputText value="#{applicationBean.language}"
-			pt:placeholder="#{msg.language}">
+		<h:inputText value="#{applicationBean.city}"
+			pt:placeholder="#{msg.city}">
 		</h:inputText>
 		<b:commandButton value="#{msg.searchCandidates}" type="submit"
 			action="#{applicationBean.search}">
 		</b:commandButton>
-	</h:form>
-
-	<h:form style="padding-top:10px; display: #{applicationBean.clicked}">
-		<b:dataTable var="row" value="#{applicationBean.resultsDataTable}"
-			border="1">
-			<b:dataTableColumn>
-				<f:facet name="header">#{msg.applicant}</f:facet>
-            #{row.applicant}
-        </b:dataTableColumn>
-			<b:dataTableColumn>
-				<f:facet name="header">#{msg.cumulatedExperience}</f:facet>
-            #{row.experience}
-        </b:dataTableColumn>
-			<b:dataTableColumn>
-				<f:facet name="header">#{msg.city}</f:facet>
-					#{row.city}
-			</b:dataTableColumn>
-
-			<b:dataTableColumn>
-				<f:facet name="header">#{msg.viewCV}</f:facet>
-				<b:commandButton type="submit" name="apply" value="#{msg.viewCV}"
-					action="#{applicationBean.view}">
-					<f:param name="applicant" value="#{row.applicant}" />
-				</b:commandButton>
-			</b:dataTableColumn>
-		</b:dataTable>
-
 	</h:form>
 </h:body>
 </html>

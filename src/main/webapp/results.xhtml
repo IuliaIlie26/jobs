@@ -51,10 +51,7 @@
 				<f:facet name="header">#{msg.apply}</f:facet>
 				<b:commandButton type="submit" name="apply" value="#{msg.apply}"
 					action="#{cvBean.apply}">
-					<f:param name="position" value="#{row.position}" />
-					<f:param name="website" value="#{row.website}" />
-					<f:param name="company" value="#{row.company}" />
-					<f:param name="city" value=" #{row.city}" />
+					<f:param name="id" value="#{row.id}" />
 				</b:commandButton>
 			</b:dataTableColumn>
 		</b:dataTable>

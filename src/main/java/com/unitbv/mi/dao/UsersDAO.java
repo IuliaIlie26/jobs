@@ -70,9 +70,10 @@ public class UsersDAO {
 		String nameAndLastname = null;
 		try {
 			con = DataConnect.getConnection();
-			ps = con.prepareStatement("Select lastname, name from Users where username = ? or email = ?");
+			ps = con.prepareStatement("Select lastname, name from Users where username = ? or email = ? or idusers =?");
 			ps.setString(1, username);
 			ps.setString(2, username);
+			ps.setString(3, username);
 
 			ResultSet rs = ps.executeQuery();
 
@@ -104,13 +105,13 @@ public class UsersDAO {
 		PreparedStatement ps = null;
 		try {
 			con = DataConnect.getConnection();
-			ps = con.prepareStatement("Select iduser from Users where username = ? or email = ?");
+			ps = con.prepareStatement("Select idusers from Users where username = ? or email = ?");
 			ps.setString(1, username);
 			ps.setString(2, username);
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.next()) {
-				id = rs.getString("iduser");
+				id = rs.getString("idusers");
 			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();
@@ -213,5 +214,27 @@ public class UsersDAO {
 		}
 
 		return true;
+	}
+
+	public static String getCity(String user) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		String city = null;
+		try {
+			con = DataConnect.getConnection();
+			ps = con.prepareStatement("select city from jobs join applications on jobs.id = applications.position where applications.applicant = ?");
+			ps.setString(1, user);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				city = rs.getString("city");
+			}
+		} catch (SQLException ex) {
+
+			ex.printStackTrace();
+
+		} finally {
+			DataConnect.close(con);
+		}
+		return city;
 	}
 }
