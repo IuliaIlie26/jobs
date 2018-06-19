@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.faces.model.SelectItem;
 
+import com.unitbv.mi.exceptions.CustomException;
 import com.unitbv.mi.utils.JobResultsUtils;
 import com.unitbv.mi.utils.UUIDGeneratorUtils;
 
@@ -31,7 +32,7 @@ public class JobsDAO {
 			ps.setString(7, recruiter);
 			ps.executeUpdate();
 
-		} catch (SQLException ex) {
+		} catch (SQLException | CustomException ex) {
 
 			ex.printStackTrace();
 			return false;
@@ -60,7 +61,7 @@ public class JobsDAO {
 				results.add(job);
 			}
 
-		} catch (SQLException ex) {
+		} catch (SQLException | CustomException ex) {
 
 			ex.printStackTrace();
 
@@ -84,7 +85,7 @@ public class JobsDAO {
 				result = rs.getString(column);
 			}
 
-		} catch (SQLException ex) {
+		} catch (SQLException | CustomException ex) {
 
 			ex.printStackTrace();
 
@@ -106,7 +107,7 @@ public class JobsDAO {
 			if (rs.next()) {
 				position = rs.getString("position");
 			}
-		} catch (SQLException ex) {
+		} catch (SQLException | CustomException ex) {
 
 			ex.printStackTrace();
 
@@ -133,7 +134,7 @@ public class JobsDAO {
 			ps.setString(6, id);
 			ps.executeUpdate();
 
-		} catch (SQLException ex) {
+		} catch (SQLException | CustomException ex) {
 
 			ex.printStackTrace();
 			return false;
@@ -158,7 +159,7 @@ public class JobsDAO {
 			if (rs.next()) {
 				city = rs.getString("city");
 			}
-		} catch (SQLException ex) {
+		} catch (SQLException | CustomException ex) {
 
 			ex.printStackTrace();
 
@@ -180,7 +181,7 @@ public class JobsDAO {
 			if (rs.next()) {
 				company = rs.getString("company");
 			}
-		} catch (SQLException ex) {
+		} catch (SQLException | CustomException ex) {
 
 			ex.printStackTrace();
 
@@ -202,7 +203,7 @@ public class JobsDAO {
 			while (rs.next()) {
 				cities.add(new SelectItem(rs.getString("city")));
 			}
-		} catch (SQLException ex) {
+		} catch (SQLException | CustomException ex) {
 
 			ex.printStackTrace();
 
@@ -224,7 +225,7 @@ public class JobsDAO {
 			while (rs.next()) {
 				positions.add(new SelectItem(rs.getString("position")));
 			}
-		} catch (SQLException ex) {
+		} catch (SQLException | CustomException ex) {
 
 			ex.printStackTrace();
 
@@ -248,7 +249,7 @@ public class JobsDAO {
 			if (rs.next()) {
 				position = rs.getString("id");
 			}
-		} catch (SQLException ex) {
+		} catch (SQLException | CustomException ex) {
 
 			ex.printStackTrace();
 

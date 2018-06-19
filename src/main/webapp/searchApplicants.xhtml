@@ -19,9 +19,9 @@
 			<ui:include src="header.xhtml" />
 		</ui:insert>
 	</div>
-	<h:form style="padding-top:10px">
+	<h:form  style="padding-top: 10px; padding-left: 20px">
 
-		<h:selectOneMenu value="#{applicationBean.selectedDomain}"
+		<h:selectOneMenu style="padding-bottom: 2px;padding-top: 4px; margin-left: 10px; margin-right: 10px;" value="#{applicationBean.selectedDomain}"
 			required="true" requiredMessage="#{msg.selectDomain}">
 			<f:selectItem itemLabel="#{msg.domainsAll}" itemValue=""
 				itemDisabled="true" />

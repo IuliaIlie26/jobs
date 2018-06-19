@@ -1,0 +1,25 @@
+body {
+	margin: 25px;
+	background-color: rgb(240, 240, 240);
+	font-family: arial, sans-serif;
+	font-size: 14px;
+}
+
+.style {
+	padding: 20px;
+	border: 1px solid lightgray;
+	margin-top: 10px;
+	max-width: 500px;
+}
+
+.button {
+  
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}

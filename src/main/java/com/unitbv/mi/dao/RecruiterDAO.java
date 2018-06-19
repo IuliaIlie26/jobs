@@ -4,10 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
-import com.unitbv.mi.utils.ApplicantUtils;
+import com.unitbv.mi.exceptions.CustomException;
 
 public class RecruiterDAO {
 
@@ -25,7 +23,7 @@ public class RecruiterDAO {
 			if (rs.next()) {
 				company = rs.getString("company");
 			}
-		} catch (SQLException ex) {
+		} catch (SQLException | CustomException ex) {
 			ex.printStackTrace();
 
 		} finally {

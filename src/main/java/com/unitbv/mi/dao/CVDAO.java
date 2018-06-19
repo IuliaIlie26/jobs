@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.unitbv.mi.exceptions.CustomException;
 import com.unitbv.mi.utils.ApplicantUtils;
 import com.unitbv.mi.utils.UUIDGeneratorUtils;
 
@@ -31,6 +33,9 @@ public class CVDAO {
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 			return false;
+		} catch (CustomException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
 			DataConnect.close(con);
 		}
@@ -44,7 +49,7 @@ public class CVDAO {
 
 		try {
 			con = DataConnect.getConnection();
-			ps = con.prepareStatement("select username from cv where user = ?");
+			ps = con.prepareStatement("select username from cv where username = ?");
 			ps.setString(1, username);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
@@ -52,29 +57,33 @@ public class CVDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} catch (CustomException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return false;
 
 	}
 
 	public static boolean sendCV(String usernameID, String languages, String selectedDomain, String skills,
-			int experience) {
+			double experience, String city) {
 		Connection con = null;
 		PreparedStatement ps = null;
 
 		try {
 			con = DataConnect.getConnection();
-			ps = con.prepareStatement("insert into cv values(?,?,?,?,?,?)");
+			ps = con.prepareStatement("insert into cv values(?,?,?,?,?,?,?)");
 			String uuid = UUIDGeneratorUtils.generate();
 			ps.setString(1, uuid);
 			ps.setString(2, usernameID);
 			ps.setString(3, skills);
-			ps.setInt(4, experience);
+			ps.setDouble(4, experience);
 			ps.setString(5, languages);
 			ps.setString(6, selectedDomain);
+			ps.setString(7, city);
 			ps.executeUpdate();
 
-		} catch (SQLException ex) {
+		} catch (SQLException | CustomException ex) {
 			ex.printStackTrace();
 			return false;
 		} finally {
@@ -100,6 +109,9 @@ public class CVDAO {
 						rs.getString("languages")));
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (CustomException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return list;

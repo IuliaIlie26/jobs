@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.unitbv.mi.exceptions.CustomException;
 import com.unitbv.mi.utils.ApplicantUtils;
 
 public class ApplicationsDAO {
@@ -28,6 +29,9 @@ public class ApplicationsDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} catch (CustomException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return list;
 
@@ -48,9 +52,33 @@ public class ApplicationsDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} catch (CustomException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return username;
 
+	}
+
+	public static boolean hasApplied(String username, String position) {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con = DataConnect.getConnection();
+			ps = con.prepareStatement("select applicant from applications where applicant = ? and position = ?");
+			ps.setString(1, UsersDAO.getIdByUsername(username));
+			ps.setString(2, position);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (CustomException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 }

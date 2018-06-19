@@ -18,39 +18,64 @@
 		</ui:insert>
 	</div>
 
-	<h:form style="padding-top:10px">
-
-		<h:outputLabel id="domain" value="#{msg.domain}" />
-		<h:selectOneMenu value="#{cvBean.selectedDomain}">
-			<f:selectItems value="#{cvBean.domainList}" itemValue="" />
-		</h:selectOneMenu>
-		<br />
-		<h:outputLabel value="#{msg.experience}" required="true"
-			requiredMessage="#{msg.enterExperience}" />
-		<h:inputText value="#{cvBean.experience}" />
-		<br />
-		<h:outputLabel value="#{msg.city}:" required="true"
-			requiredMessage="#{msg.enterCity}" />
-		<h:inputText value="#{cvBean.city}" />
-		<br />
-		<h:outputLabel value="#{msg.languages}" required="true"
-			requiredMessage="#{msg.enterLanguages}" />
-		<h:inputTextarea cols="30" rows="10" value="#{cvBean.languages}"
-			required="true" requiredMessage="#{msg.enterLanguages}" />
-		<br />
-		<h:outputLabel value="#{msg.skills}" required="true"
-			requiredMessage="#{msg.enterSkills}" />
-		<h:inputTextarea cols="30" rows="10" value="#{cvBean.skills}"
-			required="true" requiredMessage="#{msg.enterSkills}" />
-		<br />
-		<b:commandButton action="#{cvBean.save}" value="#{msg.save}"
-			type="submit" />
+	<h:form
+		style="padding-top:10px;padding-left:20px; display: #{login.isLoggedIn}">
+		<div style="width: 100%; padding-bottom: 20px;">
+			<h:outputLabel style="width:25%;" id="domain" value="#{msg.domain}" />
+			<h:selectOneMenu style="width:23%;" value="#{cvBean.selectedDomain}">
+				<f:selectItems value="#{cvBean.domainList}" itemValue="" />
+			</h:selectOneMenu>
+		</div>
+		<div style="width: 100%; padding-bottom: 20px;">
+			<h:outputLabel style="width:25%;" value="#{msg.experience}" />
+			<h:inputText id="exp" style="width:23%;" value="#{cvBean.experience}"
+				validatorMessage="#{msg.enterExperience}">
+				<f:validateRequired />
+			</h:inputText>
+			<h:message for="exp" style="color:red" />
+		</div>
+		<div style="width: 100%; padding-bottom: 20px;">
+			<h:outputLabel style="width:25%;" value="#{msg.city}:" />
+			<h:inputText style="width:23%;" id="city" value="#{cvBean.city}"
+				validatorMessage="#{msg.enterCity}">
+				<f:validateRequired />
+			</h:inputText>
+			<h:message for="city" style="color:red" />
+		</div>
+		<div style="width: 100%; padding-bottom: 20px;">
+			<h:outputLabel style="width:25%;" value="#{msg.languages}" />
+			<h:inputTextarea id="lang" cols="30" rows="10"
+				value="#{cvBean.languages}" validatorMessage="#{msg.enterLanguages}">
+				<f:validateRequired />
+			</h:inputTextarea>
+			<h:message for="lang" style="color:red" />
+		</div>
+		<div style="width: 100%; padding-bottom: 20px;">
+			<h:outputLabel style="width:25%;" value="#{msg.skills}" />
+			<h:inputTextarea id="skills" cols="30" rows="10"
+				value="#{cvBean.skills}" validatorMessage="#{msg.enterSkills}">
+				<f:validateRequired />
+			</h:inputTextarea>
+			<h:message for="skills" style="color:red" />
+		</div>
+		<div style="padding-bottom: 20px; padding-left: 200px">
+			<b:commandButton action="#{cvBean.save}" value="#{msg.save}"
+				type="submit" />
+		</div>
 	</h:form>
-	<h:form enctype="multipart/form-data">
+	<h:form enctype="multipart/form-data"
+		style="display: #{login.isLoggedIn}">
 		<p:fileUpload value="#{cvBean.file}" dragDropSupport="true"
 			allowTypes="/(\.|\/)(pdf)$/"
 			fileUploadListener="#{cvBean.fileUploadListener}"
 			sizeLimit="16000000" fileLimit="1" update="@this" />
 	</h:form>
+	<h:form
+		style="padding-top:10px;padding-left:20px;display: #{login.isLoggedOut}">
+		<h:outputLabel value="#{msg.logReq}"></h:outputLabel>
+	</h:form>
+	<p:dialog id="diag" widgetVar="dlg2" modal="true" height="100">
+		<h:outputText value="#{cvBean.message}" />
+	</p:dialog>
 </h:body>
 </html>

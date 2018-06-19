@@ -22,28 +22,34 @@ public class LoginValidator implements Validator {
 	public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
 		String username = (String) value;
 		UIInput uiInputConfirmPassword = (UIInput) component.getAttributes().get("password");
-		String password="";
-		final ResourceBundle bundle;
-		final FacesMessage msg;
+		String password = uiInputConfirmPassword.getSubmittedValue().toString();
+		final ResourceBundle bundle = ResourceBundle.getBundle("ApplicationResources");
+		FacesMessage msg;
+		if (password == null || password.equals("")) {
+
+			msg = new FacesMessage(bundle.getString("enterPassword"));
+			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+			throw new ValidatorException(msg);
+		}
 		try {
-			password = MD5EncryptionUtils.encrypt(uiInputConfirmPassword.getSubmittedValue().toString());
+			password = MD5EncryptionUtils.encrypt(password);
+			
 		} catch (NoSuchAlgorithmException | NoSuchProviderException e) {
-			bundle = ResourceBundle.getBundle("ApplicationResources");
+
 			msg = new FacesMessage(bundle.getString("DBerror"));
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			throw new ValidatorException(msg);
 		}
 		int valid = UsersDAO.validate(username, password);
-		if (valid==0) {
-			bundle = ResourceBundle.getBundle("ApplicationResources");
+		if (valid == 0) {
+
 			msg = new FacesMessage(bundle.getString("failed"));
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			throw new ValidatorException(msg);
 		}
-		if(valid == 1) {
+		if (valid == 1) {
 			LoginBean.setRecruiter(false);
-		}
-		else {
+		} else {
 			LoginBean.setRecruiter(true);
 		}
 	}

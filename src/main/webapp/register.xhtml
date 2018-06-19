@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
-	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough" xmlns:b="http://bootsfaces.net/ui">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
 
 <f:loadBundle basename="ApplicationResources" var="msg" />
 <h:head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Register</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Register</title>
+<h:outputStylesheet library="css" name="bootstrap.css" />
 </h:head>
 <h:body>
 	<div id="header">
@@ -15,42 +18,63 @@
 			<ui:include src="header.xhtml" />
 		</ui:insert>
 	</div>
-	<h:form style="padding-top:10px">
-		<h:outputLabel id="name" value="#{msg.name}" />
-		<h:inputText id="inputName" value="#{userBean.name}" required="true" requiredMessage="#{msg.enterName}">
-		</h:inputText>
-		<br />
-		<h:outputLabel id="lname" value="#{msg.lastname}" />
-		<h:inputText id="inputLastName" value="#{userBean.lastname}" required="true" requiredMessage="#{msg.enterLName}">
-		</h:inputText>
-		<br />
-		<h:outputLabel id="username" value="#{msg.usernameReg}" />
-		<h:inputText id="inputUsername" value="#{userBean.username}" required="true" requiredMessage="#{msg.enterUsername}">
-			<f:validator validatorId="username" />
-		</h:inputText>
-		<br />
-		<h:outputLabel id="password" value="#{msg.password}" />
-		<h:inputSecret id="passwordInput" value="#{userBean.password}">
-			<f:validator validatorId="password" />
-			<f:attribute name="confirmationPassword" value="#{confirmationPassword}" />
-		</h:inputSecret>
-		<br />
-		<h:outputLabel id="passw" value="#{msg.passwordRepeat}" />
-		<h:inputSecret id="confirmationPassword" value="#{userBean.passwordRepeat}" binding="#{confirmationPassword}">
-		</h:inputSecret>
-		<br />
-		<h:outputLabel id="email" value="#{msg.email}" />
-		<h:inputText id="inputEmail" value="#{userBean.email}" required="true" requiredMessage="#{msg.enterEmail}">
-			<f:validator validatorId="email" />
-		</h:inputText>
-		<br />
-		<h:outputLabel id="phone" value="#{msg.phone}" />
-		<h:inputText id="inputPhone" value="#{userBean.phone}" required="true" requiredMessage="#{msg.enterPhone}">
-			<f:validator validatorId="phone" />
-		</h:inputText>
-		<br />
-		<h:message for="password" style="display-color: red"/>
-		<b:commandButton id="submit" value="#{msg.register}" action="#{userBean.register}" />
+	<h:form style="padding-top:10px; padding-left: 20px">
+		<div style="width:100%;padding-bottom: 20px;">
+			<h:outputLabel style="width:10%;" id="name" value="#{msg.name}:" />
+			<h:inputText style="width:15%;" id="inputName" value="#{userBean.name}"
+				validatorMessage="#{msg.enterName}">
+				<f:validateRequired />
+			</h:inputText>
+			<h:message for="inputName" style="color:red" />
+		</div>
+		<div style="width:100%;padding-bottom: 20px;">
+			<h:outputLabel style="width:10%;" id="lname" value="#{msg.lastname}:" />
+			<h:inputText style="width:15%;" id="inputLastName" value="#{userBean.lastname}"
+				validatorMessage="#{msg.enterLName}">
+				<f:validateRequired />
+			</h:inputText>
+			<h:message for="inputLastName" style="color:red" />
+		</div>
+		<div style="width:100%;padding-bottom: 20px;">
+			<h:outputLabel style="width:10%;" id="username" value="#{msg.usernameReg}:" />
+			<h:inputText style="width:15%;" id="inputUsername" value="#{userBean.username}">
+				<f:validator validatorId="username" />
+			</h:inputText>
+			<h:message for="inputUsername" style="color:red" />
+		</div>
+		<div style="width:100%;padding-bottom: 20px;">
+			<h:outputLabel style="width:10%;" id="password" value="#{msg.password}:" />
+			<h:inputSecret style="width:15%;"  id="passwordInput" value="#{userBean.password}">
+				<f:validator validatorId="password" />
+				<f:attribute name="confirmationPassword"
+					value="#{confirmationPassword}" />
+			</h:inputSecret>
+			<h:message for="passwordInput" style="color:red" />
+		</div>
+		<div style="width:100%;padding-bottom: 20px;">
+			<h:outputLabel style="width:10%;" id="passw" value="#{msg.passwordRepeat}" />
+			<h:inputSecret style="width:15%;"  id="confirmationPassword"
+				value="#{userBean.passwordRepeat}" binding="#{confirmationPassword}">
+			</h:inputSecret>
+		</div>
+		<div style="width:100%;padding-bottom: 20px;">
+			<h:outputLabel style="width:10%;" id="email" value="#{msg.email}:" />
+			<h:inputText style="width:15%;" id="inputEmail" value="#{userBean.email}">
+				<f:validator validatorId="email" />
+			</h:inputText>
+			<h:message for="inputEmail" style="color:red" />
+		</div>
+		<div style="width:100%;padding-bottom: 20px;">
+			<h:outputLabel style="width:10%;" id="phone" value="#{msg.phone}:" />
+			<h:inputText style="width:15%;" id="inputPhone" value="#{userBean.phone}">
+				<f:validator validatorId="phone" />
+			</h:inputText>
+			<h:message for="inputPhone" style="color:red" />
+		</div>
+		<h:message for="password" style="display-color: red" />
+		<b:commandButton style="padding-left: 20px" id="submit" value="#{msg.register}"
+			action="#{userBean.register}" />
 	</h:form>
 </h:body>
+
 </html>

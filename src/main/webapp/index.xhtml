@@ -2,9 +2,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
-	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough" xmlns:b="http://bootsfaces.net/ui">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:b="http://bootsfaces.net/ui">
 
 <f:loadBundle basename="ApplicationResources" var="msg" />
 
@@ -17,21 +21,36 @@
 			<ui:include src="header.xhtml" />
 		</ui:insert>
 	</div>
-	<h:form style="padding-top:10px">
-		<h:inputText value="#{searchBean.job}" pt:placeholder="#{msg.job}">
-		</h:inputText>
-		<h:inputText value="#{searchBean.company}" pt:placeholder="#{msg.company}">
-		</h:inputText>
-		<h:selectOneMenu value="#{searchBean.selectedDomain}" required="true" requiredMessage="#{msg.selectDomain}">
-			<f:selectItem itemLabel="#{msg.domainsAll}" itemValue="" itemDisabled="true" />
-			<f:selectItems value="#{searchBean.list}" itemValue="" />
-		</h:selectOneMenu>
-		<h:selectOneMenu value="#{searchBean.selectedCity}" required="true" requiredMessage="#{msg.selectCity}">
-			<f:selectItem itemLabel="#{msg.citiesAll}" itemValue="" itemDisabled="true" />
-			<f:selectItems value="#{searchBean.city}" itemValue="" />
-		</h:selectOneMenu>
-		<b:commandButton value="#{msg.search}" type="submit" action="#{searchBean.search}">
-		</b:commandButton>
+	<h:form>
+		<div style="padding-top: 10px; padding-left: 20px">
+			<h:inputText value="#{searchBean.job}" pt:placeholder="#{msg.job}">
+			</h:inputText>
+			<h:inputText value="#{searchBean.company}"
+				pt:placeholder="#{msg.company}">
+			</h:inputText>
+
+			<h:selectOneMenu style="padding-bottom: 2px;padding-top: 4px"
+				id="domain" value="#{searchBean.selectedDomain}" required="true"
+				requiredMessage="#{msg.selectDomain}">
+				<f:selectItem itemLabel="#{msg.domainsAll}" itemValue=""
+					itemDisabled="true" />
+				<f:selectItems value="#{searchBean.list}" itemValue="" />
+			</h:selectOneMenu>
+
+
+			<h:selectOneMenu style="padding-bottom: 2px;padding-top: 4px; margin-left: 10px; margin-right: 10px;"
+				id="city" value="#{searchBean.selectedCity}" required="true"
+				requiredMessage="#{msg.selectCity}">
+				<f:selectItem itemLabel="#{msg.citiesAll}" itemValue=""
+					itemDisabled="true" />
+				<f:selectItems value="#{searchBean.city}" itemValue="" />
+			</h:selectOneMenu>
+
+			<b:commandButton value="#{msg.search}" type="submit"
+				action="#{searchBean.search}" />
+			<h:message for="city" style="color:red" />
+			<h:message for="domain" style="color:red" />
+		</div>
 	</h:form>
 </h:body>
 </html>

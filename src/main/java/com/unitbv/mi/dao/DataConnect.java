@@ -3,25 +3,37 @@ package com.unitbv.mi.dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+import org.apache.log4j.Logger;
+
+import com.unitbv.mi.exceptions.CustomException;
+
 public class DataConnect {
 
-	public static Connection getConnection() {
+	private final static Logger logger = Logger.getLogger(DataConnect.class);
+
+	public static Connection getConnection() throws CustomException {
+		Connection con = null;
 		try {
 			Class.forName("org.postgresql.Driver");
-			Connection con = DriverManager.getConnection("jdbc:postgresql://localhost/postgres?currentSchema=dreamjob",
-					"postgres", "iulia");
-			System.out.println("ok");
-			return con;
+			con = DriverManager.getConnection("jdbc:postgresql://localhost/postgres", "postgres",
+					"iulia");
+			logger.info("Connected to Postgres!");
+
 		} catch (Exception ex) {
-			System.out.println("Database.getConnection() Error -->" + ex.getMessage());
-			return null;
+			logger.error("Database.getConnection() Error --> " + ex.getMessage());
+			throw new CustomException();
+
 		}
+		return con;
 	}
 
 	public static void close(Connection con) {
 		try {
 			con.close();
+			logger.info("Connection to Postgres closed!");
+
 		} catch (Exception ex) {
+			logger.error("Error closing Postgres connection: " + ex.getMessage());
 		}
 	}
 }

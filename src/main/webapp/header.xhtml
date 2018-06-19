@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
-	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough" xmlns:b="http://bootsfaces.net/ui">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:b="http://bootsfaces.net/ui">
 
 <f:loadBundle basename="ApplicationResources" var="msg" />
 <head>
@@ -11,24 +15,34 @@
 <body>
 	<b:navBar brand="" brandHref="#" fluid="true">
 		<b:navbarLinks>
-			<b:navLink value="#{msg.publishJob}" href="publishJobs.xhtml" style="display: #{login.recruiterDisplay}"></b:navLink>
-			<b:navLink value="#{msg.viewPublishedJobs}" href="allJobs.xhtml" style="display: #{login.recruiterDisplay}"></b:navLink>
-			<b:navLink value="#{msg.search}" href="index.xhtml" style="display: #{login.userDisplay}"></b:navLink>
-			<b:navLink value="#{msg.createCV}" href="createCV.xhtml" style="display: #{login.userDisplay}"></b:navLink>
-			<b:navLink value="#{msg.register}" href="register.xhtml" style="display: #{login.isLoggedOut}"></b:navLink>
-			<b:navLink value="#{msg.searchApplicants}" href="searchApplicants.xhtml" style="display: #{login.recruiterDisplay}"></b:navLink>
-			<b:navLink value="#{msg.viewApplicants}" href="viewApplicants.xhtml" style="display: #{login.recruiterDisplay}"></b:navLink>
+			<b:navLink value="#{msg.publishJob}" href="publishJobs.xhtml"
+				style="display: #{login.recruiterDisplay}"></b:navLink>
+			<b:navLink value="#{msg.viewPublishedJobs}" href="allJobs.xhtml"
+				style="display: #{login.recruiterDisplay}"></b:navLink>
+			<b:navLink value="#{msg.search}" href="index.xhtml"
+				style="display: #{login.userDisplay}"></b:navLink>
+			<b:navLink value="#{msg.createCV}" href="createCV.xhtml"
+				style="display: #{login.userDisplay}"></b:navLink>
+			<b:navLink value="#{msg.register}" href="register.xhtml"
+				style="display: #{login.isLoggedOut}"></b:navLink>
+			<b:navLink value="#{msg.searchApplicants}"
+				href="searchApplicants.xhtml"
+				style="display: #{login.recruiterDisplay}"></b:navLink>
+			<b:navLink value="#{msg.viewApplicants}" href="viewApplicants.xhtml"
+				style="display: #{login.recruiterDisplay}"></b:navLink>
 		</b:navbarLinks>
 		<b:form style="text-align:right; padding-top:5px">
 			<div id="log" style="display: #{login.isLoggedOut}">
-				<h:inputText id="username" value="#{login.username}" pt:placeholder="#{msg.username}" style="width:200px;"
-					required="true" requiredMessage="Please enter the username">
+				<h:inputText id="username" value="#{login.username}"
+					pt:placeholder="#{msg.username}" style="width:200px;">
 					<f:attribute name="password" value="#{password}" />
 					<f:validator validatorId="login" />
 				</h:inputText>
-				<h:inputSecret id="password" value="#{login.password}" pt:placeholder="#{msg.password}" binding="#{password}"
-					required="true" requiredMessage="Please enter the password" />
-				<b:commandButton action="#{login.validateUsernamePassword}" value="#{msg.login}" />
+				<h:inputSecret id="password" value="#{login.password}"
+					pt:placeholder="#{msg.password}" binding="#{password}" />
+				<b:commandButton action="#{login.validateUsernamePassword}"
+					value="#{msg.login}" />
+				<h:message for="username" style="color:red" />
 			</div>
 		</b:form>
 		<b:form style="text-align:right; padding-top:5px">
@@ -37,12 +51,12 @@
 					value="#{msg.welcomeUsername} #{ login.nameAndLastname != null ? login.nameAndLastname : userBean.nameAndLastname}!"
 					iconAwesome="fa-align-justify">
 					<b:navLink value="#{msg.myAccount}" href="myAccount.xhtml"></b:navLink>
-					<b:navLink value="#{msg.myCV}" href="viewCV.xhtml" style="display: #{login.userDisplay}"></b:navLink>
+					<b:navLink value="#{msg.myCV}" href="viewCV.xhtml"
+						style="display: #{login.userDisplay}"></b:navLink>
 					<b:navCommandLink value="#{msg.logout}" action="#{login.logout}" />
 				</b:dropMenu>
 			</div>
 		</b:form>
 	</b:navBar>
-
 </body>
 </html>

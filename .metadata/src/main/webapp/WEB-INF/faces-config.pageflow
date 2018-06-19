@@ -9,8 +9,8 @@
   <nodes xsi:type="pageflow:PFPage" name="viewCV.xhtml" x="338" y="1330" id="pf15276700117191" referenceLink="//@navigationRule.0/@navigationCase.5/@toViewId|" inlinks="pf15276700117190" path="/viewCV.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="publishJobs.xhtml" x="338" y="1714" id="pf15278602844431" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" inlinks="pf15278602844420" path="/publishJobs.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="editJobs.xhtml" x="338" y="2098" id="pf15279611137181" referenceLink="//@navigationRule.0/@navigationCase.4/@toViewId|" inlinks="pf15279611137180" path="/editJobs.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="results_recruiter.xhtml" x="338" y="2482" id="pf15283039860781" referenceLink="//@navigationRule.0/@navigationCase.6/@toViewId|" inlinks="pf15283039860780" path="/results_recruiter.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="searchApplicants.xhtml" x="338" y="2866" id="pf15283040071003" referenceLink="//@navigationRule.0/@navigationCase.7/@toViewId|" inlinks="pf15283040070992" path="/searchApplicants.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="results_recruiter.xhtml" x="338" y="2482" id="pf15283039860781" referenceLink="//@navigationRule.0/@navigationCase.7/@toViewId|" inlinks="pf15283039860780" path="/results_recruiter.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="searchApplicants.xhtml" x="338" y="2866" id="pf15283040071003" referenceLink="//@navigationRule.0/@navigationCase.8/@toViewId|" inlinks="pf15283040070992" path="/searchApplicants.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="viewApplicants_results.xhtml" id="pf15286173169161" referenceLink="//@navigationRule.0/@navigationCase.6/@toViewId|" inlinks="pf15286173169160" path="/viewApplicants_results.xhtml"/>
   <links id="pf15265613310393" target="pf15265613310445" source="pf15265613310391" outcome="results"/>
   <links id="pf15266468883390" target="pf15266468883392" source="pf15265613310391" outcome="createCV"/>

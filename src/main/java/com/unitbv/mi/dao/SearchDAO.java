@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.model.SelectItem;
 
+import com.unitbv.mi.exceptions.CustomException;
 import com.unitbv.mi.utils.SearchResultsUtils;
 
 public class SearchDAO {
@@ -26,7 +27,7 @@ public class SearchDAO {
 			while (rs.next()) {
 				results.add(new SelectItem(rs.getString("city")));
 			}
-		} catch (SQLException e) {
+		} catch (SQLException | CustomException e) {
 			e.printStackTrace();
 		} finally {
 			DataConnect.close(con);
@@ -70,7 +71,7 @@ public class SearchDAO {
 						rs.getString("city"), rs.getString("description"), rs.getString("website"));
 				results.add(row);
 			}
-		} catch (SQLException e) {
+		} catch (SQLException | CustomException e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		} finally {
@@ -82,14 +83,15 @@ public class SearchDAO {
 	public static List<SelectItem> selectDomains() {
 		List<SelectItem> list = new ArrayList<>();
 		String sql = "SELECT distinct DOMAIN FROM JOBS ORDER BY DOMAIN	";
-		con = DataConnect.getConnection();
+		
 		try {
+			con = DataConnect.getConnection();
 			ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				list.add(new SelectItem(rs.getString("domain")));
 			}
-		} catch (SQLException e) {
+		} catch (SQLException | CustomException e) {
 			e.printStackTrace();
 		}
 		return list;

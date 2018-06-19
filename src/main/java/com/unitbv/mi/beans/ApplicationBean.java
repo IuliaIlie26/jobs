@@ -166,8 +166,6 @@ public class ApplicationBean implements Serializable {
 		facesContext.responseComplete();
 	}
 
-	// Helpers (can be refactored to public utility class)
-	// ----------------------------------------
 
 	private String getFileName() {
 		String 	id = ((String) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("applicationID")).trim();
@@ -180,10 +178,6 @@ public class ApplicationBean implements Serializable {
 			try {
 				resource.close();
 			} catch (IOException e) {
-				// Do your thing with the exception. Print it, log it or mail it. It may be
-				// useful to
-				// know that this will generally only be thrown when the client aborted the
-				// download.
 				e.printStackTrace();
 			}
 		}

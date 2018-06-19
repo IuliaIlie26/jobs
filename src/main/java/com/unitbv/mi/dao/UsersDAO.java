@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import com.unitbv.mi.exceptions.CustomException;
 import com.unitbv.mi.utils.UUIDGeneratorUtils;
 
 public class UsersDAO {
@@ -54,7 +56,7 @@ public class UsersDAO {
 			if (rs.next()) {
 				return 2;
 			}
-		} catch (SQLException ex) {
+		} catch (SQLException | CustomException ex) {
 			System.out.println("Login error -->" + ex.getMessage());
 			ex.printStackTrace();
 		} finally {
@@ -90,7 +92,7 @@ public class UsersDAO {
 			if (rs.next()) {
 				nameAndLastname = rs.getString("lastname") + " " + rs.getString("name");
 			}
-		} catch (SQLException ex) {
+		} catch (SQLException | CustomException ex) {
 			ex.printStackTrace();
 
 		} finally {
@@ -113,7 +115,7 @@ public class UsersDAO {
 			if (rs.next()) {
 				id = rs.getString("idusers");
 			}
-		} catch (SQLException ex) {
+		} catch (SQLException | CustomException ex) {
 			ex.printStackTrace();
 
 		} finally {
@@ -136,7 +138,7 @@ public class UsersDAO {
 			ps.setString(7, phone);
 			ps.setString(6, email);
 			ps.executeUpdate();
-		} catch (SQLException ex) {
+		} catch (SQLException | CustomException ex) {
 			ex.printStackTrace();
 			return false;
 
@@ -156,7 +158,7 @@ public class UsersDAO {
 			ps.setString(1, value);
 			ps.setString(2, username);
 			ps.executeUpdate();
-		} catch (SQLException ex) {
+		} catch (SQLException | CustomException ex) {
 			ex.printStackTrace();
 			return false;
 
@@ -181,7 +183,7 @@ public class UsersDAO {
 				result = rs.getString(value);
 			}
 
-		} catch (SQLException ex) {
+		} catch (SQLException | CustomException ex) {
 			ex.printStackTrace();
 
 		} finally {
@@ -190,7 +192,7 @@ public class UsersDAO {
 		return result;
 	}
 
-	public static boolean validateRecruiterRegistration(String name, String lastname, String username, String password, String email,
+	public static boolean name(String name, String lastname, String username, String password, String email,
 			String company) {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -205,7 +207,7 @@ public class UsersDAO {
 			ps.setString(5, company);
 			ps.setString(4, email);
 			ps.executeUpdate();
-		} catch (SQLException ex) {
+		} catch (SQLException | CustomException ex) {
 			ex.printStackTrace();
 			return false;
 
@@ -228,7 +230,7 @@ public class UsersDAO {
 			if (rs.next()) {
 				city = rs.getString("city");
 			}
-		} catch (SQLException ex) {
+		} catch (SQLException | CustomException ex) {
 
 			ex.printStackTrace();
 

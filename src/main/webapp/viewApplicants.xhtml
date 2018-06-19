@@ -19,13 +19,12 @@
 			<ui:include src="header.xhtml" />
 		</ui:insert>
 	</div>
-	<h:form>
-		<h:selectOneMenu value="#{viewApplicationBean.selectedCity}">
+	<h:form style="padding-top: 10px; padding-left: 20px">
+		<h:selectOneMenu style="padding-bottom: 2px;padding-top: 4px; margin-left: 10px; margin-right: 10px;" value="#{viewApplicationBean.selectedCity}">
 			<f:selectItems value="#{viewApplicationBean.city}" itemValue="" />
 		</h:selectOneMenu>
 
-		<h:selectOneMenu value="#{viewApplicationBean.selectedPosition}"
-			style="dispay: #{viewApplicationBean.displayPosition}">
+		<h:selectOneMenu style="padding-bottom: 2px;padding-top: 4px; margin-right: 10px;dispay: #{viewApplicationBean.displayPosition}" value="#{viewApplicationBean.selectedPosition}">
 			<f:selectItems value="#{viewApplicationBean.positions}" itemValue="" />
 		</h:selectOneMenu>
 
