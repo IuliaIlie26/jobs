@@ -12,7 +12,7 @@ import com.unitbv.mi.utils.ApplicantUtils;
 
 public class ApplicationsDAO {
 
-	public static List<ApplicantUtils> getApplication(String selectedPosition, String selectedCity, String company) {
+	public static synchronized List<ApplicantUtils> getApplication(String selectedPosition, String selectedCity, String company) {
 		List<ApplicantUtils> list = new ArrayList<>();
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -37,7 +37,7 @@ public class ApplicationsDAO {
 
 	}
 
-	public static String getApplicant(String id) {
+	public static synchronized String getApplicant(String id) {
 		String username = null;
 
 		Connection con = null;
@@ -60,7 +60,7 @@ public class ApplicationsDAO {
 
 	}
 
-	public static boolean hasApplied(String username, String position) {
+	public static synchronized boolean hasApplied(String username, String position) {
 
 		Connection con = null;
 		PreparedStatement ps = null;

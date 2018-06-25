@@ -9,7 +9,7 @@ import com.unitbv.mi.exceptions.CustomException;
 
 public class RecruiterDAO {
 
-	public static String getCompany(String recruiter) {
+	public static synchronized String getCompany(String recruiter) {
 		String company = null;
 		Connection con = null;
 		PreparedStatement ps = null;

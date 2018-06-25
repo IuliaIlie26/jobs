@@ -10,7 +10,7 @@ import com.unitbv.mi.utils.UUIDGeneratorUtils;
 
 public class UsersDAO {
 
-	public static int validate(String user, String password) {
+	public static synchronized int validate(String user, String password) {
 		Connection con = null;
 		PreparedStatement ps = null;
 
@@ -65,7 +65,7 @@ public class UsersDAO {
 		return 0;
 	}
 
-	public static String getNameAndLastname(String username) {
+	public static synchronized String getNameAndLastname(String username) {
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -101,7 +101,7 @@ public class UsersDAO {
 		return nameAndLastname;
 	}
 
-	public static String getIdByUsername(String username) {
+	public static synchronized String getIdByUsername(String username) {
 		String id = null;
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -124,7 +124,7 @@ public class UsersDAO {
 		return id;
 	}
 
-	public static boolean validateRegistration(String name, String lastname, String username, String password, String phone, String email) {
+	public static synchronized boolean validateRegistration(String name, String lastname, String username, String password, String phone, String email) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		try {
@@ -149,7 +149,7 @@ public class UsersDAO {
 		return true;
 	}
 
-	public static boolean update(String value, String username, String column) {
+	public static synchronized boolean update(String value, String username, String column) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		try {
@@ -168,7 +168,7 @@ public class UsersDAO {
 		return true;
 	}
 
-	public static String select(String value, String username) {
+	public static synchronized String select(String value, String username) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		String result = "";
@@ -192,7 +192,7 @@ public class UsersDAO {
 		return result;
 	}
 
-	public static boolean name(String name, String lastname, String username, String password, String email,
+	public static synchronized boolean name(String name, String lastname, String username, String password, String email,
 			String company) {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -218,7 +218,7 @@ public class UsersDAO {
 		return true;
 	}
 
-	public static String getCity(String user) {
+	public static synchronized String getCity(String user) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		String city = null;

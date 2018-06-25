@@ -16,7 +16,7 @@ public class SearchDAO {
 	private static Connection con = null;
 	static PreparedStatement ps = null;
 
-	public static List<SelectItem> getCities() {
+	public static synchronized List<SelectItem> getCities() {
 		List<SelectItem> results = new ArrayList<>();
 
 		try {
@@ -35,7 +35,7 @@ public class SearchDAO {
 		return results;
 	}
 
-	public static List<SearchResultsUtils> getResults(String domain, String city, String company, String position) {
+	public static synchronized List<SearchResultsUtils> getResults(String domain, String city, String company, String position) {
 
 		List<SearchResultsUtils> results = new ArrayList<>();
 
@@ -80,7 +80,7 @@ public class SearchDAO {
 		return results;
 	}
 
-	public static List<SelectItem> selectDomains() {
+	public static synchronized List<SelectItem> selectDomains() {
 		List<SelectItem> list = new ArrayList<>();
 		String sql = "SELECT distinct DOMAIN FROM JOBS ORDER BY DOMAIN	";
 		

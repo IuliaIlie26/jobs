@@ -15,7 +15,7 @@ import com.unitbv.mi.utils.UUIDGeneratorUtils;
 
 public class JobsDAO {
 
-	public static boolean publish(String position, String domain, String company, String description, String city,
+	public static synchronized boolean publish(String position, String domain, String company, String description, String city,
 			String recruiter, String website) {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -44,7 +44,7 @@ public class JobsDAO {
 		return true;
 	}
 
-	public static List<JobResultsUtils> getAll(String company) {
+	public static synchronized List<JobResultsUtils> getAll(String company) {
 
 		List<JobResultsUtils> results = new ArrayList<>();
 		Connection con = null;
@@ -71,7 +71,7 @@ public class JobsDAO {
 		return results;
 	}
 
-	public static String select(String column, String id) {
+	public static synchronized String select(String column, String id) {
 		String result = null;
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -95,7 +95,7 @@ public class JobsDAO {
 		return result;
 	}
 
-	public static String getPositionById(String id) {
+	public static synchronized String getPositionById(String id) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		String position = null;
@@ -117,7 +117,7 @@ public class JobsDAO {
 		return position;
 	}
 
-	public static boolean update(String id, String position, String domain, String description, String city,
+	public static synchronized boolean update(String id, String position, String domain, String description, String city,
 			String website) {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -147,7 +147,7 @@ public class JobsDAO {
 
 	}
 
-	public static String getCityById(String id) {
+	public static synchronized String getCityById(String id) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		String city = null;
@@ -169,7 +169,7 @@ public class JobsDAO {
 		return city;
 	}
 
-	public static String getCompany(String id) {
+	public static synchronized String getCompany(String id) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		String company = null;
@@ -191,7 +191,7 @@ public class JobsDAO {
 		return company;
 	}
 
-	public static List<SelectItem> getCitiesByCompany(String company) {
+	public static synchronized List<SelectItem> getCitiesByCompany(String company) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		List<SelectItem> cities = new ArrayList<>();
@@ -213,7 +213,7 @@ public class JobsDAO {
 		return cities;
 	}
 
-	public static List<SelectItem> getPositions(String company) {
+	public static synchronized List<SelectItem> getPositions(String company) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		List<SelectItem> positions = new ArrayList<>();
@@ -235,7 +235,7 @@ public class JobsDAO {
 		return positions;
 	}
 
-	public static String getIDByPosition(String selectedPosition, String company, String selectedCity) {
+	public static synchronized String getIDByPosition(String selectedPosition, String company, String selectedCity) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		String position = null;

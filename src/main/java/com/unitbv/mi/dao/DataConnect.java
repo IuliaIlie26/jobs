@@ -11,27 +11,28 @@ public class DataConnect {
 
 	private final static Logger logger = Logger.getLogger(DataConnect.class);
 
-	public static Connection getConnection() throws CustomException {
+	public static synchronized Connection getConnection() throws CustomException {
 		Connection con = null;
 		try {
 			Class.forName("org.postgresql.Driver");
-			con = DriverManager.getConnection("jdbc:postgresql://localhost/postgres", "postgres",
-					"iulia");
+			con = DriverManager.getConnection("jdbc:postgresql://localhost/postgres?user=postgres&password=iulia");
 			logger.info("Connected to Postgres!");
 
 		} catch (Exception ex) {
-			logger.error("Database.getConnection() Error --> " + ex.getMessage());
+			logger.error("Database.getConnection() Error --> " );
+			ex.printStackTrace();
 			throw new CustomException();
 
 		}
 		return con;
 	}
 
-	public static void close(Connection con) {
+	public static synchronized void close(Connection con) {
 		try {
-			con.close();
-			logger.info("Connection to Postgres closed!");
-
+			if (con != null) {
+				con.close();
+				logger.info("Connection to Postgres closed!");
+			}
 		} catch (Exception ex) {
 			logger.error("Error closing Postgres connection: " + ex.getMessage());
 		}

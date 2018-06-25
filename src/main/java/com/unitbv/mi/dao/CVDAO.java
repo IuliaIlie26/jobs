@@ -13,7 +13,7 @@ import com.unitbv.mi.utils.UUIDGeneratorUtils;
 
 public class CVDAO {
 
-	public static boolean sendApplication(String position, String username) {
+	public static synchronized boolean sendApplication(String position, String username) {
 
 		String userID = UsersDAO.getIdByUsername(username);
 		Connection con = null;
@@ -42,7 +42,7 @@ public class CVDAO {
 		return true;
 	}
 
-	public static boolean hasCV(String username) {
+	public static synchronized boolean hasCV(String username) {
 		username = UsersDAO.getIdByUsername(username);
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -65,8 +65,8 @@ public class CVDAO {
 
 	}
 
-	public static boolean sendCV(String usernameID, String languages, String selectedDomain, String skills,
-			double experience, String city) {
+	public static synchronized boolean sendCV(String usernameID, String languages, String selectedDomain, String skills, double experience,
+			String city) {
 		Connection con = null;
 		PreparedStatement ps = null;
 
@@ -92,27 +92,27 @@ public class CVDAO {
 		return true;
 	}
 
-	public static List<ApplicantUtils> searchApplicants(String selectedDomain, String city) {
+	public static synchronized List<ApplicantUtils> searchApplicants(String selectedDomain, String city) {
 		List<ApplicantUtils> list = new ArrayList<>();
 		Connection con = null;
 		PreparedStatement ps = null;
 		try {
 			con = DataConnect.getConnection();
-			ps = con.prepareStatement(
-					"select id, username, city, experience, skills, languages from cv where domain = ? and city = ?");
+			ps = con.prepareStatement("select id, username, city, experience, skills, languages from cv where domain = ? and city = ?");
 			ps.setString(1, selectedDomain);
 			ps.setString(2, city);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				list.add(new ApplicantUtils(rs.getString("id"), UsersDAO.getNameAndLastname(rs.getString("username")),
-						rs.getString("city"), rs.getString("experience"), rs.getString("skills"),
-						rs.getString("languages")));
+				list.add(new ApplicantUtils(rs.getString("id"), UsersDAO.getNameAndLastname(rs.getString("username")), rs.getString("city"),
+						rs.getString("experience"), rs.getString("skills"), rs.getString("languages")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (CustomException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			DataConnect.close(con);
 		}
 		return list;
 	}
