@@ -12,8 +12,14 @@
 
 <h:head>
 	<title>Publish Jobs</title>
+	<style>
+.background {
+	background-image: url(#{request.contextPath}/resources/img/register.jpg);
+	background-repeat: no-repeat;
+}
+</style>
 </h:head>
-<h:body>
+<h:body styleClass="background">
 	<div id="header">
 		<ui:insert name="header">
 			<ui:include src="header.xhtml" />
@@ -22,7 +28,7 @@
 	<h:form style="padding-top:10px; padding-left: 20px">
 		<div style="width: 100%; padding-bottom: 20px;">
 			<h:outputLabel style="width:10%;" value="#{msg.publishPosition}" />
-			<h:inputText  style="width:15%;" id="pos" value="#{jobs.position}"
+			<h:inputText style="width:15%;" id="pos" value="#{jobs.position}"
 				validatorMessage="#{msg.enterPosition}">
 				<f:validateRequired />
 			</h:inputText>
@@ -31,12 +37,13 @@
 		<div style="width: 100%; padding-bottom: 20px;">
 
 			<h:outputLabel style="width:10%;" value="#{msg.publishCompany}" />
-			<h:inputText  style="width:15%;" value="#{jobs.company}" disabled="true" />
+			<h:inputText style="width:15%;" value="#{jobs.company}"
+				disabled="true" />
 		</div>
 		<div style="width: 100%; padding-bottom: 20px;">
 
 			<h:outputLabel style="width:10%;" value="#{msg.publishLocation}" />
-			<h:inputText  style="width:15%;" id="city" value="#{jobs.city}"
+			<h:inputText style="width:15%;" id="city" value="#{jobs.city}"
 				validatorMessage="#{msg.enterCity}">
 				<f:validateRequired />
 			</h:inputText>
@@ -45,8 +52,8 @@
 		<div style="width: 100%; padding-bottom: 20px;">
 
 			<h:outputLabel style="width:10%;" value="#{msg.publishDomain}" />
-			<h:selectOneMenu style="width:15%;" value="#{jobs.selectedDomain}" required="true"
-				requiredMessage="#{msg.chooseDomain}">
+			<h:selectOneMenu style="width:15%;" value="#{jobs.selectedDomain}"
+				required="true" requiredMessage="#{msg.chooseDomain}">
 				<f:selectItems value="#{jobs.domainList}" itemValue="" />
 			</h:selectOneMenu>
 		</div>
@@ -62,13 +69,14 @@
 		</div>
 		<div style="width: 100%; padding-bottom: 20px;">
 			<h:outputLabel style="width:10%;" value="#{msg.publishWebsite}" />
-			<h:inputText  style="width:15%;" id="web" value="#{jobs.website}"
+			<h:inputText style="width:15%;" id="web" value="#{jobs.website}"
 				validatorMessage="#{msg.enterWebsite}">
 				<f:validateRequired />
 			</h:inputText>
 			<h:message for="web" style="color:red" />
 		</div>
-		<b:commandButton value="#{msg.publishJ}" action="#{jobs.submit}" />
+		<b:commandButton value="#{msg.publishJ}" action="#{jobs.submit}"
+			iconAwesome="fa-save" look="primary" />
 	</h:form>
 </h:body>
 </html>

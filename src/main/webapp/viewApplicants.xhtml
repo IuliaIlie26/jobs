@@ -12,24 +12,37 @@
 
 <h:head>
 	<title>View Candidates</title>
+	<style>
+.background {
+	background-image:
+		url(#{request.contextPath}/resources/img/candidates.jpg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-attachment: fixed;
+}
+</style>
 </h:head>
-<h:body>
+<h:body styleClass="background">
 	<div id="header">
 		<ui:insert name="header">
 			<ui:include src="header.xhtml" />
 		</ui:insert>
 	</div>
 	<h:form style="padding-top: 10px; padding-left: 20px">
-		<h:selectOneMenu style="padding-bottom: 2px;padding-top: 4px; margin-left: 10px; margin-right: 10px;" value="#{viewApplicationBean.selectedCity}">
+		<h:selectOneMenu
+			style="padding-bottom: 2px;padding-top: 4px; margin-left: 10px; margin-right: 10px;"
+			value="#{viewApplicationBean.selectedCity}">
 			<f:selectItems value="#{viewApplicationBean.city}" itemValue="" />
 		</h:selectOneMenu>
-
-		<h:selectOneMenu style="padding-bottom: 2px;padding-top: 4px; margin-right: 10px;dispay: #{viewApplicationBean.displayPosition}" value="#{viewApplicationBean.selectedPosition}">
+		<h:selectOneMenu
+			style="padding-bottom: 2px;padding-top: 4px; margin-right: 10px;dispay: #{viewApplicationBean.displayPosition}"
+			value="#{viewApplicationBean.selectedPosition}">
 			<f:selectItems value="#{viewApplicationBean.positions}" itemValue="" />
 		</h:selectOneMenu>
 
 		<b:commandButton value="#{msg.viewApplicants}" type="submit"
-			action="#{viewApplicationBean.search}">
+			action="#{viewApplicationBean.search}" iconAwesome="fa-search"
+			look="primary">
 		</b:commandButton>
 	</h:form>
 </h:body>

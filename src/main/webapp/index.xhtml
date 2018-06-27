@@ -14,8 +14,15 @@
 
 <h:head>
 	<title>Find my dream job</title>
+	<style>
+.background {
+	background-image: url(#{request.contextPath}/resources/img/header.jpg);
+  	background-repeat: no-repeat;
+    background-attachment: fixed;
+    }
+</style>
 </h:head>
-<h:body>
+<h:body styleClass="background">
 	<div id="header">
 		<ui:insert name="header">
 			<ui:include src="header.xhtml" />
@@ -38,7 +45,8 @@
 			</h:selectOneMenu>
 
 
-			<h:selectOneMenu style="padding-bottom: 2px;padding-top: 4px; margin-left: 10px; margin-right: 10px;"
+			<h:selectOneMenu
+				style="padding-bottom: 2px;padding-top: 4px; margin-left: 10px; margin-right: 10px;"
 				id="city" value="#{searchBean.selectedCity}" required="true"
 				requiredMessage="#{msg.selectCity}">
 				<f:selectItem itemLabel="#{msg.citiesAll}" itemValue=""
@@ -46,8 +54,8 @@
 				<f:selectItems value="#{searchBean.city}" itemValue="" />
 			</h:selectOneMenu>
 
-			<b:commandButton value="#{msg.search}" type="submit"
-				action="#{searchBean.search}" />
+			<b:commandButton look="primary"  value="#{msg.search}" type="submit"
+				action="#{searchBean.search}" iconAwesome="fa-search"/>
 			<h:message for="city" style="color:red" />
 			<h:message for="domain" style="color:red" />
 		</div>

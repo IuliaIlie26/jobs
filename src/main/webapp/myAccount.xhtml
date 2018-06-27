@@ -43,7 +43,7 @@
 					<h:inputText  style="width:15%;" id="inputPhone" value="#{myAccount.phone}" />
 				</div>
 				<b:commandButton value="#{msg.saveChanges}"
-					action="#{myAccount.saveChanges}" iconAwesome="fa-pencil">
+					action="#{myAccount.saveChanges}" look="primary" iconAwesome="fa-pencil">
 				</b:commandButton>
 			</b:tab>
 			<b:tab title="#{msg.changePassword}" look="info" immediate="true">
@@ -67,7 +67,7 @@
 					</h:inputSecret>
 				</div>
 				<b:commandButton value="#{msg.saveChanges}"
-					action="#{myAccount.changePassword}" iconAwesome="fa-pencil" />
+					action="#{myAccount.changePassword}" look="primary" iconAwesome="fa-pencil" />
 			</b:tab>
 		</b:tabView>
 	</b:form>

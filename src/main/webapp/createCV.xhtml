@@ -10,8 +10,15 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<title>CV Tool</title>
+	<style>
+.background {
+	background-image: url(#{request.contextPath}/resources/img/register.jpg);
+	background-repeat: no-repeat;
+	}
+</style>
+<h:outputStylesheet name="css/bootstrap.css"/>
 </h:head>
-<h:body>
+<h:body styleClass="background">
 	<div id="header">
 		<ui:insert name="header">
 			<ui:include src="header.xhtml" />
@@ -58,9 +65,9 @@
 			</h:inputTextarea>
 			<h:message for="skills" style="color:red" />
 		</div>
-		<div style="padding-bottom: 20px; padding-left: 200px">
-			<b:commandButton action="#{cvBean.save}" value="#{msg.save}"
-				type="submit" />
+		<div style="padding-bottom: 20px; padding-left: 440px">
+			<b:commandButton look="primary" action="#{cvBean.save}" value="#{msg.save}"
+				type="submit" iconAwesome="fa-send"/>
 		</div>
 	</h:form>
 	<h:form enctype="multipart/form-data"
@@ -70,9 +77,9 @@
 			fileUploadListener="#{cvBean.fileUploadListener}"
 			sizeLimit="16000000" fileLimit="1" update="@this" />
 	</h:form>
-	<h:form
+	<h:form  
 		style="padding-top:10px;padding-left:20px;display: #{login.isLoggedOut}">
-		<h:outputLabel value="#{msg.logReq}"></h:outputLabel>
+		<h3 class="glyphicon" >#{msg.logReq}</h3>
 	</h:form>
 	<p:dialog id="diag" widgetVar="dlg2" modal="true" height="100">
 		<h:outputText value="#{cvBean.message}" />

@@ -9,10 +9,10 @@
 	xmlns:b="http://bootsfaces.net/ui">
 
 <f:loadBundle basename="ApplicationResources" var="msg" />
-<head>
+<h:head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-</head>
-<body>
+</h:head>
+<h:body >
 	<b:navBar brand="" brandHref="#" fluid="true">
 		<b:navbarLinks>
 			<b:navLink value="#{msg.publishJob}" href="publishJobs.xhtml"
@@ -41,7 +41,7 @@
 				<h:inputSecret id="password" value="#{login.password}"
 					pt:placeholder="#{msg.password}" binding="#{password}" />
 				<b:commandButton action="#{login.validateUsernamePassword}"
-					value="#{msg.login}" />
+					value="#{msg.login}" look="primary"/>
 				<h:message for="username" style="color:red" />
 			</div>
 		</b:form>
@@ -58,5 +58,5 @@
 			</div>
 		</b:form>
 	</b:navBar>
-</body>
+</h:body>
 </html>

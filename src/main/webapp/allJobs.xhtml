@@ -19,7 +19,7 @@
 			<ui:include src="header.xhtml" />
 		</ui:insert>
 	</div>
-	<h:form style="width:900px; align:center">
+	<h:form style="width:1265px; align:center">
 		<b:dataTable var="row" value="#{jobs.resultsDataTable}" border="1">
 			<b:dataTableColumn>
 				<f:facet name="header">#{msg.id}</f:facet>
@@ -41,7 +41,7 @@
 			<b:dataTableColumn>
 				<f:facet name="header">#{msg.editPublished}</f:facet>
 				<b:commandButton type="submit" name="apply"
-					value="#{msg.editPublished}" action="#{jobs.edit}">
+					value="#{msg.editPublished}" action="#{jobs.edit}" iconAwesome="fa-edit" look="primary">
 					<f:param name="id" value=" #{row.id}" />
 				</b:commandButton>
 			</b:dataTableColumn>

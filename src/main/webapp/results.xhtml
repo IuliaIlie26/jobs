@@ -13,14 +13,22 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<title>Search results</title>
+	<style>
+.background {
+	background-image: url(#{request.contextPath}/resources/img/hiring.jpeg);
+	background-repeat: no-repeat;
+	background-position: bottom;
+	background-attachment: fixed;
+}
+</style>
 </h:head>
-<h:body>
+<h:body styleClass="background">
 	<div id="header">
 		<ui:insert name="header">
 			<ui:include src="header.xhtml" />
 		</ui:insert>
 	</div>
-	<h:form style="width:1300px;">
+	<h:form style="width:1265px;" >
 		<h:outputLabel
 			value="#{msg.result} #{searchBean.job} #{searchBean.company} #{searchBean.selectedDomain} #{searchBean.selectedCity}" />
 		<br />
@@ -49,8 +57,8 @@
 				</b:dataTableColumn>
 			<b:dataTableColumn>
 				<f:facet name="header">#{msg.apply}</f:facet>
-				<b:commandButton type="submit" name="apply" value="#{msg.apply}"
-					action="#{cvBean.apply}">
+				<b:commandButton look="primary" type="submit" name="apply" value="#{msg.apply}"
+					action="#{cvBean.apply}" iconAwesome="fa-send">
 					<f:param name="id" value="#{row.id}" />
 				</b:commandButton>
 			</b:dataTableColumn>

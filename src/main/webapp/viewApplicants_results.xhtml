@@ -41,7 +41,7 @@
 			<b:dataTableColumn>
 				<f:facet name="header">#{msg.viewCV}</f:facet>
 				<b:commandButton action="#{applicationBean.downloadPDF}" name="apply"
-					value="#{msg.viewCV}">
+					value="#{msg.viewCV}" iconAwesome="fa-external-link" look="primary">
 					<f:param name="applicationID" value="#{row.id}" />
 				</b:commandButton>
 			</b:dataTableColumn>

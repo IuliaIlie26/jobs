@@ -12,8 +12,14 @@
 
 <h:head>
 	<title>Edit Jobs</title>
+	<style>
+.background {
+	background-image: url(#{request.contextPath}/resources/img/register.jpg);
+	background-repeat: no-repeat;
+}
+</style>
 </h:head>
-<h:body>
+<h:body styleClass="background">
 	<div id="header">
 		<ui:insert name="header">
 			<ui:include src="header.xhtml" />
@@ -31,7 +37,8 @@
 		<div style="width: 100%; padding-bottom: 20px;">
 
 			<h:outputLabel style="width:10%;" value="#{msg.publishCompany}" />
-			<h:inputText style="width:15%;" value="#{jobs.company}" disabled="true" />
+			<h:inputText style="width:15%;" value="#{jobs.company}"
+				disabled="true" />
 		</div>
 		<div style="width: 100%; padding-bottom: 20px;">
 
@@ -45,13 +52,14 @@
 		<div style="width: 100%; padding-bottom: 20px;">
 
 			<h:outputLabel style="width:10%;" value="#{msg.publishDomain}" />
-			<h:selectOneMenu style="width:15%;" value="#{jobs.editSelectedDomain}">
+			<h:selectOneMenu style="width:15%;"
+				value="#{jobs.editSelectedDomain}">
 				<f:selectItems value="#{jobs.domainList}" itemValue="" />
 			</h:selectOneMenu>
 		</div>
 		<div style="width: 100%; padding-bottom: 20px;">
 			<h:outputLabel style="width:10%;" value="#{msg.publishDescription}" />
-			<h:inputTextarea  style="width:15%;" id="desc" cols="30" rows="10"
+			<h:inputTextarea style="width:15%;" id="desc" cols="30" rows="10"
 				value="#{jobs.editDescription}"
 				validatorMessage="#{msg.enterDescription}">
 				<f:validateRequired />
@@ -68,7 +76,8 @@
 			<h:message for="web" style="color:red" />
 		</div>
 
-		<b:commandButton value="#{msg.publishJ}" action="#{jobs.saveChanges}" />
+		<b:commandButton value="#{msg.publishJ}" action="#{jobs.saveChanges}"
+			iconAwesome="fa-save" look="primary"/>
 	</h:form>
 </h:body>
 </html>
