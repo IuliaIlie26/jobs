@@ -5,34 +5,30 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.Serializable;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
 import org.primefaces.context.RequestContext;
-import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.UploadedFile;
 
-import com.unitbv.mi.dao.ApplicationsDAO;
 import com.unitbv.mi.dao.CVDAO;
 import com.unitbv.mi.dao.UsersDAO;
 
-@ManagedBean(name = "cvBean")
+@ManagedBean(name = "cvBeanEdit")
 @SessionScoped
-public class CVBean implements Serializable {
+public class CVEditBean implements Serializable {
 
 	private static final long serialVersionUID = 2693204137924254766L;
 
 	private List<SelectItem> domainList;
 	private String selectedDomain, experience, skills, languages, city;
 	private String message;
-	private static final String PATH = "C:\\Users\\IuliaIlie\\Desktop\\USEFUL\\98. Servers\\payara-4.1.2.174\\payara41\\glassfish\\domains\\licenta2\\docroot\\htdocs\\cv";
+
 	private static final String DOMAINS = "C:\\Users\\IuliaIlie\\Desktop\\USEFUL\\licenta\\project\\jobs\\src\\main\\resources\\domains_EN.txt";
 
 	public String getMessage() {
@@ -44,25 +40,21 @@ public class CVBean implements Serializable {
 	}
 
 	public String getCity() {
-		return city;
+		String username = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.get("username");
+		String usernameID = UsersDAO.getIdByUsername(username);
+		return CVDAO.getCity(usernameID);
 	}
 
 	public void setCity(String city) {
 		this.city = city;
 	}
 
-	private UploadedFile file;
-
-	public UploadedFile getFile() {
-		return file;
-	}
-
-	public void setFile(UploadedFile file) {
-		this.file = file;
-	}
-
 	public String getSelectedDomain() {
-		return selectedDomain;
+		String username = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.get("username");
+		String usernameID = UsersDAO.getIdByUsername(username);
+		return CVDAO.getDomain(usernameID);
 	}
 
 	public void setSelectedDomain(String selectedDomain) {
@@ -70,7 +62,10 @@ public class CVBean implements Serializable {
 	}
 
 	public String getExperience() {
-		return experience;
+		String username = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.get("username");
+		String usernameID = UsersDAO.getIdByUsername(username);
+		return CVDAO.getExperience(usernameID);
 	}
 
 	public void setExperience(String experience) {
@@ -78,7 +73,10 @@ public class CVBean implements Serializable {
 	}
 
 	public String getSkills() {
-		return skills;
+		String username = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.get("username");
+		String usernameID = UsersDAO.getIdByUsername(username);
+		return CVDAO.getSkills(usernameID);
 	}
 
 	public void setSkills(String skills) {
@@ -86,7 +84,10 @@ public class CVBean implements Serializable {
 	}
 
 	public String getLanguages() {
-		return languages;
+		String username = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.get("username");
+		String usernameID = UsersDAO.getIdByUsername(username);
+		return CVDAO.getLanguage(usernameID);
 	}
 
 	public void setLanguages(String languages) {
@@ -118,65 +119,39 @@ public class CVBean implements Serializable {
 		this.domainList = domainList;
 	}
 
-	@SuppressWarnings("deprecation")
-	public void apply() {
-		String id = (String) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
+	private boolean hasCV() {
+		String username = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.get("username");
+		if (CVDAO.hasCV(username)) {
 
-		String username = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("username");
-		if (username == null) {
-			message = "Please log in!";
-		} else if (alreadyApplied(id, username)) {
-			message = "You already applied for this job!";
-		} else if (hasCV(username)) {
-			CVDAO.sendApplication(id, username);
-			message = "Application sent!";
-		} else {
-			message = "Please upload a CV first! Please use the CV Tool";
-		}
-
-		RequestContext context = RequestContext.getCurrentInstance();
-		context.execute("PF('dlg2').show();");
-	}
-
-	private boolean alreadyApplied(String position, String username) {
-		return ApplicationsDAO.hasApplied(username, position);
-	}
-
-	private boolean hasCV(String username) {
-		if (CVDAO.hasCV(username))
 			return true;
-		return false;
-	}
-
-	private void upload(String username) {
-
-		try (InputStream input = file.getInputstream()) {
-			File newFile = new File(PATH, username + ".pdf");
-			if (newFile.exists()) {
-				newFile.delete();
-			}
-			Files.copy(input, newFile.toPath());
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
+
+		return false;
 	}
 
 	@SuppressWarnings("deprecation")
 	public void save() {
-		String username = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("username");
-		if(hasCV(username)) {
-			message = "You seem to already have a CV. To edit it, go to My Account - View or edit CV.";
-		}
-		else if (!experience.matches("\\d+")) {
+		String username = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.get("username");
+		if (!experience.matches("\\d+")) {
 			message = "Please enter a number in experience field.";
 		} else {
 			String usernameID = UsersDAO.getIdByUsername(username);
 			try {
 				double exp = Double.parseDouble(experience);
-				if (CVDAO.sendCV(usernameID, languages, selectedDomain, skills, exp, city)) {
-					message = "CV sent!";
+				if (hasCV()) {
+					if (CVDAO.updateCV(usernameID, languages, selectedDomain, skills, exp, city)) {
+						message = "CV updated!";
+					} else {
+						message = "An error occured, please try again!";
+					}
 				} else {
-					message = "An error occured, please try again!";
+					if (CVDAO.sendCV(usernameID, languages, selectedDomain, skills, exp, city)) {
+						message = "CV updated!";
+					} else {
+						message = "An error occured, please try again!";
+					}
 				}
 			} catch (NumberFormatException e) {
 				message = "Please enter a number in experience field.";
@@ -188,11 +163,18 @@ public class CVBean implements Serializable {
 		context.execute("PF('dlg2').show();");
 	}
 
-	public void fileUploadListener(FileUploadEvent event) {
-		file = event.getFile();
-		String username = UsersDAO
-				.getIdByUsername((String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("username"));
-		upload(username);
-		
+	@SuppressWarnings("deprecation")
+	public void delete() {
+		String username = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.get("username");
+		String usernameID = UsersDAO.getIdByUsername(username);
+		if (CVDAO.deleteCV(usernameID)) {
+			message = "CV deleted!";
+		} else {
+			message = "An error occured, please try again!";
+		}
+		RequestContext context = RequestContext.getCurrentInstance();
+		context.execute("PF('dlg2').show();");
 	}
+
 }

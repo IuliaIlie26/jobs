@@ -953,4 +953,87 @@ public class DataConnect {
 		return false;
 	}
 
+	public static boolean deleteCV(String username) {
+		PreparedStatement ps = null;
+		try {
+			con = DataConnect.getConnection();
+			synchronized (con) {
+				try {
+					ps = con.prepareStatement("delete from cv where username = ?");
+					ps.setString(1, username);
+					ps.executeUpdate();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+					return false;
+				} finally {
+					DataConnect.close(con);
+				}
+			}
+		} catch (CustomException e) {
+			e.printStackTrace();
+		}
+		return true;
+	}
+
+	public static boolean updateCV(String usernameID, String languages, String selectedDomain, String skills,
+			double exp, String city) {
+		DataConnect.deleteCV(usernameID);
+		PreparedStatement ps = null;
+		try {
+			con = DataConnect.getConnection();
+			synchronized (con) {
+				try {
+
+					ps = con.prepareStatement("insert into cv values(?,?,?,?,?,?,?)");
+					String uuid = UUIDGeneratorUtils.generate();
+					ps.setString(1, uuid);
+					ps.setString(2, usernameID);
+					ps.setString(3, skills);
+					ps.setDouble(4, exp);
+					ps.setString(5, languages);
+					ps.setString(6, selectedDomain);
+					ps.setString(7, city);
+					ps.executeUpdate();
+
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+					return false;
+				} finally {
+					DataConnect.close(con);
+				}
+			}
+		} catch (CustomException e) {
+			e.printStackTrace();
+		}
+		return true;
+	}
+
+	public static String selectFromCV(String usernameID, String column) {
+		String result = null;
+		PreparedStatement ps = null;
+		try {
+			con = DataConnect.getConnection();
+			synchronized (con) {
+				try {
+					ps = con.prepareStatement("select " + column + " from cv where username = ?");
+					ps.setString(1, usernameID);
+					ResultSet rs = ps.executeQuery();
+
+					while (rs.next()) {
+						result = rs.getString(column);
+					}
+
+				} catch (SQLException ex) {
+
+					ex.printStackTrace();
+
+				} finally {
+					DataConnect.close(con);
+				}
+			}
+		} catch (CustomException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 }

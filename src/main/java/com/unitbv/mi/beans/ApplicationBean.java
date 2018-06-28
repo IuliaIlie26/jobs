@@ -33,7 +33,7 @@ public class ApplicationBean implements Serializable {
 	private String language, experience, city, selectedDomain;
 	private List<SelectItem> domains;
 	private List<ApplicantUtils> resultsDataTable;
-	private static String PATH = "C:\\Users\\IuliaIlie\\Desktop\\USEFUL\\98. Servers\\payara-4.1.2.174\\payara41\\glassfish\\domains\\licenta\\docroot\\htdocs\\cv";
+	private static String PATH = "C:\\Users\\IuliaIlie\\Desktop\\USEFUL\\98. Servers\\payara-4.1.2.174\\payara41\\glassfish\\domains\\licenta2\\docroot\\htdocs\\cv";
 
 	public String getPath() {
 		return PATH;

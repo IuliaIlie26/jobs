@@ -45,7 +45,7 @@
 				<h:message for="username" style="color:red" />
 			</div>
 		</b:form>
-		<b:form style="text-align:right; padding-top:5px">
+		<b:form style="text-align:right; padding-top:5px; margin-right:35px;">
 			<div id="logged" style="display: #{login.isLoggedIn}">
 				<b:dropMenu
 					value="#{msg.welcomeUsername} #{ login.nameAndLastname != null ? login.nameAndLastname : userBean.nameAndLastname}!"
